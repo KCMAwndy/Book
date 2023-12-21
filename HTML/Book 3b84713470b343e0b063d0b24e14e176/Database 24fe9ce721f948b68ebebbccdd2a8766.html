@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Database</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="24fe9ce7-21f9-48b6-8ebe-bbccdd2a8766" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/database_gray.svg"/></div><h1 class="page-title">Database</h1><p class="page-description"></p></header><div class="page-body"><h2 id="de385d54-9621-4f85-ac6e-ede86b5564cd" class="">Introduction</h2><p id="640ca44b-ca50-457a-8f61-3a44f7632f09" class=""><strong>ฐานข้อมูล</strong> คือกลุ่มข้อมูลที่ถูกรวบรวมและจัดดก็บไว้อย่างมีโครงสร้าง โดยมีรูปแบบการจัดเก็บที่ชัดเจน เป็นระเบียบและง่ายต่อการทำไปใช้ตามวัตถุประสงค์ที่ต้องการ</p><p id="81f19b34-34a0-41d2-a55c-e0cabc683060" class=""><strong>ฐานข้อมูลที่นิยมใช้ในปัจจุบันแบ่งออกเป็น 2 แบบ ได้แก่</strong></p><ol type="1" id="1ae2b134-c6a1-44ee-bc08-cb358ed8033a" class="numbered-list" start="1"><li><mark class="highlight-blue"><strong>Relational Databases (ฐานข้อมูลเชิงสัมพันธ์)</strong></mark><ul id="27772325-2fb1-4d9c-b21a-b7e437e3e43b" class="bulleted-list"><li style="list-style-type:disc">เป็นฐานข้อมูลที่ใช้ภาษา SQL (Structure Query Language) มาดำเนินการกับข้อมูล (เพิ่ม, ลบ, แก้ไข, ค้นหา)</li></ul><ul id="8c8367a2-fdfb-48a8-8938-1b10c49b68e8" class="bulleted-list"><li style="list-style-type:disc">จัดเก็บข้อมูลแบบตาราง (Table)</li></ul><ul id="20a6b260-069e-44d6-9046-641bf1bf4c78" class="bulleted-list"><li style="list-style-type:disc">กำหนดโครงสร้างการจัดเก็บข้อมูลที่ชัดเจน (Structure Data)</li></ul><ul id="a643b864-e133-4a6e-a614-d60f721b2ec6" class="bulleted-list"><li style="list-style-type:disc">มีการเชื่อมโยงความสัมพันธ์กับข้อมูลตารางอื่นๆด้วย</li></ul><figure id="bf2cdf0d-bacc-4c58-9fb3-310dd750e8f1" class="image"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled.png"><img style="width:1619px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled.png"/></a></figure><p id="bd91f5ac-f24e-418e-854d-405721000272" class=""><strong>การปรับขนาด</strong><div class="indented"><p id="48265cb8-dd80-46f2-bf07-2bc4af75db14" class="">เมื่อฐานข้อมูลมีการจัดเก็บข้อมูลในปริมาณมาก และอนาคตมีการปรับขนาดฐานข้อมูลให้ใหญ่ขึ้น ฐานข้อมูลเชิงสัมพันธ์ จะเป็นการปรับขนาดในแนวตั้ง (Vertical-Scaling) โดยติดตั้งอุปกรณ์เก็บข้อมูลเพื่อเพิ่มความจุ เพิ่มแรมและหน่วยประมวลผลให้มีประสิทธิภาพสูงขึ้น ส่งผลให้มีค่าใช้จ่ายที่สูงขึ้น และการอัพเกรดอุปกรณ์ต้องทำการปิดระบบชั่วคราว</p></div></p><p id="04602669-ec6b-4fed-bc74-52a060905ab2" class="">
+</p><p id="2b3dfcec-5599-4d17-b09a-7fa00e99cc28" class=""><strong>ระบบจัดการฐานข้อมูล SQL ที่ได้รับความนิยมในปัจจุบัน</strong></p><ul id="a4da6f33-425b-4a96-b03e-4a357fc014d0" class="bulleted-list"><li style="list-style-type:disc">MySQL</li></ul><ul id="1432ac4c-d84c-4753-abdf-30f6bad46986" class="bulleted-list"><li style="list-style-type:disc">Oracle</li></ul><ul id="b74cc07a-8efc-487e-a762-1321c49bf2ac" class="bulleted-list"><li style="list-style-type:disc">PostgresSQL</li></ul><ul id="443a62dd-4979-44e8-88b4-3444ca475bc8" class="bulleted-list"><li style="list-style-type:disc">SQL Server</li></ul><hr id="f7be33c6-7a41-40ca-b4d2-5924bcfbdbb0"/><blockquote id="7c5ad6b0-1bed-4fed-b340-dbf0233b0512" class=""><strong>เอกสาร</strong><figure id="1e8a4ee6-e63b-4189-b7ee-ed197087cc23" class="link-to-page"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/SQL%201e8a4ee6e63b4189b7eeed197087cc23.html"><img class="icon" src="https://www.notion.so/icons/database_blue.svg"/>SQL</a></figure></blockquote></li></ol><p id="b5aa72df-651e-4e6d-9e7b-cf1a880b2ba0" class="">
+</p><ol type="1" id="99c0302a-7d23-41ad-be4e-6e980ddd9da1" class="numbered-list" start="2"><li><mark class="highlight-teal"><strong>Non-Relational Databases (ฐานข้อมูลไม่ใช่เชิงสัมพันธ์)</strong></mark><p id="c59074c7-1766-4e38-8a2c-44a3f317c36a" class=""><strong>ฐานข้อมูลไม่ใช่เชิงสัมพันธ์ หรือเรียกอีกชื่อ คือ NoSQL (Not-Only SQL)</strong> ถูกคิดค้นขึ้นเพื่อจัดการข้อจำกัดของการใช้งาน Relational Database ในอดีต เพื่อปรับเปลี่ยนโครงสร้างการจัดเก็บข้อมูลให้มีความยืดหยุ่นที่มากขึ้น</p><p id="1b4ee9a0-9b8c-4000-bec7-cc0d57e84101" class=""><strong>NoSQL </strong>ถูกนำมาใช้งานสำหรับประมวลผลข้อมูลจากการใช้งาน internet อย่างแพร่หลายในยุคปัจจุบันไม่ว่าจะมาจาก Social Media ต่างๆ ที่มีข้อมูลขนาดใหญ่ (ฺBig Data) เพื่อแปลข้อมูลที่มีความหลากหลายมากขึ้น เช่น ข้อมูลรูปภาพ VDO เสียง ตัวอักษร เป็นต้น ซึ่งจะตอบโจทย์ในเรื่องความเร็วและความยืดหยุ่นในการจัดเก็ยข้อมูล</p><ul id="44b97e4e-30dc-4e65-853d-da25612f60c4" class="bulleted-list"><li style="list-style-type:disc">ไม่มีการจัดเก็บข้อมูลในแบบตารางที่มีความสัมพันธ์กัน</li></ul><ul id="ff75f7e7-ce1c-491d-99da-1f65be624af2" class="bulleted-list"><li style="list-style-type:disc">ไม่มีโครงสร้างการจัดเก็บข้อมูลที่แน่นอน (Unstructured Data)</li></ul><ul id="4b8edc4f-6782-41b6-af9c-5258a37ee584" class="bulleted-list"><li style="list-style-type:disc">ง่ายต่อการปรับขนาดและโครงสร้าง</li></ul><p id="b7fb76fa-c2dd-43ea-906c-cb931854e7d6" class=""><strong>การปรับขนาด</strong><div class="indented"><p id="dbaad66c-9b61-49ed-96db-e4972f2cd8e4" class="">เมื่อฐานข้อมูลมีการจัดเก็บข้อมูลในปริมาณมาก และอนาคตมีการปรับขนาดฐานข้อมูลให้ใหญ่ขึ้น ฐานข้อมูลไม่ใช่เชิงสัมพันธ์จะเป็นการปรับขนาดในแนวนอน (Horizontal-Scaling) โดยเพิ่ม Server เข้าไปแบ่งภาระของข้อมูล สามารถรองรับข้อมูลขนาดใหญืขึ้น มีประสิทธิภาพสูงขึ้น ติดตั้งง่าย และเปลี่ยนแปลงได้ตลอดเวลาโดยไม่ต้องปิดระบบ</p></div></p><p id="9f3d5ca6-785b-4f9b-8382-43f494a8d86a" class="">NoSQL ไม่มีโครงสร้างการจัดเก็บข้อมูลที่แน่นอน เพื่อที่จะสามารถปรับเปลี่ยน โครงสร้างได้ในอนาคต </p><p id="50563152-f588-42b9-993f-fa76b69a1cd9" class=""><strong>โดยจะเก็บข้อมูลอยู่ 4 รูปแบบ (ตามการใช้งาน) ได้ดังนี้</strong></p><ol type="1" id="da039760-8e5e-44ac-8033-976c51716c90" class="numbered-list" start="1"><li><strong>Key - Value Store</strong><p id="794adae9-bcec-4d64-b413-f6017b3aaad7" class="">เป็นระบบจัดเก็บข้อมูลในรูปแบบที่เรียกว่า “Associative Arrays” หรืออาร์เรย์ของชุดข้อมูลที่มีความสัมพันธ์กันในรูปแบบคู่คีย์ (key : value) หรือเรียกอีกชื่อว่า<mark class="highlight-orange"><strong> Dictionary</strong></mark></p><ul id="11e6560f-9d5a-453c-a662-28f0331f204e" class="bulleted-list"><li style="list-style-type:disc">key : <ul id="bbf192b0-047c-40e7-aef1-1e90929d4e47" class="bulleted-list"><li style="list-style-type:circle">จะทำหน้าที่เป็นตัวเชื่อมโยงไปยังค่า (value) ในโครงสร้างของฐานข้อมูล </li></ul><ul id="faaf1d78-1660-4a45-a293-013260763073" class="bulleted-list"><li style="list-style-type:circle">มีได้แค่ key เดียว</li></ul><ul id="9decb8d9-c96d-4098-9bc0-ece836f56b19" class="bulleted-list"><li style="list-style-type:circle">การดึงข้อมูลต้องระบุ key ที่เก็บข้อมูลนั้นๆไว้</li></ul><figure id="126e62ce-2b70-4767-948b-8ea38ec7cbf7" class="image" style="text-align:center"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%201.png"><img style="width:240px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%201.png"/></a></figure></li></ul><p id="f0a402c2-6e4e-447b-a07b-9eb05878b9ce" class="">
+</p><p id="840d0894-46c8-4a74-908b-80d6904eb30f" class=""><strong>ระบบจัดการฐานข้อมูล</strong></p><ul id="cfbb7298-4b25-466e-8cef-b4d2d9ecd5d3" class="bulleted-list"><li style="list-style-type:disc">Redis</li></ul><ul id="a4d69b6a-6599-4ecd-9344-2067597dbd69" class="bulleted-list"><li style="list-style-type:disc">Oracle NoSQL Database</li></ul><ul id="ec18ebf2-8f33-48ea-8600-2fb0985b87d4" class="bulleted-list"><li style="list-style-type:disc">Voldemorte</li></ul><ul id="dbeef82c-8972-465c-b862-89b010a37e96" class="bulleted-list"><li style="list-style-type:disc">Aerospike</li></ul></li></ol><p id="4e1d21d9-f13d-4a8e-bf97-9331e8ba25af" class="">
+</p><ol type="1" id="21de631a-7753-4b74-8ed2-34db711935eb" class="numbered-list" start="2"><li><strong>Document Store</strong><p id="a9aa0fb1-5ebc-4dfc-9cda-852911ecf448" class="">เป็นฐานข้อมูลเชิงเอกสารที่ออกแบบมาเพื่อจัดเก็บข้อมูล ดึงข้อมูล และจัดการข้อมูล ที่เรียกว่า “Document-Oriented” คือ ใช้โครงสร้างภายในของเอกสารเพื่อระบุการจัดเก็บข้อมูล ซึ่งมีลักษณะ แบบกึ่งโครงสร้าง (Semi Structure Data) โดยเอกสาร (Document) จะถูกเข้ารหัสข้อมูล และจัดให้อยู่ในรูปแบบของ XML, JSON, BSON</p></li></ol><figure id="5c7a3b71-9b8b-4eb9-b3f3-7126484fd834" class="image" style="text-align:center"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%202.png"><img style="width:384px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%202.png"/></a></figure><p id="14df9361-86be-4f59-b0da-d7a71986f6aa" class=""><div class="indented"><p id="e2ed2193-09f5-49e4-b879-91253618aa6d" class=""><strong>ระบบจัดการฐานข้อมูล</strong></p><ul id="5485ae8c-596e-4f98-98eb-900c6760b911" class="bulleted-list"><li style="list-style-type:disc">MongoDB<figure id="5a42f8cf-de0c-4450-9e7a-951e3f689d2e" class="link-to-page"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/MongoDB%205a42f8cfde0c44509e7a951e3f689d2e.html"><img class="icon" src="https://www.notion.so/icons/database_green.svg"/>MongoDB</a></figure></li></ul><ul id="f83f9204-9238-4b94-add9-7bdb32c76858" class="bulleted-list"><li style="list-style-type:disc">CouchDB</li></ul></div></p><p id="41bef98c-bbed-4092-906f-0d847d461c80" class="">
+</p><p id="a01632b9-4c3b-44c1-b376-7485b5a65412" class="">
+</p><ol type="1" id="03336640-f701-40b3-980d-a5d7868fc7f3" class="numbered-list" start="3"><li><strong>Graph Store</strong><p id="603b36e5-c4c5-4a44-bd28-05c41d6b9c11" class="">เป็ยการจัดเก็บข้อมูล และความสัมพันธ์ของข้อมูลในรูปแบบกราฟ ข้อมูลด้านในจะเรียกว่า โหนด (Node) ซึ่งจะเก็บ Entity ของข้อมูล และกำหนดความสัมพันธ์ที่เชื่อมโยงความสัมพันธ์ดังกล่าวผ่าน Edge การใช้งานกราฟจะถูกนำเสนอผ่านความสัมพันธ์ของข้อมูล เช่น Social Network, AI และ Machine Learning เป็นต้น</p></li></ol><figure id="e9ca0ba4-2a71-4325-a5b9-2d432bc41701" class="image" style="text-align:center"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%203.png"><img style="width:288px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%203.png"/></a></figure><p id="fcaa6e0c-5307-40d9-b7da-cfd0c91d2f56" class=""><div class="indented"><p id="5bcf5a84-4c49-4a29-ad27-a65be7e1bdc1" class=""><strong>ระบบจัดการฐานข้อมูล</strong></p><ul id="e287e766-e940-4f81-b7ea-3bcf33949d50" class="bulleted-list"><li style="list-style-type:disc">neo4j</li></ul><p id="aad9830b-3c00-423f-9991-c2fb16a814bf" class="">
+</p></div></p><ol type="1" id="54b03c2d-a745-4cc0-90ca-64e257639e39" class="numbered-list" start="4"><li><strong>Wide Column Storage</strong><p id="524ba2c4-59c7-40f3-973e-ed848c3e4ad3" class="">เป็นการจัดเก็บข้อมูลเป็น record หรือในรูปแบบ ตาราง แถว และตอลัมม์ ซึ่งจะแตกต่างจาก Relational Database คือจะมีความยืดหยุ่นมากกว่า ชื่อและรูปแบบของคอลัมม์ สามารถเปลี่ยนจากแถวหนึ่งไปอีกแถวภายในตารางเดียวกันได้ และขยายคอลัมม์ได้จำนวนมาก (Extensible Record Store : ขยายการจัดเก็บข้อมูลในแต่ละ record) อาจจะมองเป็นรูปแบบ key : value ในรูปแบบ 2 มิติได้</p></li></ol><figure id="a970336b-61cf-4c07-9d11-10f042866d29" class="image" style="text-align:center"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%204.png"><img style="width:336px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%204.png"/></a></figure><p id="6a7b5294-880d-4056-a4f7-5cbac3ad5fe5" class=""><div class="indented"><p id="f0cbb41a-f6c8-4735-b438-f702f923aafd" class=""><strong>ระบบจัดการฐานข้อมูล</strong></p><ul id="6dbca15f-2571-43b2-9ab2-f8bf58214822" class="bulleted-list"><li style="list-style-type:disc">Cassandra</li></ul><ul id="2862e620-164d-416f-90ff-4a8e4ac5e63e" class="bulleted-list"><li style="list-style-type:disc">HBase</li></ul><ul id="853f5dd4-9c52-4885-aaf9-b698ddaa24f5" class="bulleted-list"><li style="list-style-type:disc">DynamoDB</li></ul><ul id="28720e5b-4da0-4e1d-aa55-410ea216709e" class="bulleted-list"><li style="list-style-type:disc">Microsoft Azure Cosmos DB</li></ul></div></p></li></ol><hr id="10282f57-6d26-4860-a5c6-5af133d92e56"/><h2 id="122af617-8b2f-4364-80ef-e7a44b5d3f3d" class=""><strong>สรุปความแตกต่างระหว่าง SQL และ NoSQL</strong></h2><p id="3848ab97-3f1b-4a4f-9390-ec8c5d10f373" class="">
+</p><figure id="181abc95-8d78-4a4f-9483-f34271bac4bf" class="image"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%205.png"><img style="width:998px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%205.png"/></a></figure><figure id="e3f3849d-d8a2-4883-9943-a1624f1b21ec" class="image"><a href="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%206.png"><img style="width:1747px" src="Database%2024fe9ce721f948b68ebebbccdd2a8766/Untitled%206.png"/></a></figure><hr id="7808bfe0-abed-461c-9701-77cf2a66efbf"/><p id="f4531c19-9b64-45fb-80da-c69d1bf74974" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

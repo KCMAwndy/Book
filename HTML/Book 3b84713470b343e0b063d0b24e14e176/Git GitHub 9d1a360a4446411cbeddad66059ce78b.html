@@ -1,0 +1,699 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Git/GitHub</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9d1a360a-4446-411c-bedd-ad66059ce78b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/git_gray.svg"/></div><h1 class="page-title">Git/GitHub</h1><p class="page-description"></p></header><div class="page-body"><h2 id="1eee048b-521f-465c-b6aa-8668abbef09c" class="">Introduction</h2><p id="e6e2d849-8d34-450b-bba0-a5a70be67957" class=""><strong>Version Control</strong> : <div class="indented"><ul id="aef0f5e3-770a-4f7f-a525-00b5f670bf25" class="bulleted-list"><li style="list-style-type:disc">System records all the change made to a file or set of files, so a specific version may be called later if needed</li></ul><ul id="2b0b7c9a-44ef-48a0-928a-f8211e031235" class="bulleted-list"><li style="list-style-type:disc">The system makes sure that all the team members are working on the latest version of the file</li></ul></div></p><p id="32ad5b81-470e-4c0d-a3ec-717bae35b4ef" class=""><strong>Git</strong> : เป็น Version Control แบบ Distributed Version Control System (DVCS)</p><p id="4599d4a4-e995-4f6b-b962-556ec18e592c" class=""><strong>GitHub</strong> : (Git Repository/ Remote Repository) : คือ Web Server ที่เก็บ file ที่ upload โดย Git </p><p id="054d9008-f8e2-48aa-879d-7480194a4a44" class=""><strong>Repository </strong>: Database ที่เก็บ version ของ code<div class="indented"><ul id="a6219135-61ff-40a9-b9ec-02b2ad2aea84" class="toggle"><li><details open=""><summary>ใน GitHub การสร้าง repository คือการสร้าง พื้นที่จัดเก็บ project (file code)</summary></details></li></ul><ul id="8c110b64-db0b-4a65-ab5c-568971317d0a" class="toggle"><li><details open=""><summary>การที่จะดึงข้อมูลจาก server มาไว้กับเครื่องโดยที่จะทำงานแบบ Offline โดยไม่ต้องพึ่ง Online ต้องอาศัยการ clone จาก server มาใช้งาน ซึ่งจะเรียกเครื่องที่ใช้ clone source code จากฐานข้อมูลมาไว้ที่เครื่องของตนเองว่า Local Repository </summary></details></li></ul><ul id="d709eb7f-0249-40b7-b458-bff4cf7abf36" class="toggle"><li><details open=""><summary>เมื่อต้องการ upload เข้า server (GitHub) จะใช้การ Syn ด้วยวิธีการ Pull/ Merge/ Push</summary></details></li></ul><p id="90270411-23cb-4d97-b148-9fe442306f29" class="">
+</p></div></p><hr id="29dcbaf3-5bb9-4a12-90c2-2324936cc86c"/><h2 id="86285d9b-9aa0-4f8f-9d33-97485d616001" class="">การสร้างและลบ Repository (GitHub)</h2><p id="97260e19-9d46-4e43-a13c-b430c2f06eff" class="">บน Web Browse</p><figure id="ad40475e-adeb-435e-9757-b01ae757e23e" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled.png"><img style="width:1173px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled.png"/></a></figure><hr id="b99aa6fa-1348-4ca2-af72-5fcbec99c86a"/><h2 id="1402a8a8-2fe2-4143-ae85-914f13756e99" class="">การเชื่อมต่อ Git กับ Email &amp; Username</h2><p id="b3dfbdcc-4833-4399-8cb4-823ea1e4c67f" class="">command line</p><p id="ed847c26-69c9-4c39-9b7d-9e636c0978db" class="">การเชื่อม git กับ Email</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9dcce33b-5ca1-4f1f-a21c-2b719d68e1b5"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git config —global <a href="http://user.email">user.email</a> “Email ของเรา”</div></figure><p id="e04ceb05-53e6-4133-97c6-8fad47430fa0" class="">การเชื่อม git กับ Username </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="867be1a4-82fa-4064-94ce-5868d08c96a6"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git config —global <a href="http://user.email">user.</a>name “ชื่อ user ของเราบน git”</div></figure><p id="0899fb60-e5e5-4f17-bbf2-f3665296d003" class="">การเเสดงการตั้งค่าทั่งหมด</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="669cde68-0818-4627-8277-6e7764fd362b"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git config —list</div></figure><hr id="ae05b8bc-6870-4769-a846-a346daecd00b"/><h2 id="d63daf5a-e80a-4c48-a547-270576a45160" class="">วงจรการทำงานของ Git (Git WorkFlow)</h2><figure id="576fea47-472d-4942-9e32-fb20daef25d1" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%201.png"><img style="width:1796px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%201.png"/></a></figure><p id="683cd2da-4fde-4687-aaae-afc2185b89eb" class="">Untracked : คือ file/folder ที่ยังไม่มีการตรวจสอบโดย git ว่ามีการเปลี่ยนแปลงอย่างไรบ้าง</p><ul id="5934febb-7eea-4cb2-8001-4a12618dfeda" class="bulleted-list"><li style="list-style-type:disc"><strong>git init </strong>: เป็นการบอกว่าจะนำ file มาตรวจสอบ (tracked)<ul id="228a11e1-d975-4e85-8251-bd60bb72fa4b" class="bulleted-list"><li style="list-style-type:circle"><strong>Tracked Status (สถานะการติดตาม)</strong><ul id="a09f51f6-e949-40d9-9dad-09c0d02a14cc" class="bulleted-list"><li style="list-style-type:square"><strong>Modified</strong> : มีการแก้ไขไฟล์แล้ว แต่ยังไม่เริ่มต้นจัดเก็บลงบน Repository</li></ul><ul id="920bc152-3c18-49ad-929c-f5ef4b5b03e7" class="bulleted-list"><li style="list-style-type:square"><strong>Staged </strong>: ได้ทำเครื่องหมาย File ที่ได้ถูกแก้ไขเพื่อบันทึกใน version หน้า</li></ul><ul id="348c701e-cea6-470d-be8b-e9027d73c49f" class="bulleted-list"><li style="list-style-type:square"><strong>Committed</strong> : ข้อมูลถูกบันทึกลงใน Repository เรียบร้อยแล้ว</li></ul></li></ul></li></ul><hr id="e18a1509-f664-4b09-9f04-8911f56406c9"/><h2 id="40e26a3c-d6a2-431d-957b-d3b36bd3f6c9" class="">Git Command เบื้องต้น</h2><p id="3fcce3af-bf29-4909-b2db-78601e212b72" class=""><strong>การสร้าง Local Git Repository</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cd85d44a-2219-4826-82be-f8c9ab89dbb2"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git init</div></figure><p id="8e99c8ea-b1f8-4281-9f7a-dc7363fac6dc" class="">การเชื่อม git กับ Email</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="aedb6c21-e599-456a-a998-1363e2e97704"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git config —global <a href="http://user.email">user.email</a> “Email ของเรา”</div></figure><p id="cff815d5-dec6-442c-b785-ff4bfd3fc9d9" class="">
+</p><p id="0c2182a5-d2cd-4e40-9be7-466d66d1a6ee" class=""><strong>การเพิ่ม file เข้าไปใน Staging Area(Check-in)</strong></p><ul id="77ceae87-ddd0-4108-af90-d7c75e9d2b8f" class="bulleted-list"><li style="list-style-type:disc">ระบุ file โดยตรง<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1bf82cb9-8547-4894-9f51-ef20c2c4e815"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git add &lt;file_name&gt;</div></figure></li></ul><ul id="064ea063-a0d5-4224-95d3-c74ba7b36868" class="bulleted-list"><li style="list-style-type:disc">เพิ่มหลายๆ file พร้อมกัน โดยระบุนามสกุล<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ec292318-f528-4f00-97f8-944291e9d109"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git add *.html</div></figure></li></ul><ul id="446b902b-ed34-440a-848f-46471e8c5e39" class="bulleted-list"><li style="list-style-type:disc">เพิ่มทุก file ที่อยู่ภายใต้ Directory ปัจจุบัน<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b54a3bb6-d9f7-4700-a4a5-60dc16e7017c"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git add .</div></figure></li></ul><p id="1fe3f9bc-fb9a-4052-90d6-0cce521a4278" class="">
+</p><p id="df006903-3c2a-49c4-b173-703d97f66253" class=""><strong>การลบ file หรือ folder ออกจาก Git Repository (Remove)</strong></p><ul id="44d12499-3134-461a-ba13-837bfcc4a734" class="bulleted-list"><li style="list-style-type:disc">ลบทั้งหมด<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0fd98164-2cac-4b8c-90d2-ba29d39814c0"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git rm -r —cached .</div></figure></li></ul><ul id="6160df93-8a23-4592-b045-930b0f6fbd6b" class="bulleted-list"><li style="list-style-type:disc">ระบุ file โดยตรง<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="061f4697-2db3-4db9-b8e1-c459460202d6"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git rm —cached &lt;file_name&gt;</div></figure><p id="09320b36-4bbf-4454-aac7-41e3372b06d8" class="">
+</p></li></ul><p id="a048ac45-f0e1-47b3-b4ed-0e5a544b0fe7" class=""><strong>การตรวจสอบสถานะ (status)</strong><div class="indented"><p id="aeba1e36-c7d9-4c2f-afd6-099818dbe7ef" class="">เป็นการดูสถานะการเปลี่ยนแหลงของ Repository บนเครื่องเรา (Local) เช่น การเพิ่ม, แก้ไข, ลบไฟล์ต่างๆ</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a4757487-7e94-4fef-b3ce-cbfbfcf173b8"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git status</div></figure><p id="82977256-dfb4-44d7-b9ef-dbca9e7c0613" class="">
+</p></div></p><p id="afe24dcb-57d0-485e-90df-8ca877ab61d1" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="3ca84576-8ffa-44a1-8ed8-001aa3caf0d1" class="numbered-list" start="1"><li>ใน folder ที่เราจะนำเข้าสู่ Git ให้กดคลิกขวา &gt; เลือก Git Bash Here<figure id="0f3d509f-e4e2-4839-87b5-660ed23a0f66" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%202.png"><img style="width:977px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%202.png"/></a></figure></li></ol><ol type="1" id="84d0a5a7-332c-4368-a09b-4a67830f6f1f" class="numbered-list" start="2"><li>สร้าง file โดยใช้คำสั่ง touch / สร้างผ่าน text editor<figure id="fb8c8d53-55ef-4605-be9c-f42ce07a3198" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%203.png"><img style="width:952px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%203.png"/></a></figure></li></ol><ol type="1" id="faea3287-f117-46a8-be57-8ac8cbe9b47b" class="numbered-list" start="3"><li>นำ Git มาตรวจสอบ file ว่ามีการเปลี่ยนแปลงกลุ่มคำสั่งตรงไหนบ้าง เริ่มจากการนำ Git มาทำงาน (สร้าง Git บนเครื่องเรา) โดยใช้คำสั่ง git init<figure id="1d975e6e-dfcf-4832-968f-44db7e6ec5a3" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%204.png"><img style="width:602px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%204.png"/></a></figure><figure id="7f98cf00-f33c-4193-8803-08984ee7e5a2" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%205.png"><img style="width:596px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%205.png"/></a></figure></li></ol><ol type="1" id="96bcbcba-1723-4a4e-b20c-47c3606e7aee" class="numbered-list" start="4"><li>ตรวจสอบการติดตาม (track) ของไฟล์ ด้วย git status ว่ามีการจัดเก็บลงบน staging area (git repository ที่เราสร้างขึ้นมา แต่ยังไม่ยืนยันแบบถาวรบน local repository เนื่องจาก staging area คือพื้นที่ที่เราจัดเตียมขึ้นมาก่อนนำไป commit ถาวร) หรือไม่ ถ้า untracked ให้เก็บประวัติการแก้ไขบน staging area โดยใช้ git add<figure id="5d802e81-6eb1-443e-a767-f84c2018deed" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%206.png"><img style="width:682px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%206.png"/></a></figure><figure id="d586f72f-d90a-4d87-ba72-8d2caecf3684" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%207.png"><img style="width:600px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%207.png"/></a></figure></li></ol><ol type="1" id="d42404a6-8f2a-454c-b9aa-736cc2006625" class="numbered-list" start="5"><li>ลบ file ใน staging area นั้นคือ การยกเลิกการติดตาม file (untrack)<figure id="b607cea5-8694-4352-a1b7-6b2b131291c5" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%208.png"><img style="width:687px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%208.png"/></a></figure></li></ol><hr id="37a2d5aa-5fd4-42de-83bf-2b6464fa6516"/><h2 id="e1991b0d-59ab-4e3d-92e6-f48f3f619884" class="">Git Commit ,Git Log</h2><p id="06f6711a-98cf-41be-8832-8e30a60b413e" class="">ใช้เพื่อเก็บประวัติถาวรบน Repository </p><p id="3c4bfa31-7c4e-408b-881e-d22ba221a7ab" class="">
+</p><p id="c9bfdca7-e793-46de-a48f-6b58b9a86fae" class=""><strong>การเก็บประวัติการอก้ไขถาวร (Commit)</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d4ed89c6-353b-4c45-a41b-33acff688ac2"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git commit -m “Log Message” </div></figure><p id="5de3700f-8a2c-4586-a14a-0c497282fdab" class=""><strong>Option</strong></p><ul id="c423e9c4-9dd1-4990-bd88-ce5fc44744d8" class="bulleted-list"><li style="list-style-type:disc"><strong>m</strong> : เป็น parameter สำหรับใส่ข้อความช่วยจำ (Log Message) เพอื่อธิบายการ commit แต่ละ version</li></ul><ul id="968a0f30-12b9-4381-a604-c952fa0179f1" class="bulleted-list"><li style="list-style-type:disc">เมื่อ Commit ไปแล้ว ขะได้ SHA-1 Hash เป็น Commit ID (รหัสประจำ version), (โดยที่ SHA-1 Hash = 40 ตัวอักษร แต่ตอนอ้างอิงใช้แค่ 7 ตัวอักษรแรก)</li></ul><p id="cd704472-74d4-4bd4-8813-24d8fcfafeb3" class="">
+</p><p id="9c349a81-58f5-47ab-83d9-bd4726d022f5" class=""><strong>การดูประวัติการ Commit (Log)</strong></p><p id="4cbf2058-7eb1-4363-b86a-c6d5b373d7e6" class="">เป็นการแสดง Commit ID, Message, ชื่อผู้เขียน, email, และเวลาที่ Commit</p><ul id="70e988e1-35dd-4c4f-9815-194747575f2c" class="bulleted-list"><li style="list-style-type:disc">การแสดงผลทั้งหมดทีเดียว<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b9411efd-d31e-486c-8043-234fc10697a2"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git log</div></figure></li></ul><ul id="46bdb360-2d10-4ce6-afdf-3da23420889e" class="bulleted-list"><li style="list-style-type:disc">การแสดงแต่ละ log ให้เหลือบรรทัดเดียว<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="86f3db26-4a0b-4c92-913b-1b2e52b7bed3"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git log —oneline</div></figure></li></ul><ul id="1fc134bf-f7ed-40f3-bd37-ba28ad22fa34" class="bulleted-list"><li style="list-style-type:disc">การแสดงเป็นเส้น Branch ให้ดูง่าย<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e355493a-f314-443d-913f-9b7004aba003"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git log —graph</div></figure><p id="a9fee3ca-14f7-4933-adce-3dce800bf2bb" class="">
+</p></li></ul><p id="7370a20f-cdc2-4d48-8c81-5660cf523abd" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="0b98d832-1617-4061-b626-54cedd2088d8" class="numbered-list" start="1"><li>การเก็บประวัติ file version แรก บน repository โดยใช้ git commit -m “Log Message” ทำให้เมื่อดู git status จะไม่ขึ้นว่าไม่มีการเปลี่ยนแปลงของไฟล์แล้ว เนื่องจากมีการเก็บประวัตถาวร<figure id="221c9d18-2fa4-4033-9b5d-4a60522f2033" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%209.png"><img style="width:537px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%209.png"/></a></figure></li></ol><ol type="1" id="2fe74f58-5440-46d1-9f0d-131c54adff09" class="numbered-list" start="2"><li>ดูประวัติการทำงานบน folder ในอดีต โดยใช้ git log <figure id="14c51a57-aca9-46b7-aff3-650d9884d0eb" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2010.png"><img style="width:573px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2010.png"/></a></figure></li></ol><ol type="1" id="93cf29a0-68e0-4217-b565-097ca9701f1e" class="numbered-list" start="3"><li>เมื่อเกิดการเปลี่ยนแปลงบน folder (แก้ไข file) ต้องการ check การแก้ไข file บน folder ใช้คำสั่ง git status โดยจะขึ้น status ว่า modified &gt; ทำให้จะมี version ที่ 2 <figure id="63a0e436-e2b7-4665-8be0-434fe1a44216" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2011.png"><img style="width:650px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2011.png"/></a></figure></li></ol><ol type="1" id="fe38b9e5-fe13-4d0e-836e-77ebc727fa42" class="numbered-list" start="4"><li>ทำการ update version ที่ 2 โดยการใช้ git add &gt; git commit<figure id="b3233775-a402-4cba-b44d-65f067f8aa38" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2012.png"><img style="width:552px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2012.png"/></a></figure></li></ol><ol type="1" id="60e3b7c6-33fd-42e5-bf62-b092ba38679b" class="numbered-list" start="5"><li>เมื่อ check ประวัติด้วย git log จะเห็นว่า มีทั้งหมด 2 version (version ที่ 1 ด้านล่าง, version ที่ 2 ด้านบน) <mark class="highlight-orange">โดยที่มี HEAD ชี้อยู่ว่า version นี้คือ version ปัจจุบัน (สามารถดู version ปัจจุบนโดยการใช้</mark><strong><mark class="highlight-orange"> git show HEAD</mark></strong><mark class="highlight-orange">)</mark><figure id="e362a1e5-e8e7-48c6-8b03-dae0e818ee93" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2013.png"><img style="width:576px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2013.png"/></a></figure><ul id="5fedea23-ac0d-474b-847a-577cb8f798ac" class="bulleted-list"><li style="list-style-type:disc">การแสดงผลแบบ oneline<figure id="0bab0a2c-f8b4-4b71-9036-264d95ca9d2a" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2014.png"><img style="width:543px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2014.png"/></a></figure></li></ul><ul id="a95f5692-91f9-45d7-8666-3971f47296f5" class="bulleted-list"><li style="list-style-type:disc">การแสดงผลแบบ Branch <figure id="4b20f897-d15f-4af4-bd47-3dadffc95aff" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2015.png"><img style="width:591px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2015.png"/></a></figure></li></ul></li></ol><hr id="ccbd8ad1-bd45-4a66-86ab-4e5925689a94"/><h2 id="99d04cab-c8ba-4e5c-8850-51e2bcbe9e45" class="">การเปรียบเทียบ version (git diff)</h2><p id="dda8b8d2-b078-4552-9267-be50915ec4ee" class="">ใช้สำหรับตรวจสอบแลเปรียบเทียบ file source code ว่ามีอะไรเปลี่ยนแปลง และต่างไปจากเดิมบ้างเมื่อเทียบกับ Commit (version )ที่ผ่านมา</p><ul id="d660d740-0e56-4326-86b5-9ade6fdffb42" class="bulleted-list"><li style="list-style-type:disc">เปรียบเทียบโดยการระบุ Commit ID โดยตรง (เปรียบเทียบแค่ version เดียว)</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5ecbaa66-21fc-4532-956a-a637543527d0"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git diff &lt;commit_id&gt;</div></figure><ul id="b1b17124-0e12-496e-9d51-3e9e57d3b04b" class="bulleted-list"><li style="list-style-type:disc">เปรียบเทียบระหว่าง 2 Commit</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7aed4016-3559-4171-8015-1fb2bdbf8eea"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git diff &lt;commit_id&gt; &lt;commit_id&gt;</div></figure><p id="8fcdcb6b-d0cc-42d7-8f21-1b0408ef6abb" class="">โดยที่ commit_id คือ รหัส version 7 ตัวแรก นำมาอ้างอิง</p><p id="d99d8a7d-4334-40d3-bce7-d359dde56c76" class="">
+</p><p id="6911ede8-42b7-4520-abb7-ba92ce3d367b" class=""><strong>สีสถานะ</strong></p><ul id="3cb84347-1a3c-46c6-a651-879a558a046d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><strong>เครื่องหมาย - และตัวอักษรสีแดง</strong></mark> หมายถึง บรรทัดเดิมก่อนถูกแก้ไขและถูกลบ (version เดิม)</li></ul><ul id="375563d2-7ea6-438b-bbd5-5d6398b849ff" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal"><strong>เครื่องหมาย + และตัวอักษรสีเขียว</strong></mark> หมายถึง โค้ดใหม่ที่ถูกแก้ไขและเพิ่มใหม่ (คำสั่งที่มีการแก้ไขบน version ใหม่)</li></ul><p id="df08ca18-be06-4fcd-80fd-31b7f39123ec" class="">
+</p><p id="00762a14-8efe-45ed-b530-fd77c786ff40" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="cc214b6d-3ac9-45c6-b9e5-e64b4b002067" class="numbered-list" start="1"><li>แสดงการเปรียบเทียบระหว่าง 2 version ด้วย git diff &lt;commit_id&gt; &lt;commit_id&gt;<figure id="985c1e82-8534-44a0-a8bd-50303f17db3c" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2016.png"><img style="width:440px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2016.png"/></a></figure><ul id="eb896e9e-cab7-4889-8232-ea2fa0711767" class="bulleted-list"><li style="list-style-type:disc">เปรียบเทียบ 2 version จากที่มี 3 version<figure id="883854cf-490b-4e3a-87fd-afbe83d652f2" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2017.png"><img style="width:982px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2017.png"/></a></figure></li></ul></li></ol><hr id="23565008-48de-4ef2-b104-31a435c45ea5"/><h2 id="512a614a-c9e2-432b-aa32-e227985fdc75" class="">การกู้คืน version ของ file</h2><p id="fc2eddd3-b26a-471e-b4c9-145b4cabf09f" class="">
+</p><p id="fbd77ad8-c844-404d-8bc0-5960cd75bf38" class=""><strong>การยกเลิกการแก้ไข file (Check-Out)</strong></p><p id="5f84bfc6-757e-44c9-9fd7-501bfe453a2f" class="">เป็นการย้อนกลับไปยัง Commit ล่าสุด หรือยกเลิกการแก้ไย file </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0bf4937a-f539-472f-8e5a-6378fb1f828e"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git checkout &lt;file-name&gt;</div></figure><p id="26d68e16-13fd-4769-98f4-d4f4798e7555" class="">
+</p><p id="80e792e1-f460-4715-891a-3af6de96d511" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="77ae0637-9e0d-40d7-88d0-3154df3bfc2e" class="numbered-list" start="1"><li>เมื่อลบ code ทั้งหมดบน file แล้ว กด save<figure id="2762aaba-a17c-4591-b137-9c608ae0c0cd" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2018.png"><img style="width:860px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2018.png"/></a></figure></li></ol><ol type="1" id="fe76949a-cab9-48b0-8a62-54747e38f996" class="numbered-list" start="2"><li>ต้องการกู้คืนคำสั่งกลับมา(ยกเลิกการแก้ไข) โดยใช้ git checkout &lt;file-name&gt;<figure id="1d400c0f-80f2-4dcb-b38e-0593b2a9aafb" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2019.png"><img style="width:871px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2019.png"/></a></figure></li></ol><hr id="639ee7a9-8f85-451b-ac75-ac960cf6a026"/><h2 id="89c85729-3016-46fa-a81f-d5b17a7a1d49" class="">Git Reset</h2><p id="0a9a9c64-9d36-403c-83a1-ffe7066f855a" class="">
+</p><p id="49acdf5e-716c-4959-951e-46da04bc1fff" class=""><strong>Git Reset สำหรับการย้อนคืน file ที่ไม่ต้องการจาก Staging Area</strong></p><p id="3e54f7c0-98da-4453-9ebc-7ed3e6d70bbe" class="">เป็นการย้อน version ให้กลับไปอยู่ในสภาพก่อนที่จะ add file เข้าสู่ Staging Area ซึ่งบางครั้ง มีการเพิ่ม file ลงใน Staging Area โดยไม่ได้ตั้งใจ ซึ่งสามมารถเอาออกได้ โดยใช้ git reset</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3087ae53-9afb-4df5-aaea-30500a09de08"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git reset &lt;ชื่อ file ที่จะนำออกจาก staging area&gt;</div></figure><p id="d201d7d1-98f9-41ba-b073-5110968e8a40" class="">
+</p><p id="6596385a-eee3-4945-96d9-deb857152e4f" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="99f29276-4d02-4dba-868c-6278d4385465" class="numbered-list" start="1"><li>ทดลองโดยการ เพิ่ม 2 file ด้วย touch<figure id="9eb5251a-4777-440b-9886-3df3106aaf18" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2020.png"><img style="width:790px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2020.png"/></a></figure></li></ol><ol type="1" id="3fc56e66-c62b-4528-9976-6c0a40f3ea24" class="numbered-list" start="2"><li>check track file และเพิ่ม file บน staging area ด้วย git add<figure id="caee7284-820a-413e-9fbc-efa222ff0aca" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2021.png"><img style="width:723px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2021.png"/></a></figure></li></ol><ol type="1" id="87d8fbe1-8185-4a73-ae13-d3f8bb8fa883" class="numbered-list" start="3"><li>นำ readme.txt ออกจาก staging area โดยการใช้ git reset<figure id="7dcca1ef-992a-4936-b72c-97469f4c1814" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2022.png"><img style="width:511px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2022.png"/></a></figure></li></ol><ol type="1" id="68e9e57a-bad4-408d-9195-f1648e7eebd7" class="numbered-list" start="4"><li>ในการ commit นี้ หมายถึงการเก็บ style.css ลงประวัติอย่างเดียว<figure id="6e153a07-f4b8-4a01-8f9d-f67a6e1bca08" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2023.png"><img style="width:446px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2023.png"/></a></figure><p id="ac80f954-b609-4867-aeb1-6f83c333101c" class="">
+</p></li></ol><p id="83114e7d-fb2d-4aaf-b272-963a297906d1" class=""><strong>Git Reset สำหรับการย้อนคืน version</strong> </p><figure id="615f32e0-5a79-4bc0-96cc-ec577b987678" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2024.png"><img style="width:776px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2024.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1a3cd9e7-bc5a-4800-a915-a26ad32d1652"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git reset —option &lt;commit_id&gt;</div></figure><p id="6ead7b32-7105-46a3-99fa-1e209dda47d7" class=""><strong>Option</strong></p><ul id="04797d91-ec30-4f28-8282-289e1c22e0b9" class="bulleted-list"><li style="list-style-type:disc"><strong>soft </strong>: ใช้เพื่อลบ Commit ทั้งหมดที่อยู่หลัง Commit ID แล้วนำไฟล์ที่เคยอยู่ใน Commit นั้นหลับมายัง <strong>Staging Area</strong></li></ul><ul id="e2b7e3d1-936b-4631-8b33-4c856cd72c72" class="bulleted-list"><li style="list-style-type:disc"><strong>mixed </strong>: ใช้เพื่อลบ Commit ทั้งหมดที่อยู่หลัง Commit ID แล้วนำไฟล์ที่เคยอยู่ใน Commit นั้นหลับมายัง <strong>Working Directory</strong></li></ul><ul id="247638df-20d8-4505-a8e8-5e8f3246b44c" class="bulleted-list"><li style="list-style-type:disc"><strong>hard </strong>: ใช้เพื่อลบ Commit ทั้งหมดที่อยู่หลัง Commit ID และจะทำลาย file ที่เคยอยู่ใน Commit เหล่านั้น</li></ul><p id="271607a4-bf3f-4109-81cc-348218876208" class="">
+</p><p id="d876cb4d-4619-4bef-a22c-9149f4763d57" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="a33737c3-4793-4df8-89f9-300e9d5cddda" class="numbered-list" start="1"><li>check version ที่มีด้วย git log<figure id="3108e958-41bf-4835-b16a-2819b170309c" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2025.png"><img style="width:497px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2025.png"/></a></figure></li></ol><ol type="1" id="995b3488-0acc-4cac-a292-a666ad40a8c6" class="numbered-list" start="2"><li>จะเห็นว่าปัจจุบันอยู่ version ที่ 4 ต้องการย้อนกลับไปใช้ version ที่ 2 โดยที่ถัดไปจาก version ที่ 2 ทิ้งไปหมดเลย (version ที่ 3 และ 4) ด้วยการใช้ git reset —<strong>hard </strong>&lt;commit_id&gt; <figure id="796f04c6-6101-4d01-8cda-139d979fab27" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2026.png"><img style="width:833px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2026.png"/></a></figure></li></ol><ol type="1" id="830e4375-fefd-452a-b4d5-9f9b34e3bef7" class="numbered-list" start="3"><li>เพิ่มข้อมูลบน index.html <figure id="07452c9b-80cf-493b-97da-6226534f14c5" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2027.png"><img style="width:840px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2027.png"/></a></figure></li></ol><ol type="1" id="ca854b4e-9434-4e20-b292-6badc31d12b5" class="numbered-list" start="4"><li>ทำการ commit เป็น version ที่ 3 <figure id="cac2d2fe-d4b9-4c3f-aa86-453fec91ebc2" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2028.png"><img style="width:848px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2028.png"/></a></figure></li></ol><hr id="82a35ecd-b6eb-4e2d-a3a2-e2ff7f1af0fe"/><h2 id="2bf3ee18-72dd-4fb3-acdf-4cd1820088d1" class="">Git Branching : การแตกกิ่ง</h2><p id="9d977e8c-1dfe-4fe6-854c-cec07680a0ff" class="">การแตกกิ่งคือการพัฒนา project ใหม่/เพิ่ม feature เข้าไปใน project เก่า โดยที่ยังสามารถใช้งาน version ล่าสุดได้โดยไม่ต้อง ใช้ git reset ย้อนกลับ version (ใช้เมื่อ version ล่าสุดเกิด Bug แต่ยังต้องการเพิ่ม feature เข้าไป ทำได้โดยการใช้ version ก่อนหน้าแตกกิ่งก้านออกมา หลังจากที่ version ล่าสุดแก้ Bug เสร็จแล้ว สามารถนำมา Merge รวมกันได้)</p><figure id="30c45dff-f3cf-4121-9463-8782909eb3f2" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2029.png"><img style="width:866px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2029.png"/></a></figure><ul id="d4e1a699-64f4-455e-ae8a-a8d98ea18009" class="toggle"><li><details open=""><summary>Master เป็น Branch Default (กิ่งหลัก) ตอนใช้คำสั่ง git init</summary></details></li></ul><ul id="7d9da841-17e4-4436-a6ad-f84875b934e7" class="toggle"><li><details open=""><summary>project ที่ถูกแตกกิ่งออกมาจาก Master Branch เรียกว่า Feature Branch</summary></details></li></ul><figure id="2011341b-0304-4154-babb-6c4c7c7d0cc9" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2030.png"><img style="width:910px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2030.png"/></a></figure><ul id="d75f90b7-1850-4505-89b2-f2282cf95ef6" class="toggle"><li><details open=""><summary>โดยที่ถ้าเราอยากสลับไปทำงานที่ Feature Branch สามารถสลับกิ่งได้ด้วยการ Check Out </summary></details></li></ul><hr id="f733dd39-2dfa-46e3-ad72-fc327150c56f"/><h2 id="5cabeb4e-dc5d-428e-84a1-1335ee3d779e" class="">การจัดการ Git Branch เบื้องต้น</h2><p id="075d0e18-c1df-4841-b322-93e97e65799c" class="">
+</p><ul id="85ba95ae-e941-487a-850c-14c87207c190" class="bulleted-list"><li style="list-style-type:disc">การแสดงชื่อ Branch</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="397a304f-d635-4271-a193-89c39e30e3a9"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git branch</div></figure><ul id="ab22b386-4ffd-43f5-96bc-ad03c8dc075f" class="bulleted-list"><li style="list-style-type:disc">การสลับและสร้าง Branch</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8ff42cb1-05e6-4cf2-a4cd-57ea8f64593f"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git checkout -b &lt;ชื่อ_branch&gt;</div></figure><ul id="8bc8485d-2665-405e-a47d-4b364e776858" class="toggle"><li><details open=""><summary><mark class="highlight-orange">โดยที่ &lt;ชื่อ_branch&gt; ห้ามตั้งชื่อเว้นวรรค</mark></summary></details></li></ul><ul id="27e22098-6931-425c-bee4-57a1ec21d316" class="bulleted-list"><li style="list-style-type:disc">การลบ Branch</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3301cdf8-405a-4ec7-9e89-eb8bcf529f1b"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git branch -d &lt;ชื่อ_branch&gt;</div></figure><ul id="9d2a2369-ae80-4760-ae28-f2fa18abf676" class="bulleted-list"><li style="list-style-type:disc">สลับไป Branch ที่ต้องการ</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26e1fcfa-e954-48b5-9c2d-51927ae43811"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git checkout &lt;ชื่อ_branch&gt;</div></figure><ul id="8466a3a9-582c-4814-9a52-a2e17039c1fb" class="bulleted-list"><li style="list-style-type:disc">สลับไป Branch หลัก</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="633cde16-a482-43fe-ae86-c38c67fe7fa6"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git checkout master</div></figure><ul id="1e79ee42-b5f1-4560-ac85-c78987a9e4f4" class="bulleted-list"><li style="list-style-type:disc">การรวม Branch</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7aeab435-4d16-4cfe-9bea-ad3992a65f5c"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git merge &lt;ชื่อ_branch&gt;</div></figure><p id="105dbb74-f5be-4ff7-954d-dcb4073af984" class="">
+</p><p id="9627271b-884d-4baa-821a-182e2448f076" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="998f9cd7-22fa-4ff5-a9ff-afd45165890e" class="numbered-list" start="1"><li>ทดสอบโดยการดูชื่อ branch โดยใช้คำสั่ง git branch<figure id="841a893e-080c-4425-8afa-d221e1cc5c94" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2031.png"><img style="width:677px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2031.png"/></a></figure><p id="d49b0ce9-f9dc-4782-b678-cdffe1959766" class="">โดยที่เราจะเห็นว่า <mark class="highlight-teal">เครื่องหมาย “*” หมายถึง ตอนนี้เรากำลังทำงานอยู่ที่ branch นั้นๆ / หรือดูที่ “()” หลังชื่อ project</mark></p></li></ol><ol type="1" id="bb557e59-0f40-4505-b3aa-a73633391e03" class="numbered-list" start="2"><li>การสร้างและสลับไปใช้ branch ที่สร้างขึ้น โดยใช้คำสั่ง git checkout -b &lt;ชื่อ_branch&gt;<figure id="cb06a2d1-c405-427f-ba29-45ba632249f1" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2032.png"><img style="width:727px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2032.png"/></a></figure></li></ol><ol type="1" id="b9faa413-e5cf-4082-bc66-75e97077a4a4" class="numbered-list" start="3"><li>การลบ branch โดยใช้คำสั่ง git branch -d &lt;ชื่อ_branch&gt;<figure id="a61effdc-5d36-4e4a-9dbd-60ecc6362795" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2033.png"><img style="width:720px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2033.png"/></a></figure><figure id="79fd1772-33da-4d7e-a3cd-0c8c552fadf5" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2034.png"><img style="width:670px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2034.png"/></a></figure></li></ol><ol type="1" id="95a660c4-7266-4a56-a3b2-70aa16627666" class="numbered-list" start="4"><li>เพิ่ม branch(feature) ใหม่ และแก้ไข source code ที่ branch นั้น<figure id="c9802bce-cc6d-427e-8e53-456ab4f49a1c" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2035.png"><img style="width:995px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2035.png"/></a></figure></li></ol><ol type="1" id="a12b134b-8233-4104-9a69-85c32670909d" class="numbered-list" start="5"><li>ทำการ check status, add และ commit ของ file index.html บน branch ให้เรียบร้อย<figure id="70139f73-6c72-4f54-9190-688b26ce28cc" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2036.png"><img style="width:547px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2036.png"/></a></figure></li></ol><ol type="1" id="8e4662c1-7a20-458b-93d7-09b2316b64e4" class="numbered-list" start="6"><li>ทำการสลับไปใช้ branch master จะเห็นว่า source code ใน branch master ไม่เปลี่ยนแปลง<figure id="1869f61e-31f6-42d4-a692-9b16a31ad93e" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2037.png"><img style="width:998px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2037.png"/></a></figure></li></ol><ol type="1" id="2981bc75-3a5b-42be-9fd6-9d305200db29" class="numbered-list" start="7"><li>นำ branch มารวมกัน โดยใช้ git merge &lt;ชื่อ_branch&gt; โดยที่ต้องอยู่ใน branch master ก่อน<figure id="385250c0-9df9-40cf-83a6-7b5944fd93e1" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2038.png"><img style="width:1007px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2038.png"/></a></figure></li></ol><hr id="8c9533a0-3a5a-46a9-ab88-1674a8e76c73"/><h2 id="362990c5-1cbe-4bf6-ad9b-5e6db3c4b8cc" class="">Git Push (ผลัก)</h2><p id="1a188f82-8d79-4674-824f-86b27f5718d4" class="">คือคำสั่งที่ใช้สำหรับนำสื่งที่อยู่ในเครื่องของเรา (Local Repository) ไปอัพเดตให้กับ Remote Repository (Server) / GitHub</p><p id="1c6af819-8623-446c-a766-7cf466aa2280" class=""><strong>โดยสามารถใช้งานได้ 2 เหตุการณ์นั้นคือ</strong></p><ol type="1" id="e483cf19-7348-4dbc-80c1-517ff5dbd673" class="numbered-list" start="1"><li>นำไฟล์เข้าสู่ GitHub ตั้งแต่แรกที่ยังไม่เคยนำเข้า</li></ol><ol type="1" id="7b11ddf2-513d-4c63-81fc-24df6a3b0450" class="numbered-list" start="2"><li>นำไฟล์เข้าไป update ไฟล์เดิมใน GitHub</li></ol><p id="d02ab4c7-d51c-48b0-a718-35cdfcc62288" class=""><strong>ทำได้โดย</strong></p><ul id="44387919-f889-4f73-b9ba-1d9187dac8e9" class="bulleted-list"><li style="list-style-type:disc">สร้าง branch (main) หลักบน remote repository</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7467be55-c70b-4347-9e29-35dbbddac3b1"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git branch -M main</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="61ecb2fa-4533-40d4-8f2b-37e09303ac5b"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git remote add origin &lt;URL_ของ_repository_เรา&gt;</div></figure><ul id="e93eb96d-5482-45ee-b26f-523519410e42" class="toggle"><li><details open=""><summary>เป็นการบอกว่า เราจะอัพ ตัว project ของเราขึ้นไปเก็บบน remote repository (GitHub) โดยมีที่อยู่ดังนี้</summary></details></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4fb7b3a0-8a65-4cd2-ba2d-365755700ed8"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git push -u origin main</div></figure><ul id="b02c6448-e972-42aa-bf0e-ee7f35c90bb9" class="toggle"><li><details open=""><summary>เป็นการบอกว่าให้นำตัว project บนไปทำงาน/จัดเก็บบน branch (main) นั้นๆ</summary></details></li></ul><figure id="3139fe12-0d20-4b8e-8c22-2249be52b281" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2039.png"><img style="width:396px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2039.png"/></a></figure><p id="87b73675-ee8c-41ae-98c6-0546b6721ba5" class="">
+</p><p id="c34de228-9694-4c8e-a472-b5cae29749d2" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="ff180081-6397-47e7-ac8a-96693c9dc330" class="numbered-list" start="1"><li>สร้าง repository ใหม่ บน GitHub<figure id="192fc1f7-d689-4884-9d35-8bb5f8322af7" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2040.png"><img style="width:592px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2040.png"/></a></figure><p id="78d481a1-1f22-4ac2-a2cc-5ddd577f2245" class="">โดยเราจะ push แค่ file .js และ .html จึงต้องลบ file readme.txt จากนั้น git add และ commit ตามลำดับ</p></li></ol><ol type="1" id="e55fde84-bf5d-43b5-a87d-fd98f1edd71d" class="numbered-list" start="2"><li>ทำการ Git Push ทั้ง 3 ขั้นตามลำดับ<figure id="e83fa0c1-0e43-4c49-b807-5af529012f59" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2041.png"><img style="width:505px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2041.png"/></a></figure><figure id="8a897445-fe2d-4a97-aa0a-d6f15e68334e" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2042.png"><img style="width:442px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2042.png"/></a></figure></li></ol><ol type="1" id="969a1f76-dab8-4968-95d2-0b08d039ead3" class="numbered-list" start="3"><li>จะเห็นว่ามีการ update ที่ branch หลักบน repository<figure id="b8b37c20-b027-41d9-b72d-f4d2ef3d8348" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2043.png"><img style="width:707px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2043.png"/></a></figure></li></ol><hr id="ae579672-2c47-48f0-bec9-aa978f574607"/><h2 id="c1f6485f-97bb-4f7b-ae46-1e48ef5118e6" class="">Git Pull (ดึง+รวม)</h2><p id="e5552850-31a9-40cc-82bd-a57337e77330" class="">คือคำสั่งที่ใช้สำหรับนำสิ่งที่อยู่ยน Remote Repository (Sever)/GitHub มาอัพเดตในเครื่องของเรา (Local Repository) ให้เป็น code ชุดเดียวกัน </p><p id="62fbe17e-6bd4-4ebb-a814-f0b35befebd4" class=""><strong>ทำได้โดย</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c65f3000-45a7-4f34-897b-6eeebe831640"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git pull</div></figure><p id="5fcba530-677d-4965-9597-77fb19f34253" class="">
+</p><p id="c7c6f818-05f6-4469-8a5e-92c9a193bbca" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="2bc396fa-da4a-4831-820b-3cd563ea3911" class="numbered-list" start="1"><li>ทำการแก้ไข file app.js บน GitHub และทำการ commit<figure id="5f9ff484-04ab-4b60-a926-f85a1e2e6e69" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2044.png"><img style="width:847px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2044.png"/></a></figure><figure id="b8bebcc3-363b-44af-92ee-47addbf22774" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2045.png"><img style="width:817px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2045.png"/></a></figure><figure id="cdf7f2a1-9b1c-485d-84d2-86840700834d" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2046.png"><img style="width:853px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2046.png"/></a></figure></li></ol><ol type="1" id="9f74ff01-e2b8-4c25-83f4-9e4ef03cc005" class="numbered-list" start="2"><li>ใช้คำสั่ง git pull เพื่อดึง code จาก GitHub มา update บนเครื่องเรา<figure id="065394e2-a264-44e2-9f8f-e842ae8ce906" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2047.png"><img style="width:998px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2047.png"/></a></figure></li></ol><hr id="aa142f5b-2431-4da6-827b-b7941a84e26c"/><h2 id="cfc05e15-3300-40ba-bd31-eda98cbe4425" class="">README</h2><p id="48fa5aa0-711f-46dc-b5cf-93763ead714c" class="">คือเอกสาร documentary ประกอบ กับ repository (คู่มือประกอบ project ว่า project เกี่ยวกับอะไร การทำงานเป็นอย่างไร ใช้งานอย่างไร)</p><p id="5abd807a-f755-4f88-a6ff-478aad8d34be" class=""><strong>สามารถสร้างได้ 2 วิธี</strong></p><ol type="1" id="ac1057e8-8f1c-4065-a193-1970f0d97ae1" class="numbered-list" start="1"><li>จากหน้า repository บน GitHub</li></ol><figure id="88b1b34c-8ce5-46c0-a622-df7e1d34b0c2" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2048.png"><img style="width:623px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2048.png"/></a></figure><ol type="1" id="31bed04f-c6b7-4c43-9da2-a3ac229b8b43" class="numbered-list" start="2"><li>บน git bash</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e0814049-34ce-444f-8459-4f2bed83b695"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">touch README.md</div></figure><p id="c915ca9f-2844-4a6c-a25e-0f68a6b08a36" class=""><strong>การใช้งาน</strong></p><ul id="bd51423e-b108-4d3c-b085-bf9f8334c953" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong>#</strong></mark> : แสดงถึงหัวข้อ project (header)</li></ul><ul id="7518b012-1ba8-47f6-b05c-39eb3aadbe0b" class="bulleted-list"><li style="list-style-type:disc">ระบุลายละเอียดด้วย text เฉยๆ</li></ul><p id="58cef632-1d92-42ff-ae95-1e5212741c2c" class="">
+</p><p id="e3c18422-1ca2-430a-aed0-0aef1bb34193" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="8c205551-3438-45b7-8789-6a502405160a" class="numbered-list" start="1"><li>สร้าง file README.md บน project<figure id="2cdefed1-2ea6-4299-979e-3d3cc615b0b4" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2049.png"><img style="width:926px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2049.png"/></a></figure></li></ol><ol type="1" id="9f12f50c-9090-4acc-8ad7-6bed12ccc987" class="numbered-list" start="2"><li>กำหนดหัวข้อ และลายละเอียดใน README.md และกด save<figure id="d112235f-da46-40bb-9483-416707297d24" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2050.png"><img style="width:691px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2050.png"/></a></figure></li></ol><ol type="1" id="2e0a90dd-8f42-4f5b-bb80-84fbcb2f0c6f" class="numbered-list" start="3"><li>ทำการ git add, commit และ push ตัว README.md<figure id="e25573e0-b81c-4fe3-925a-92c275de18b1" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2051.png"><img style="width:422px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2051.png"/></a></figure><figure id="6a41defe-543c-4cc9-8cf9-6b038b362a97" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2052.png"><img style="width:436px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2052.png"/></a></figure></li></ol><ol type="1" id="acf9fd1b-1867-4323-a28d-75057d764c3e" class="numbered-list" start="4"><li>กลับไปดู README.md บน GitHub<figure id="5152756b-c5a6-4aad-933a-b4d4603aac11" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2053.png"><img style="width:633px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2053.png"/></a></figure></li></ol><hr id="32fe3c31-ad4f-41a1-8fdc-5a10e000408f"/><h2 id="ff28732d-5d5a-4953-b226-4642ff78a5d8" class="">Git Clone</h2><p id="9385042e-1ee7-4a66-bd2b-b45450425607" class="">คือคำสั่งที่ใช้สำหรับนำเอา project ใน Remote Repository (Server)/GitHub มาไว้ในเครื่องของเราหรือคนในทีม (Local Repository) โดยไม่สงผลกระทบต่อตัว project ที่ clone มา</p><p id="c488fc08-c28a-43e8-817c-f6ea6814b2cf" class=""><strong>ทำได้โดย</strong></p><ul id="5c9fe189-a35d-4590-b617-5d26ad67a9cc" class="bulleted-list"><li style="list-style-type:disc">หาตำแหน่งที่ project ที่จะ clone (URL) บน GitHub</li></ul><ul id="fcd12b1e-b3bf-415a-bb80-6dbea4e3576e" class="bulleted-list"><li style="list-style-type:disc">ระบุตำแหน่งนั้นบน folder ที่จะใส่ โดยใช้ git bash</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bb52da8e-f257-4008-9fcd-51f17c548600"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><div style="width:100%">git clone &lt;URL_project ที่จะ clone&gt;</div></figure><p id="0875e877-11ec-4bc2-9f34-20cd43ff0a17" class="">
+</p><p id="74feae21-ca54-46e8-b683-cf1b83f6afac" class=""><strong>ตัวอย่างการใช้งาน</strong></p><ol type="1" id="6ee655d3-537e-4f87-8768-c8d25c52ed0c" class="numbered-list" start="1"><li>หาตำแหน่งที่ project ที่จะ clone (URL) บน GitHub<figure id="e9f1df1d-f629-4455-ac1d-a04aebed74e4" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2054.png"><img style="width:633px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2054.png"/></a></figure></li></ol><ol type="1" id="9fabe8c8-defc-499d-a3ca-79a665372ddd" class="numbered-list" start="2"><li>สร้าง folder ใหม่เพื่อจัดเก็บ และใช้คำสั่ง git clone &lt;URL_project ที่จะ clone&gt;<figure id="5a6e94bf-7533-4903-917e-11da13e4f867" class="image"><a href="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2055.png"><img style="width:767px" src="Git%20GitHub%209d1a360a4446411cbeddad66059ce78b/Untitled%2055.png"/></a></figure></li></ol><hr id="4950ceb2-699e-4529-9bc3-c31bdc011695"/><p id="3e7ec12f-4084-489c-831c-80e0287dc40a" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

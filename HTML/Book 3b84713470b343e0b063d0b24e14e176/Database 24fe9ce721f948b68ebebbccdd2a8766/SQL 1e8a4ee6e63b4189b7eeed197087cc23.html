@@ -1,0 +1,698 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SQL</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1e8a4ee6-e63b-4189-b7ee-ed197087cc23" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/database_blue.svg"/></div><h1 class="page-title">SQL</h1><p class="page-description"></p></header><div class="page-body"><p id="fc2c1b04-95e4-4688-86c1-fb2ec403d87f" class=""><strong>(Structured Query Language)</strong></p><p id="d69d1801-38af-4333-9977-1c808c803962" class=""><strong><strong>DBMS : Database Management System </strong></strong><div class="indented"><p id="36bf0855-6b5c-4b3c-829c-c8f19520463d" class="">software ระบบจัดการฐานข้อมูล</p></div></p><figure id="9cb01db6-d49f-4a7a-b55f-a5ffdc8b4a3f" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled.png"><img style="width:240px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled.png"/></a></figure><p id="110837fb-2270-4cbb-991a-b6a4d83ed73e" class="">DBMS ที่ใช้ : <strong>SQLite</strong></p><hr id="387c5bf9-0723-4e3f-8462-79ead0976eb1"/><h2 id="eabef8a2-55a6-4c58-bcd9-ed3d8d79a003" class="">การสร้างฐานข้อมูล</h2><p id="e5c1d51b-b109-4892-ac4f-540240d910b1" class="">New Database &gt; สร้างตารางให้ฐานข้อมูล </p><figure id="92d2d676-c3b8-4070-b1ec-75edeecf1dc0" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%201.png"><img style="width:336px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%201.png"/></a></figure><figure id="2a07a81f-b486-4ef8-83c1-f8283389d921" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%202.png"><img style="width:432px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%202.png"/></a></figure><p id="26975635-a2e0-4a2a-a064-1446877622e4" class=""><strong>Type : </strong><div class="indented"><ul id="11562eae-1872-41c4-b23b-26a2dda70c21" class="bulleted-list"><li style="list-style-type:disc"><strong>TEXT </strong>: ตัวอักษร/ข้อความ</li></ul><ul id="382f7796-4c60-455a-81ff-f1df3560103b" class="bulleted-list"><li style="list-style-type:disc"><strong>NUMERIC</strong> : ตัวเลขที่มีทศนิยมที่<strong>แน่นอน</strong> เช่น 100.00, 200.00 (ทศนิยม 2 ตำแหน่ง)</li></ul><ul id="5f21febe-f7f0-4f59-9333-d8c09ea95177" class="bulleted-list"><li style="list-style-type:disc"><strong>INTEGER</strong> ำ: ตัวเลขไม่มีทศนิยม</li></ul><ul id="15e5580b-ad7c-431c-a168-bcf3904e5579" class="bulleted-list"><li style="list-style-type:disc"> <strong>REAL </strong>:  ตัวเลขที่มีทศนิยมที่<strong>ไม่แน่นอน</strong> เช่น 150.75, 200.125 (ทศนิยม 2, 3 ตำแหน่ง)</li></ul><ul id="ef36092c-bf9f-45f3-ae88-2411b0bc8c3f" class="bulleted-list"><li style="list-style-type:disc"><strong>BLOB</strong> : เลขฐาน 2/ภาพ/link</li></ul></div></p><p id="9e0e4b06-1b1e-4e64-b27e-6b6ad6283669" class=""><strong><strong><strong><strong><strong><strong><strong><strong>ข้อจำกัด</strong></strong></strong></strong></strong></strong></strong></strong> :<div class="indented"><ul id="ff7571b6-631d-4d9c-9a5e-613f92728695" class="bulleted-list"><li style="list-style-type:disc"><strong>NN (Not-Null)</strong> : ข้อมูลใน row นี้ห้ามมีช่องว่าง</li></ul><ul id="3ff600da-e849-4cbf-981f-9919909a7185" class="bulleted-list"><li style="list-style-type:disc"><strong>PK (Primary Key) </strong>: ข้อมูลใน row นี้ใช้เป็น Key หลักที่ใช้ในการ search ข้อมูล</li></ul><ul id="f461943a-34a0-4d87-b15a-bd7fe6eedd75" class="bulleted-list"><li style="list-style-type:disc"><strong>AI (Auto Increment) </strong>: ข้อมูลใน row นี้จะ auto เพิ่มค่าขึ้นเรื่อยๆ</li></ul><ul id="7fbb4cdb-3def-4d05-a398-279814eaa0ad" class="bulleted-list"><li style="list-style-type:disc"><strong>U (Unique)</strong> : ข้อมูลใน row นี้ห้ามซ้ำกัน</li></ul></div></p><p id="9053b8e4-71b2-425e-90b4-671fa8959921" class=""><strong>การแก้ข้อมูล </strong>: แถบ Database Structure &gt; ตารางที่ต้องการ &gt; Modify Table</p><figure id="16303086-b4e8-4596-ba1d-d9983dd21921" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%203.png"><img style="width:240px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%203.png"/></a></figure><hr id="cb64d355-c15d-44ef-9d65-88f85065b482"/><h2 id="815931b4-6e32-48ba-b2d8-cece1bc84883" class="">การบันทึกข้อมูล (Insert)</h2><p id="357f3c5e-c564-40d2-a6da-dd478ea82846" class="">การพิมพ์คำสั่ง SQL จะพิมพ์ในแถบ Execute SQL</p><ul id="91a0133e-4e45-476c-95a4-f997cbd2479a" class="bulleted-list"><li style="list-style-type:disc">ตัวพิมพ์ใหญ่ : คำสั่ง SQL</li></ul><ul id="1dfb6aed-a879-4615-ac19-75c8acee4ed1" class="bulleted-list"><li style="list-style-type:disc">ตัวพิมพ์เล็ก : ตัวแปรต่างๆ</li></ul><ul id="058aa4ba-33d2-4e4f-9cc6-c45cc61370cc" class="toggle"><li><details open=""><summary>ใช้เลขแทนชื่อ column ได้</summary></details></li></ul><ol type="1" id="130a78ba-6391-42d0-a9f4-b5784fb964cf" class="numbered-list" start="1"><li>การบันทึกข้อมูลที่ระบุ column</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e5dbaf8b-eb3d-4997-a7f3-199b89886e5d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>INSERT INTO</strong> ชื่อตารางข้อมูล <mark class="highlight-teal">(หัวข้อ column ที่ต้องการจะ insert, …, …)</mark><br/><br/><strong>VALUES</strong><mark class="highlight-teal"> (xxx, xxx, xxx, xxx)</mark></div></figure><ul id="7beaef76-9738-4ccb-a351-d0e258b72212" class="toggle"><li><details open=""><summary>โดยที่ หัวข้อ column กับข้อมูลที่จะใส่ใน value ต้องสัมพันธ์กัน</summary></details></li></ul><ul id="6b55db1b-5126-4b46-9e0e-1a108e93922c" class="toggle"><li><details open=""><summary>โดยค่าที่อยู่ในวงเว็บคือค่าที่จะ insert ไปในตาราง</summary></details></li></ul><figure id="88dab010-3191-4834-9fad-3332821b7cc6" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%204.png"><img style="width:706px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%204.png"/></a></figure><figure id="8eb34ce7-f443-4a4a-b81c-3f39ad683a49" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%205.png"><img style="width:619px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%205.png"/></a></figure><ul id="70af5311-22be-4508-9d19-a6626fd751eb" class="bulleted-list"><li style="list-style-type:disc">สังเกตุว่า เราไม่ต้องระบุ id ใน value เนื่องมาจากเรากำหนดให้ id เป็น <strong>AI (Auto Increment)</strong> แล้ว</li></ul><p id="d8257751-ed7a-48e5-b40b-7b13ac86cba8" class="">
+</p><ol type="1" id="9d0a75db-3c32-4029-b923-8e3b13ffb54b" class="numbered-list" start="2"><li>การบันทึกข้อมูลไม่ระบุ column</li></ol><ul id="f163c78c-6fbc-4fd2-9d4c-4415b07f9094" class="bulleted-list"><li style="list-style-type:disc">ไม่ต้องระบุชื่อ column ในตารางทั้งหมด</li></ul><figure id="49d367b2-4294-40eb-9f06-217ea1d09280" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%206.png"><img style="width:672px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%206.png"/></a></figure><ul id="bb951d10-dc3f-4e90-b5c3-5dfb2c80fb08" class="toggle"><li><details open=""><summary>สามารถระบุ column ทั้งหมดของตารางได้ แต่เราต้องใส่ค่า value ให้ตรงกับที่ระบุ column ไว้อยู่ดี</summary></details></li></ul><figure id="f2207895-5dfc-4eb3-9506-8f6eb54c4d48" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%207.png"><img style="width:1051px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%207.png"/></a></figure><ul id="b4bbc753-c854-446e-9135-e3855d673d1e" class="bulleted-list"><li style="list-style-type:disc">สังเกตุว่า เมื่อเราไม่ระบุ column ถ้าเราระบุที่เหลือ ยกเว้น id จะเกิด error เพราะฉนั้นเราสามารถ modify column : id ให้สามารถรับ not null ได้ เมื่อเราใส่ค่า id : null ใน value ในตารางข้อมูลยังมีค่า เนื่องมากจากเรากำหนดให้ id เป็น <strong>(Auto Increment) </strong>ทำให้มันยังคงเพิ่มค่าขึ้นเรื่อยๆ เเม้เรากำหนดเป็น null</li></ul><p id="350f69df-9f0d-4230-a701-fbdf77ed9375" class="">
+</p><ol type="1" id="bd0725d4-9d77-4372-8867-95bb01210bb8" class="numbered-list" start="3"><li>การบันทึกข้อมูลบาง column</li></ol><ul id="cbecfe62-a64d-4141-b194-4ed350d5fa00" class="bulleted-list"><li style="list-style-type:disc">ระบุแค่ชื่อ column ในตารางที่ต้องการจะเพิ่มค่า (ยกเว้น column ที่เป็น not null)</li></ul><figure id="653ad031-cec2-48da-b2a0-202d12cf1df0" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%208.png"><img style="width:869px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%208.png"/></a></figure><ul id="2948c13a-1aea-4b8a-b697-241af798b52f" class="toggle"><li><details open=""><summary>โดยค่าที่ไม่ได้ระบุจะมีค่าเป็น null</summary></details></li></ul><figure id="1e8cfe8a-bfe3-4fd7-af4c-aacb59d24c88" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%209.png"><img style="width:610px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%209.png"/></a></figure><p id="0a52086b-a16a-4d21-8df2-b12b57642444" class="">
+</p><ol type="1" id="6eba8a15-af4c-44ca-996a-e369ce5fac99" class="numbered-list" start="4"><li>การบันทึกข้อมูลหลายรายการในครั้งเดียว</li></ol><ul id="a08bb539-83f5-427d-9923-9342a06bc04b" class="bulleted-list"><li style="list-style-type:disc">ระบุหลายรายการผ่าน comma (,)</li></ul><figure id="5b1ed085-5488-4f12-947d-96ba694569e9" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2010.png"><img style="width:1123px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2010.png"/></a></figure><figure id="b0121895-a703-4ce9-9769-1f516bb9401d" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2011.png"><img style="width:1062px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2011.png"/></a></figure><p id="f8d4b33e-35cb-4dca-a7bb-613536239edc" class="">
+</p><ol type="1" id="ae1d41e6-4267-457e-92bd-8f2179ff97ab" class="numbered-list" start="5"><li>การบันทึกข้อมูลค่า Default</li></ol><ul id="583faed8-4afb-44ad-867a-b4bfa54df2ea" class="bulleted-list"><li style="list-style-type:disc">ระบุค่า default ผ่านการ modify table</li></ul><figure id="12f0e6cb-1807-43c6-9573-2023d0c50a04" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2012.png"><img style="width:882px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2012.png"/></a></figure><ul id="28830361-6dee-42e1-b705-cf6525a5ecce" class="toggle"><li><details open=""><summary>โดยค่าที่ไม่ได้ระบุ จะมีค่าเป็นค่า default นั้นทันที</summary></details></li></ul><figure id="c5ea218f-5b39-4080-a34d-9a3213eb80b6" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2013.png"><img style="width:576px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2013.png"/></a></figure><figure id="979eb1d8-ec43-411e-9f9e-94ba9152c9f4" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2014.png"><img style="width:604px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2014.png"/></a></figure><p id="baabac31-3877-42c8-9fd6-82e454db99c9" class="">
+</p><ol type="1" id="eab58d85-4cb4-40eb-8daa-c5d2c1fb1082" class="numbered-list" start="6"><li>การบันทึกข้อมูลไม่ซ้ำด้วย Unique</li></ol><ul id="1a31611f-fb99-48dd-94b4-c76a4776d9ef" class="bulleted-list"><li style="list-style-type:disc">ระบุค่า Unique ผ่านการ modify table</li></ul><figure id="f0d75d14-3403-411f-8841-9bd8ec765af6" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2015.png"><img style="width:576px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2015.png"/></a></figure><figure id="0be2f2ee-fb00-4a7f-89e8-13d491f9fdc3" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2016.png"><img style="width:528px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2016.png"/></a></figure><ul id="8d0adb4d-7ff6-457b-b6c7-6e606b6e28d0" class="toggle"><li><details open=""><summary>เป็นการบอกว่าใน column นี้ข้อมูลห้ามซ้ำกัน</summary></details></li></ul><figure id="dae621e8-1863-496a-97ea-91bc59fda208" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2017.png"><img style="width:384px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2017.png"/></a></figure><hr id="53046976-b460-476e-bb91-2ed0c4d242f5"/><h2 id="491fd129-15be-4a14-83a9-c416cf9efa1e" class="">การเช็คข้อมูลด้วยเงื่อนไข Check</h2><ul id="a59547f2-01a9-40e1-99c9-e6c35b6eb1d1" class="bulleted-list"><li style="list-style-type:disc">การใช้เงื่อนไขมาตรวจสอบก่อนการเพิ่มค่าลงในตาราง</li></ul><ul id="40e49c2c-c0ed-4a11-a05b-2752dae73e6a" class="bulleted-list"><li style="list-style-type:disc">เงื่อนไขที่ใช้จะเป็นในการเปรียบเทียบเท่านั้น (&gt;,&lt;,=)</li></ul><ul id="a81a231e-6cb0-4822-9c0c-36cfca289507" class="bulleted-list"><li style="list-style-type:disc">ถ้าเงื่อนไขไม่ตรงก็จะไม่เพิ่มค่าในตาราง (error)</li></ul><figure id="e08703ab-e602-4a87-aef5-2c9efe570fc5" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2018.png"><img style="width:911px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2018.png"/></a></figure><figure id="32f89517-4a56-4f9b-8fe5-bfd4e4ac1ffb" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2019.png"><img style="width:578px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2019.png"/></a></figure><figure id="e368953e-8202-425a-94f1-cdddcb300b6e" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2020.png"><img style="width:528px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2020.png"/></a></figure><hr id="04dc2dbf-496d-4e95-af3f-0ea755dc163a"/><h2 id="546c9613-86b2-41ea-84e3-738dc6453f23" class="">การสอบถามข้อมูล (SELECT)-การ Query ข้อมูล</h2><ul id="a155b39f-eafe-496d-b0c8-6890c4157481" class="bulleted-list"><li style="list-style-type:disc">การเรียกดูข้อมูลในตาราง</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b19802b6-d1d9-4bee-98b9-e5e8a7a254d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>SELECT</strong> หัวข้อ column ที่ต้องการจะเรียกดู<br/><br/><strong>FROM </strong>ชื่อตารางที่ต้องการ</div></figure><ul id="3c6f3701-b958-4acc-9bce-dd2f2e9f25bd" class="toggle"><li><details open=""><summary>หัวข้อ column ไม่จำเป็นจะต้องเรียงตามในตาราง</summary></details></li></ul><figure id="f5c4a0eb-bcc8-4f26-a7ca-9b1032755b6f" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2021.png"><img style="width:633px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2021.png"/></a></figure><p id="bf427c81-1398-4518-a855-8ba12f8eec0c" class="">
+</p><ul id="3aa1af27-ef51-4b4d-b138-92e0b83c092c" class="bulleted-list"><li style="list-style-type:disc">การตั้งชื่อ column ด้วย AS<ul id="6151f2af-1c9a-4b87-9d5b-03d43f7e4255" class="bulleted-list"><li style="list-style-type:circle">เป็นการตั้งชื่อ column เพื่อเป็นการสื่อความหมายให้เข้าใจได้ง่ายขึ้น โดยจะไม่กระทบกับชื่อ column จริงในตาราง</li></ul></li></ul><figure id="865ff10f-866b-45b1-a03e-adbd3a074778" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2022.png"><img style="width:459px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2022.png"/></a></figure><p id="e3fee91c-e7e0-4a7b-ad9b-0454ed7eacd2" class="">
+</p><ol type="1" id="8d86ec48-01d0-45cc-bb78-dc936f401ee4" class="numbered-list" start="1"><li>การสอบถามข้อมูลทุก column</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cf86282b-5dd5-4b1d-b955-dd84157e6796"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>SELECT</strong> <mark class="highlight-purple">*</mark><br/><br/><strong>FROM</strong> ชื่อตารางที่ต้องการ</div></figure><ul id="176b0e96-cad9-4c2f-8cfe-4f7816568ca1" class="toggle"><li><details open=""><summary>จะเป็นการเรียงข้อมูลตาม column ในตารางที่ตั้งไว้</summary></details></li></ul><figure id="ed934807-96dd-4544-a52c-ce92884336a1" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2023.png"><img style="width:594px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2023.png"/></a></figure><p id="9431c56f-a4f5-4542-847b-febbdc6c4390" class="">
+</p><ol type="1" id="95691889-bc15-473d-ab3d-b1d5879ca6aa" class="numbered-list" start="2"><li>การแสดงข้อมูลไม่ซ้ำด้วย DISTINCT</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="af0a39c1-5fc0-4e5c-948d-5d7e39b48fb5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>SELECT</strong> <mark class="highlight-purple">DISTINCT<br/><br/></mark><mark class="highlight-default">FROM ชื่อตาราง</mark></div></figure><figure id="aceb4b9a-13e0-45a2-9f89-7fe84b2e3ab8" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2024.png"><img style="width:426px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2024.png"/></a></figure><ul id="23abb4dc-533a-423b-bd3a-629bff1842e6" class="bulleted-list"><li style="list-style-type:disc">สามารถใช้ร่วมกับ <ul id="5ac4d385-865e-4a41-aeed-b83ff792ac45" class="bulleted-list"><li style="list-style-type:circle"><strong>COUNT (*)</strong> : เพื่อนับจำนวนทั้งหมด</li></ul><ul id="75c4dcd5-b98e-472a-9cf7-8994beff5320" class="bulleted-list"><li style="list-style-type:circle"><strong>GROUP BY xxx</strong> : เป็นการจัดหมวดหมู่ตามxxx</li></ul></li></ul><figure id="f1ea2821-1339-4fb4-ab3b-f032a1d9f73f" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2025.png"><img style="width:336px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2025.png"/></a></figure><p id="af67cb41-2879-4bee-8224-e6fb2bf55ff2" class="">
+</p><ol type="1" id="155a57f2-7caf-43bc-851a-d9947e3fdca5" class="numbered-list" start="3"><li>การสอบถามข้อมูลแบบมีเงื่อนไข (WHERE)</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6200c2ff-c0bd-4a27-9620-a4e0011e85ec"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE</strong> ชื่อ column = “ข้อมูลที่ต้องการจะสอบถาม”(string)/ตัวเลข</div></figure><figure id="749b94b2-b1b0-473c-9f97-3f2f4a8dbfe4" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2026.png"><img style="width:502px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2026.png"/></a></figure><p id="1b208e30-9dd2-45ee-a2bf-b5a84a5a3a14" class=""><div class="indented"><p id="3aadf756-27e6-465d-8d03-d761cee2a89f" class="">3.1 ตัวดำเนินการเปรียบเทียบ<div class="indented"><p id="3e5bccff-7e30-4ef0-9df4-fb39180f45cd" class="">ตัวดำเนินการที่สามารถเปรียบเทียบได้ : =, !=, &lt;, &lt;=, &gt;, &gt;=</p><p id="51801d89-244d-466a-b5b3-91ba179bb971" class="">
+</p></div></p><p id="ff96f38b-a693-4409-bba5-b8d1f1d9ebde" class="">3.2 การเชื่อมเงื่อนไขด้วย AND OR NOT (การเชื่อมความสัมพันธ์)<div class="indented"><ul id="49c1a602-0a2b-418b-8df0-954e0925355b" class="bulleted-list"><li style="list-style-type:disc">AND : เงื่อนไขทั้ง 2 เป็นจริงถึงทำงาน</li></ul><ul id="ffa34a24-6b23-416d-8144-8a9ca29006e4" class="bulleted-list"><li style="list-style-type:disc">OR : เงื่อนไขอันใดอันหนึ่งเป็นจริง/เป็นจริงทั้งคู่ ถึงทำงาน</li></ul><ul id="a6007925-0cae-47d2-b029-adc72a004dd3" class="bulleted-list"><li style="list-style-type:disc">NOT : เงื่อนไขนอกเหนือจากที่กำหนดถึงทำงาน</li></ul></div></p><p id="00fc502e-9a93-498f-b357-7900911a4db7" class="">
+</p><p id="d2c55ec9-5d80-4997-9932-8c0981b0135e" class="">3.4 การเช็คค่าว่างด้วย IS NULL</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="50ccfc8b-46d1-455f-a0bc-96a6f6b06655"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE</strong> ชื่อ column<strong> IS NULL</strong></div></figure><figure id="fce15c8f-ae36-4d7a-89cb-76670e847028" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2027.png"><img style="width:561px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2027.png"/></a></figure><ul id="f3ce72f9-b900-4f04-9a39-c6690fc64024" class="bulleted-list"><li style="list-style-type:disc">เลือกข้อมูลที่มีค่าด้วย NOT NULL (เลือกข้อมูลทั้งหมดยกเว้นค่า NULL)</li></ul><figure id="b9ef0e2b-7314-43d2-8e01-acf2e10cdb1c" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2028.png"><img style="width:551px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2028.png"/></a></figure></div></p><hr id="a1a9b099-0fd5-4f5b-974a-ddb2619092d8"/><h2 id="e1f33bed-1927-47e8-a192-7b00eb23aa1d" class="">เรียงลำดับข้อมูลด้วย ORDER BY</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="40786527-8bd9-4596-b106-74b85c919814"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>ORDER BY</strong> ชื่อ column <strong>ASC</strong> (เรียงจากน้อยไปมาก)/<strong>DESC</strong>(เรียงจากมากไปน้อย)</div></figure><ul id="a04df20d-3602-4084-98a8-5cc9acb16105" class="toggle"><li><details open=""><summary>โดยที่ต้องวางไว้หลัง <strong>WHERE</strong></summary></details></li></ul><figure id="903c1818-d859-4f78-b0d7-aafd230b987f" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2029.png"><img style="width:537px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2029.png"/></a></figure><hr id="39c6d4fa-0aba-40e3-9e80-54c6704a8f3c"/><h2 id="9deb7e94-1e5f-4f92-96c7-0f76d69f0164" class="">การจำกัดจำนวนบรรทัดการแสดงผลด้วย LIMIT</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="76d16580-f011-4b1c-9d7a-d7c8a582e1f2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>LIMIT</strong> จำนวนบรรทัดที่ต้องการจำจำกัด</div></figure><figure id="72945098-f78f-4817-a13c-5a0ec8f1c26a" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2030.png"><img style="width:664px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2030.png"/></a></figure><hr id="838e7951-9daf-4a5a-bb6a-69f795a8b4e5"/><h2 id="6e305495-1267-41d4-b73a-9a43252cfb07" class="">การเพิ่มข้อมูลด้วยข้อมูลตารางอื่น</h2><ul id="25a82d34-dc5f-4a5f-bc29-764130e6293e" class="bulleted-list"><li style="list-style-type:disc">การใช้คำสั่ง INSERT ร่วมกับคำสั่ง SELECT</li></ul><ul id="30d9217a-650b-4286-82c6-d1ea2abb3205" class="bulleted-list"><li style="list-style-type:disc">ต้องมีชนิดข้อมูลเดียวกัน</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c3594d2f-7495-4b4a-9962-8ae41254a95d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>INSERT INTO</strong> ตารางข้อมูลที่ต้องการจะเพิ่มค่าลง (ชื่อ column ที่ต้องการจะคัดลอกลงมา, …, …)<br/><br/><strong>SELECT</strong> ชื่อ column ที่ต้องการจะคัดลอก, …, …<br/><br/><strong>FROM </strong>ชื่อตารางที่จะคัดลอก</div></figure><ul id="c36271f8-d3e2-4e9c-854e-282288cb2bb7" class="toggle"><li><details open=""><summary>โดยที่การเพิ่มค่าลงใน column นั้นๆ ต้องมีชนิดข้อมูลเดียวกัน</summary></details></li></ul><figure id="c1aa2a35-aeac-4309-9f1c-4898f3e113e9" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2031.png"><img style="width:908px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2031.png"/></a></figure><figure id="d51e3ea5-cd62-4c78-b8a7-b9391b6c4ec4" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2032.png"><img style="width:864px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2032.png"/></a></figure><figure id="1bf1af49-117e-40e2-84df-b6e629cb8928" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2033.png"><img style="width:336px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2033.png"/></a></figure><figure id="47fdd250-853c-4ffa-b4bb-9fbd42b40f0c" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2034.png"><img style="width:483px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2034.png"/></a></figure><hr id="a6aec4e1-9e51-412f-866d-0778500c09b1"/><h2 id="39d0bcca-592f-4203-b4cb-634fc7508ac8" class="">การอัปเดตข้อมูลลงในตาราง</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6232c99d-365f-4d48-9b84-5b558b88b9e4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>UPDATE</strong> ตารางข้อมูลที่จะอัปเดต<br/><br/><strong>SET </strong>ชื่อ column ที่จะแก้ = ค่าใหม่</div></figure><ol type="1" id="267979ab-499d-491c-baeb-4ee2c99b5d93" class="numbered-list" start="1"><li>การอัปเดตข้อมูลทีละ row ทีละ column : จะใช้ Id ตรง WHERE ในการ update<figure id="9c66c91a-5a8d-4e20-95b7-e81042749ea9" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2035.png"><img style="width:759px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2035.png"/></a></figure></li></ol><ol type="1" id="63ccc652-34f9-451f-9096-0e4b3d254993" class="numbered-list" start="2"><li>การไม่ระบุเงื่อนไข (WHERE) : update ข้อมูลทั้งตาราง<figure id="dbbc4b02-5c5a-432b-bbaf-8401aa1e4aef" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2036.png"><img style="width:519px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2036.png"/></a></figure></li></ol><ol type="1" id="8637a471-1b06-4927-b39c-5692b379e07e" class="numbered-list" start="3"><li>กการอัปเดตข้อมูลทีละหลายๆ row โดยระบุเงื่อนไข (WHERE) ที่ไม่ใช่ column : Id<figure id="d21a5407-52ae-4cc6-9a95-c38163de9193" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2037.png"><img style="width:528px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2037.png"/></a></figure></li></ol><hr id="cab86239-95b9-4d2b-b046-fe400d97a0d0"/><h2 id="cd8222a9-ef4b-438a-8c93-9c736d988bb8" class="">การลบข้อมูลในตาราง</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="31cfd5d1-19db-45a2-8ea4-8c90e0f65a95"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>DELETE FROM</strong> ชื่อตาราง</div></figure><ol type="1" id="71e89107-d734-4fc6-9919-28bd163cea0f" class="numbered-list" start="1"><li>การลบข้อมูลทีละ row<figure id="479f00f9-0aeb-458a-ba4f-4152fa31ccab" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2038.png"><img style="width:532px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2038.png"/></a></figure></li></ol><ol type="1" id="a25deb40-827b-48c5-8e69-114286fe1eca" class="numbered-list" start="2"><li>การลบข้อมูลทีละหลายๆ row<figure id="a61e4668-8c43-40b7-aab9-a6cf124c71bf" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2039.png"><img style="width:454px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2039.png"/></a></figure></li></ol><ol type="1" id="c6c8f702-d0d3-4bdf-8ac6-2a8f782e32a0" class="numbered-list" start="3"><li>การลบข้อมูลทั้งหมด<figure id="d532322e-725c-48a8-89b2-1bdb656b25f7" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2040.png"><img style="width:225px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2040.png"/></a></figure><ul id="4573155c-4bad-4591-9acf-6810ad31b231" class="toggle"><li><details open=""><summary>ไม่ต้องกำหนด WHERE : เป็นการลบข้อมูลทั้งตาราง</summary></details></li></ul></li></ol><hr id="c62d387b-69a1-4df3-820a-93520daa81df"/><h2 id="d7aca568-4f86-4faf-93e2-16b5e2e78183" class="">การใช้คำสั่ง LIKE และ WILDCARD CHARACTERS</h2><p id="6e19fa21-3067-4a1b-8bc8-66c4e4b85fd7" class="">LIKE คือการตรวจสอบค่าบางส่วน (คล้าย Reg Exp) โดยต้องใช้ร่วมกับ wild card character เพื่อระบุข้อความบางส่วนที่ต้องการ </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d5847ba8-0295-422b-87d8-67ebcfee5eba"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE </strong>ชื่อ column <strong>LIKE</strong> ‘wild card characters’</div></figure><p id="3d295718-52f6-43d2-bd17-89e43d88d096" class=""><strong>Wildcard Character :</strong></p><ul id="6cd978e8-148e-429d-bb67-f41170616edf" class="bulleted-list"><li style="list-style-type:disc"><strong>% </strong>: มีค่าเท่ากับตัวอักษร 0 ตัวไปจนถึงกี่ตัวก็ได้</li></ul><ul id="ba5a3245-3dda-480b-b4f3-26658ce46e90" class="bulleted-list"><li style="list-style-type:disc"><strong>_  </strong>: มีค่าเท่ากับตัวอักษร 1 ตัว</li></ul><p id="fca11363-7262-4282-8c71-a4b3e07c9d64" class=""><strong>สามารถระบุได้ 3 รูปแบบ :</strong></p><ul id="53115b13-05b4-453a-af32-b7596d741882" class="bulleted-list"><li style="list-style-type:disc">ขึ้นต้น</li></ul><ul id="a309e76f-f716-44c6-8d39-3b84533f5464" class="bulleted-list"><li style="list-style-type:disc">เป็นส่วนประกอบ</li></ul><ul id="6b0517f4-edaf-4724-b2fd-35537c138bf3" class="bulleted-list"><li style="list-style-type:disc">ลงท้าย</li></ul><p id="a3564783-0804-40ed-b2fa-0fc5f77a7f4b" class=""><strong>ยกตัวอย่างเช่น :</strong></p><ul id="a44516ea-247d-46d9-ba12-90f9108cb288" class="bulleted-list"><li style="list-style-type:disc">ขึ้นต้นด้วย ‘ส’ :  <strong>LIKE</strong> ‘ส%’</li></ul><ul id="546966e9-2410-4f1c-8302-226a3945b3f9" class="bulleted-list"><li style="list-style-type:disc">มีส่วนประกอบเป็น ‘ส’ :  <strong>LIKE</strong> ‘%ส%’</li></ul><ul id="bbce8df5-bc5b-41e7-b9c3-8c7390ce5c73" class="bulleted-list"><li style="list-style-type:disc">ลงท้ายด้วย ‘ส’ :  <strong>LIKE</strong> ‘%ส’</li></ul><ul id="65b990b8-a3fe-4505-aab4-9a50967df30c" class="bulleted-list"><li style="list-style-type:disc">ขึ้นต้นด้วย ‘1’ ลงท้ายด้วย ‘2’ : <strong>LIKE</strong> ‘1%2’</li></ul><ul id="d57ff43d-1f5a-45d8-af57-4db2f58b0889" class="bulleted-list"><li style="list-style-type:disc">ขึ้นต้นด้วยอะไรก็ได้ 1 ตัวอักษร แต่ตัวอักษรลำดับที่ 2-3 ต้องเป็นเลข 25 : <strong>LIKE</strong> ‘_25%’</li></ul><ul id="9c3d45bb-a438-4bca-aefb-52b34b33b4e1" class="bulleted-list"><li style="list-style-type:disc">ขึ้นต้นด้วยอะไรก็ได้ 1 ตัวอักษร แต่ตัวอักษรลำดับที่ 2 ต้องเป็นเลข 5 และลงท้ายด้วย 0 : <strong>LIKE</strong> ‘_5%0’</li></ul><ul id="c837dbe8-c122-441a-88dd-457e88b8d739" class="bulleted-list"><li style="list-style-type:disc">ขึ้นต้นด้วยเลข 7 เลขลำดับที่ 2 ต้องเป็นเลข 3 ลงท้ายด้วย 0 และรวมจำนวนตัวอักษรได้ 5 ตัวอักษร: <strong>LIKE</strong> ‘73__0’</li></ul><hr id="68f49232-7e00-429c-87da-4b7a7163a9ce"/><h2 id="47277889-4759-4990-b684-8a888749802e" class="">ตัวดำเนินการทางคณิตศาสตร์</h2><ul id="4464b21d-8cb9-4949-afe5-f957eb067c8d" class="bulleted-list"><li style="list-style-type:disc">+, -, *, /</li></ul><figure id="ff1ea6fa-7a5b-43d8-bb48-02e66c52dbc3" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2041.png"><img style="width:692px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2041.png"/></a></figure><hr id="4aff5cd5-5442-4194-a382-59798b4521ab"/><h2 id="3cf5a769-850a-4cbd-8382-81d79eb30fea" class="">คำสั่ง IN และ NOT IN</h2><p id="9b4ba878-91cd-44b8-bffe-b4b2f47db3cd" class="">ตรวจสอบว่าข้อมูลนั้นๆอยู่ใน list ที่กำหนดนี้ไว้ไหม (คล้าย OR)</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d4e524ff-c278-4607-b406-586511a8ecbc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE</strong> ชื่อ column<strong> IN</strong> (LIST ของคำที่ต้องการให้อยู่)</div></figure><figure id="27aeac69-789b-44d0-af09-ad7ca7b70a2f" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2042.png"><img style="width:1027px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2042.png"/></a></figure><figure id="d0bcaa5b-7ecf-4d5f-a62a-81870b59ef1e" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2043.png"><img style="width:568px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2043.png"/></a></figure><hr id="2f862e61-c999-456d-a788-72cc7022e457"/><h2 id="e5351b7d-51fb-4b91-8cfb-71aa747c9776" class="">คำสั่ง BETWEEN</h2><p id="8cc6ec13-c397-4eb1-8bff-987cdf224f82" class="">เป็นคำสั่งกำหนดช่วง (คล้าย AND) โดยจะเริ่มต้นที่ค้าเริ่มต้นถึงค่าท้ายที่เรากำหนด (เอาตัวแรกและตัวท้าย)</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="27b78123-afd5-48e1-8c66-31b20a2dfc14"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE</strong> ชื่อ column <strong>BETWEEN</strong> ค่าเริ่มต้น <strong>AND</strong> ค่าสุดท้ายในช่วง</div></figure><figure id="9c5d87e8-81cc-4aa6-a71b-6b0875e21d09" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2044.png"><img style="width:818px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2044.png"/></a></figure><figure id="a5385428-b42a-46a9-bc2e-fe02714a63d7" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2045.png"><img style="width:784px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2045.png"/></a></figure><hr id="42aec669-9e88-4d3a-b35f-095b09b1a204"/><h2 id="d55c67df-e0ee-4da0-9f84-e74d73ef2d7b" class="">ฟังก์ชั่นคณิตศาสตร์</h2><ul id="55bddf0e-af74-4e65-93bf-a8e169085ba2" class="bulleted-list"><li style="list-style-type:disc"><strong>COUNT</strong> : ฟังก์ชั่นในการนับจำนวน<ul id="30289276-06ed-403a-abbb-c0a6cb4780f6" class="bulleted-list"><li style="list-style-type:circle"><strong>COUNT (*)</strong> : นับจำนวน row ที่มีทั้งหมด</li></ul></li></ul><ul id="60086854-c881-485c-b013-197ae9a37750" class="bulleted-list"><li style="list-style-type:disc"><strong>MAX(ชื่อ column) </strong>: ฟังก์ชั่นในการหาค่าสูงสุด</li></ul><ul id="03108654-b5e3-46e0-80e2-676b8d7bf8b9" class="bulleted-list"><li style="list-style-type:disc"><strong>MIN(ชื่อ column)</strong> : ฟังก์ชั่นในการหาค่าต่ำสุด</li></ul><ul id="01847bbf-aa31-4938-9a54-9c3d67156583" class="bulleted-list"><li style="list-style-type:disc"><strong>SUM(ชื่อ column)</strong> : ฟังก์ชั่นในการหาผลรวม</li></ul><ul id="4c5091c7-a558-4248-9372-fee9e609eb4f" class="bulleted-list"><li style="list-style-type:disc"><strong>AVG(ชื่อ column)</strong> : ฟังก์ชั่นในการหาค่าเฉลี่ย</li></ul><figure id="7e8f36c6-e482-4e49-bee7-74c7650db53d" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2046.png"><img style="width:609px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2046.png"/></a></figure><hr id="aa9d9c1a-990c-4598-b4d9-1f0cab041dd5"/><h2 id="54a164a8-3e27-4c26-8bb5-51e03dd0909d" class="">CASE…WHEN</h2><p id="a17dd175-c063-4757-bc83-8a8928a9bbd0" class="">คล้ายการทำงานของ if-if else-else : (<strong>WHEN…THEN-ELSE</strong>) โดยที่ THEN คือคำสั่งที่จะทำหากตรงกับ WHEN นั้น และเมื่อจบ<strong> CASE</strong> ต้องจบด้วย <strong>END</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="db20bdd7-8bf8-402a-95d3-5cf7dc350fe6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>CASE</strong> ชื่อ column <strong>WHEN</strong> ค่าเปรียบเทียบ<strong> THEN </strong>คำสั่งที่จะทำหากตรงเงื่อนไข <strong>ELSE</strong> คำสั่งที่จะทำหากไม่ตรงกับเงื่อนไขใดเลย<strong> END</strong></div></figure><figure id="848db15c-760f-4653-ac1e-39090afb260c" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2047.png"><img style="width:941px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2047.png"/></a></figure><p id="394299de-e0c2-4ff8-b0b5-25ab4b251c39" class="">
+</p><p id="d0cef4b8-db47-40b7-89d6-ba79f9d7b23a" class=""><strong>LIKE ร่วมกับ CASE…WHEN</strong></p><figure id="27c8e1bc-5284-4f3c-acca-b6e5200ef413" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2048.png"><img style="width:656px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2048.png"/></a></figure><hr id="289fff0e-4b4f-46fe-82a6-1b2bb1449eb0"/><h2 id="813c62b2-2691-48f0-a8c1-861e829786db" class="">การจัดกลุ่ม GROUP BY</h2><p id="83692f9a-b3e5-4c48-ad5d-9d78f448c6d5" class="">การจัดกลุ่มตามหมวดหมู่นั้นๆ ตามหลัง SELECT และ FROM, จะใช้ร่วมกับ <strong>COUNT(*) </strong>เพื่อนับข้อมูลที่ซ้ำกันใน row นั้นๆ</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="de6c46b0-f79e-4720-bb6b-689a2529056a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>GROUP BY </strong>ชื่อ column</div></figure><figure id="173f78be-a6b9-4793-9e9a-0c3dfe3411a8" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2049.png"><img style="width:1049px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2049.png"/></a></figure><p id="d74ca348-d9c6-4d4c-bc58-922e2aaf9b68" class="">
+</p><p id="5b226e5b-e56d-4e4e-baae-64980a23e98d" class=""><strong>GROUP BY และ Function</strong></p><figure id="480d0e27-75ae-40a6-9bef-7ecb143cee38" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2050.png"><img style="width:702px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2050.png"/></a></figure><p id="8238b5d1-5324-451e-895f-7b30ca7c0dd5" class="">
+</p><p id="4e254c79-e09a-4800-98f8-f7f394cd8629" class=""><strong>เงื่อนไขกลุ่มข้อมูล (Having)</strong></p><p id="161ff459-fb54-4424-a7e8-dbed750607b1" class="">การใช้ HAVING จะต้องใช้คู่กับ GROUP BY เพื่อเป็นสร้างเงื่อนไขให้กับกับการจัดกลุ่ม</p><figure id="baaf4f29-1eba-41bd-b620-642d842ffd0c" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2051.png"><img style="width:871px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2051.png"/></a></figure><hr id="85c8a625-3e26-477d-b007-3e5627404ea2"/><h2 id="8650f5df-2089-49d0-aa00-ade9dea6ae20" class="">Sub Query</h2><p id="75be8fc6-9be4-4742-bc2e-410bb32b50c1" class="">คือการที่ sub query ถูกตั้งเป็นเงื่อนไขให้ main query</p><p id="d22d45f0-cae9-497f-b1b4-5dcb8b259695" class=""><strong>มีกฏก็คือ :</strong></p><ul id="abb7e3c3-fb7e-4f55-86da-e3fc50fd0eeb" class="bulleted-list"><li style="list-style-type:disc">ต้องเขียนอยู่ภายในวงเล็บ</li></ul><ul id="1f5a2be5-7249-417b-b207-0b9f1f5dbfd9" class="bulleted-list"><li style="list-style-type:disc">ไม่สามารถใช้ GROUP BY /ORDER BY ได้  และไม่สามารถใช้งาน BETWEEN Operator ร่วมกับ sub query ได้ แต่ใช้งานภายใต้ sub query ได้</li></ul><ul id="e1f96fcc-0152-4b3a-84d8-fc81f8f5fd8d" class="bulleted-list"><li style="list-style-type:disc">มีได้อย่างน้อย 1 column </li></ul><ul id="03062a04-6558-4833-9075-fc5c09b734da" class="bulleted-list"><li style="list-style-type:disc">ข้อมูลของ sub query ต้องอ้างอิงถึง main query ได้ด้วย</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d4701d21-2984-4f49-a223-e3075f4f619f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-teal"><strong>SELECT …. FROM ชื่อตาราง <br/>WHERE ชื่อ column =<br/></strong></mark> (<mark class="highlight-orange"><strong>SELECT …. FROM ชื่อตาราง WHERE ชื่อ column = …</strong></mark>) -<mark class="highlight-orange"><strong>Sub Query, </strong></mark><mark class="highlight-teal"><strong>Main Query</strong></mark></div></figure><figure id="b2216411-682d-4ded-848c-ed92e898eea6" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2052.png"><img style="width:766px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2052.png"/></a></figure><figure id="080f19c2-ea86-45b6-b779-438e94d733b9" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2053.png"><img style="width:536px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2053.png"/></a></figure><figure id="66a9cacb-4b56-478e-9443-b3f71d904e44" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2054.png"><img style="width:595px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2054.png"/></a></figure><figure id="f4a995e1-774d-4d9d-b2f1-b0e291cd6d3a" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2055.png"><img style="width:1264px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2055.png"/></a></figure><p id="4def404b-b77d-402b-ac5e-421ebd3504ac" class="">
+</p><p id="35034cc1-e636-44a0-a853-12465383982b" class=""><strong>การสร้างตารางด้วย Sub Query</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="32ee7127-86e0-4fd9-86e2-c37be7166ce5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>CREATE TABLE</strong> ชื่อตารางใหม่ <strong>AS</strong><br/><br/><mark class="highlight-teal"><strong>SELECT …. FROM ชื่อตาราง <br/>WHERE ชื่อ column =<br/></strong></mark> (<mark class="highlight-orange"><strong>SELECT …. FROM ชื่อตาราง WHERE ชื่อ column = …</strong></mark>) -<mark class="highlight-orange"><strong>Sub Query, </strong></mark><mark class="highlight-teal"><strong>Main Query</strong></mark></div></figure><ul id="87ac5b18-c2c9-469e-82d0-d6240a0d4649" class="toggle"><li><details open=""><summary>โดยที่ SELECT ของ main จะกลายเป็น ชื่อ column บนตารางใหม่</summary></details></li></ul><figure id="576502a3-7cf0-4819-9eac-96a6a27d5968" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2056.png"><img style="width:1249px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2056.png"/></a></figure><figure id="84d38d6c-5800-4e90-8649-1a0d91555a08" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2057.png"><img style="width:851px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2057.png"/></a></figure><figure id="ac7403ee-6709-428e-ae2c-4c5b7cdc0565" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2058.png"><img style="width:389px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2058.png"/></a></figure><hr id="d4bffb2e-0386-4c16-b91e-15678e340fd5"/><h2 id="252e6816-e63c-4860-b7dd-422beced908f" class="">การรวมตาราง/การเชื่อมตาราง (Join Table)</h2><p id="551f4932-3631-42e6-8d58-41c3d3e0b513" class="">การนำเอาตาราง 2 ตารางมารวมกันโดยข้อมูลจะต้องมีส่วนที่เชื่อมกันได้ในทั้ง 2 ตาราง โดยดำเนินการผ่าน Primary Key (PK) -Key หลัก และ Foreign Key -Key ย่อย</p><figure id="88a07b25-2727-4afa-bf60-6fadfd4aa969" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2059.png"><img style="width:1822px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2059.png"/></a></figure><figure id="427da466-8f1d-451b-8130-2f52c4bfc804" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2060.png"><img style="width:314px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2060.png"/></a></figure><figure id="1e075dc9-e479-4e54-b9e2-460a8d061faf" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2061.png"><img style="width:274px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2061.png"/></a></figure><p id="5b3c4d03-6e37-439e-a83e-447514543e0c" class="">
+</p><p id="a4b86f80-b8c0-45dc-8dd7-d18ab7619347" class=""><strong>การรวมตารางด้วย WHERE</strong></p><p id="e6638032-85ef-4db5-b6e6-4a6c76130b4f" class="">ใช้ type_id ของ products ที่เป็น Foreign Key ชี้ไปยัง id ของตาราง categories จึงนำทั้งสอง column มาเปรียบเทียบภายในคำสั่ง WHERE ด้วยเครื่องหมาย “=”</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="707b9cc4-00cf-4699-ac48-7da550334874"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE</strong> ชื่อ column ของ table 1 = ชื่อ column ของ table 2 </div></figure><ul id="59c6f378-8e44-41dd-bdf2-b66fcff789a1" class="toggle"><li><details open=""><summary>โดยที่จะนำค่าที่เหมือนกันมาแสดงผล (ค่าว่างจะไมถูกนำมาแสดงผล) -นำเฉพาะข้อมูลที่ link หากันเท่านั้น (คล้าย inner join)</summary></details></li></ul><ul id="4ad1c044-8fa7-42b6-9304-ad31ad9882e5" class="toggle"><li><details open=""><summary>ไม่สามารถกำหนดเงื่อนไขอื่นเพิ่มเติมได้ ถ้าจะกำหนดต้องเปลี่ยนมาใช้คำสั่ง join</summary></details></li></ul><figure id="61f93814-d6bc-4858-8530-14331eb9d25b" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2062.png"><img style="width:797px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2062.png"/></a></figure><ul id="138331e1-54e1-431a-ba13-8f516dd278b0" class="toggle"><li><details open=""><summary>ถ้าไม่ได้กำหนด WHERE จะเป็นการ cross กัน เช่น 6x11 จะได้ 66 row</summary></details></li></ul><p id="b331ecbd-db8d-4851-8ef4-d5e5d908d911" class="">
+</p><p id="a4cbfeb9-f60f-4fe9-add3-4e78a30981cc" class=""><strong>การรวมตารางด้วย join</strong></p><p id="9e8db24c-3ded-465b-be8c-90d614d0f02d" class="">เป็นการรวมตารางโดยนำคีย์จาก 2 ตารางขึ้นไปมาสร้างความสัมพันธ์และดึงข้อมูลที่ต้องการมาแสดง ซึ่งคำสั่ง JOIN มีหลายรูปแบบ สามารถใช้คำสั่ง WHERE, GROUP BY, HAVING, ORDER BY, LINIT ร่วมกับ JOIN ได้</p><p id="17a32c93-b0a9-4cb9-8a58-c16675465f4d" class=""><strong>INNER JOIN</strong></p><figure id="f4e83177-d2ae-431e-858c-f20636964e67" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2063.png"><img style="width:823px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2063.png"/></a></figure><figure id="dd2c0c67-4b9b-43b8-bea0-a01008bc4a44" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2064.png"><img style="width:772px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2064.png"/></a></figure><ul id="62e819fe-3b2b-4be4-b27d-e61e7a007cce" class="toggle"><li><details open=""><summary>สามารถกำหนดเงื่อนไข, function เพิ่มได้</summary></details></li></ul><figure id="eca59326-f520-4dcf-af1e-ea80c14e0e8a" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2065.png"><img style="width:356px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2065.png"/></a></figure><p id="9f13d72a-5801-4202-a59d-a6ac69a5c470" class="">
+</p><p id="904eb049-5a71-4843-a2c6-036697fd4cf6" class=""><strong>LEFT JOIN</strong></p><figure id="4e926e6f-485c-4740-b86c-c3d60a8187df" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2066.png"><img style="width:1798px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2066.png"/></a></figure><figure id="57891d62-a8ce-43c3-a995-606c240a127c" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2067.png"><img style="width:766px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2067.png"/></a></figure><ul id="04e50822-779e-4263-bd79-168d18ef9919" class="toggle"><li><details open=""><summary>จะสังเกตุเห็นว่า ข้อมูลที่ NULL จะถูกนำมาแสดงผลด้วย เนื่องจากอยู่ในตารางซ้ายมือ</summary></details></li></ul><p id="0d9bdaf0-5ac0-4d28-ba1f-98321a509cc3" class="">
+</p><p id="7420522b-85b2-4827-b832-422185127442" class=""><strong>OUTER JOIN</strong></p><p id="e2df799c-48f6-499f-a3b9-95447d07df57" class="">(SQLite ไม่มีคำสั่งนี้)</p><p id="32226999-6273-4583-b709-5fa7c4143e33" class="">สอบถามข้อมูลที่ไม่มีความสัมพันธ์ใดเลยของทั้ง 2 ตารางมาแสดงผล</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4c03a163-e4a2-4d4a-9b18-bed5de2b7617"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>WHERE </strong>ชื่อ column <strong>IS NULL</strong></div></figure><figure id="60e80e2a-b0e1-46f4-8d78-3b55917a8b7c" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2068.png"><img style="width:767px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2068.png"/></a></figure><p id="81e47401-a29a-4029-8fac-c5377dc18f9a" class="">
+</p><p id="c9d95f6c-586f-4932-9ed5-ac7382f74e02" class=""><strong>RIGHT JOIN<br/><br/></strong>(SQLite ไม่มีคำสั่งนี้)</p><figure id="bf3c49a6-eb0e-4bc4-b7b3-812e9f67f277" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2069.png"><img style="width:1776px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2069.png"/></a></figure><figure id="2d3a8286-5b8a-41f9-a32c-51bd90a7f9b6" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2070.png"><img style="width:427px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2070.png"/></a></figure><figure id="a05d1b03-122b-4a84-b0ba-4dcce0ff0f51" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2071.png"><img style="width:469px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2071.png"/></a></figure><p id="066e397c-ca47-4b46-83d7-4ef6caa6fbff" class="">
+</p><p id="280921cf-1359-4439-8c69-b5b3507515ae" class=""><strong>FULL JOIN<br/><br/></strong>(SQLite ไม่มีคำสั่งนี้) - ใช้คำสั่ง right และ left join มาเขียนร่วมกัน และใช้ UNION เชื่อม</p><ul id="7fc4312a-9099-4a2c-b907-488ff255d972" class="bulleted-list"><li style="list-style-type:disc">การเเสดงผลที่รวมทั้งข้อมูลที่มีการเชื่อมความสัมพันธ์กันและไม่เชื่อมความสัมพันธ์กันมารวมอยู่ในตารางเดียวกัน</li></ul><figure id="6adbf36f-a13a-4e0e-82f4-67a81fc96510" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2072.png"><img style="width:1788px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2072.png"/></a></figure><figure id="0c864045-b464-4c1c-8383-d3881d265636" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2073.png"><img style="width:435px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2073.png"/></a></figure><figure id="54e09a72-8adf-4825-a040-02d2102e36b1" class="image"><a href="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2074.png"><img style="width:475px" src="SQL%201e8a4ee6e63b4189b7eeed197087cc23/Untitled%2074.png"/></a></figure><hr id="b4eb7c8e-645b-429b-81c0-e70549678f9d"/><p id="1b9c17c9-d0c2-462d-b2d0-0e96b7daa9c3" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

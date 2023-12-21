@@ -1,0 +1,697 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MongoDB</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5a42f8cf-de0c-4450-9e7a-951e3f689d2e" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/database_green.svg"/></div><h1 class="page-title">MongoDB</h1><p class="page-description"></p></header><div class="page-body"><p id="d08707a8-8c46-4f46-8b0f-2c147c98ea06" class="">      เป็นฐานข้อมูลเชิงเอกสาร (Document Store) สำหรับเก็บข้อมูลขนาดใหญ่ที่มีความยืดหยุ่นสูง ง่ายต่อการปรับขนาดและทำงานข้าม Platform ได้ การจัดเก็บข้อมูลไม่ได้อยู่ในรูปแบบตาราง แต่จะอยู่ในรูปแบบเอกสาร JSON แล้วเซฟเก็บไว้ในเอกสารรูปแบบไบนารี BSON (เพื่อให้ทำงานได้ไวมากกว่าเดิม)</p><p id="14080d51-26e0-4f7f-8b01-3d5c68caae98" class="">JSON มีโครงสร้างการจัดเก็บข้อมูลอยู่ 3 ส่วนได้แก่</p><ol type="1" id="d1d17326-d08f-4d3c-ac6a-82f7511e0933" class="numbered-list" start="1"><li><strong>Database</strong> (ฐานข้อมูล) : เป็ยส่วนที่ใช้เก็บ collection หรือชุดข้อมูล</li></ol><ol type="1" id="0c2f0c15-1564-4274-b45a-3bdf3dc37c34" class="numbered-list" start="2"><li><strong>Collection</strong> (ชุดข้อมูล) : เทียบได้กับตารางในฐานข้อมูลเชิงสัมพันธ์</li></ol><ol type="1" id="4b9c66a6-f154-41cf-9a1c-08ae9cc46902" class="numbered-list" start="3"><li><strong>Documents</strong> (เอกสาร) : ที่จัดเก็บข้อมูลของคู่คี่ย์(Key) และค่า(Value)</li></ol><figure id="ef663b03-8497-4c4c-873b-77ccc7a5352a" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled.png"><img style="width:988px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled.png"/></a></figure><figure id="f7e6e53c-049e-4521-835f-db127ad3b140" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%201.png"><img style="width:522px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%201.png"/></a></figure><figure id="b034f327-ce2a-4bcf-bd9a-afbe40398833" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%202.png"><img style="width:336px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%202.png"/></a></figure><figure id="5c26cd3e-edfc-4ad3-be8f-5c4f16ca3961" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%203.png"><img style="width:785px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%203.png"/></a></figure><figure id="6421bdf4-283f-4c64-928a-49d09f5e027e" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%204.png"><img style="width:632px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%204.png"/></a></figure><figure id="1d9eb141-0abd-42a8-a1b6-e5d229a09668" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%205.png"><img style="width:1198px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%205.png"/></a></figure><figure id="0d24adf5-f766-4365-8b94-ce2587bee0d4" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%206.png"><img style="width:738px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%206.png"/></a></figure><p id="18ef56b7-b661-427a-abae-46c6ad80ad70" class="">
+</p><p id="b5bc3500-259d-4639-b0e1-b9dd69559edc" class=""><strong>JSON &amp; BSON</strong><div class="indented"><p id="d80dad58-d3a0-4eb4-b0d3-69e35d1b8fea" class="">JSON(JavaScript Object Notation) เป็นรูปแบบการเเลกเปลี่ยนหรือรับส่งข้อมูลในระบบคอมพิวเตอร์หรือแอพลิเคชั่น ในอดีตมีการแลกเปลี่ยนหรือรับส่งข้อมูลโดยใช้รูปแบบ xml แต่เนื่องจาก xml มีโครงสร้างข้อมูลที่มีความซับซ้อน และมีขนาดใหญ่จึงมีการเปลี่ยนมาใช้รูปแบบ JSON แทน เนื่องจากมีขนาดเบาและมีโครงสร้างข้อมูลที่มนุษย์สามารถอ่านและเขียนได้ง่าย โดยรูปแบบของ JSON จะอยู่ในรูปแบบข้อความธรรมดา</p><figure id="9dc3822b-d660-4f48-bef4-c6f24167de7c" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%207.png"><img style="width:429px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%207.png"/></a></figure><figure id="d3806f0d-01c5-4ae7-a43e-997f782d6c50" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%208.png"><img style="width:1720px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%208.png"/></a></figure></div></p><p id="1654a162-7df3-46fc-90a7-4d309a0e0521" class=""><strong>JSON รองรับการทำงานชนิดข้อมูลพื้นฐานทั้งหมด ได้แก่</strong></p><ul id="90ce3dbb-82b1-4ab9-9b95-2630d45a4199" class="bulleted-list"><li style="list-style-type:disc"><strong>Number : </strong>ตัวเลข</li></ul><ul id="0b0aa099-f5f4-4bbe-af63-755410b0bfb1" class="bulleted-list"><li style="list-style-type:disc"><strong>String : </strong>สตริงหรือชุดข้อความโดยใช้เครื่องหมาย double-quote(”)</li></ul><ul id="1d40ff4d-b10b-44a1-8db7-e7466e567dda" class="bulleted-list"><li style="list-style-type:disc"><strong>Boolean :</strong> ค่าบูลีน (True or False)</li></ul><ul id="ffad10b3-57cf-40a5-922c-2c5ee947f447" class="bulleted-list"><li style="list-style-type:disc"><strong>Null :</strong> ค่าว่าง</li></ul><ul id="d794a304-46e3-4bc9-a5a9-325855868752" class="bulleted-list"><li style="list-style-type:disc"><strong>Array :</strong> อาร์เรย์หรือชุดข้อมูลซึ่งจะเป็นชนิดข้อมูลใดก็ได้ใช้สัญลักษญ์ [] เป็นตัวแสดงและคั่นสมาชิกในอาร์เลย์แต่ละค่าด้วยคอมม่า (,) เช่น [var1,var2]</li></ul><ul id="6de05156-e4f7-49ab-a6ea-3224766ef698" class="bulleted-list"><li style="list-style-type:disc"><strong>Object :</strong> ชุดข้อมูลที่เป็นคู่ Key-Value แบบสตริงใช้สัญลักษณ์ปีกกา {key:value1,key2:value2} และคอมม่า(,) เป็นตัวแบ่งแต่ละคู่ และใช้โคลอน(:) เป็นตัวแบ่งฝั่งระหว่าง key และ value</li></ul><figure id="6bff858c-bfee-4473-83c7-004a46f32af6" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%209.png"><img style="width:706px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%209.png"/></a></figure><figure id="39c0a99b-4841-49e0-8325-891722a6f2f8" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2010.png"><img style="width:699px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2010.png"/></a></figure><figure id="0ac4d372-ae18-475c-8828-f3fd00039d63" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2011.png"><img style="width:1789px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2011.png"/></a></figure><p id="caf0ad5a-b6a5-4505-b638-fbd37940b268" class="">    ในฐานข้อมูล MongoDB จะทำการแปลงเอกสาร JSON โดยเข้ารหัสให้อยู่ในรูปแบบไบนารี่หรือเรียกว่า <strong>BSON(Binary JSON)</strong> เพื่อขยายความสามารถให้ JSON มีชนิดข้อมูลเพิ่มมากขึ้น มีการเข้าและถอดรหัสด้วยภาษาที่แตกต่างกันได้</p><p id="b8d926b1-f9c6-48f9-912a-a06da97884f5" class="">    <strong>BSON</strong> จะมีขนากเบาและรับส่งข้อมูลได้เร็วเหมือนกับ JSON โดย MongoDB สามารถเข้าถึงข้อมูลหรือ Object ใน BSON เพื่อสร้าง Index ในการทำระบบสอบถามข้อมูล(Query) โดย BSON จะทำงานซ่อนอยู่เบื้องหลัง ส่วนการแสดงข้อมูลกับผู้ใช้จะเป็น JSON</p><figure id="cc32848c-7a1d-4d06-bf1d-f012f1545df8" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2012.png"><img style="width:245px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2012.png"/></a></figure><hr id="6818e64b-6f12-4938-a3be-c2321fe0bd0f"/><h2 id="904bfdb2-e9fd-408f-94da-4e3452cf3fe7" class="">การสร้างและลบฐานข้อมูล</h2><p id="16ce8df3-971d-424c-8781-87c775f82c5f" class="">ใช้ mongo shell</p><ul id="55451fee-a04a-4d0d-b116-ea55cde57400" class="bulleted-list"><li style="list-style-type:disc">การแสดงฐานข้อมูล<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="899abdf4-350a-4c36-a7b3-165522e85a94"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">show dbs</div></figure><figure id="24143920-f1a8-4922-922a-53eb16e09b54" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2013.png"><img style="width:192px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2013.png"/></a></figure></li></ul><ul id="3e12803d-d04a-4ea0-ab74-73c9fa96faa0" class="bulleted-list"><li style="list-style-type:disc">การสร้างหรือเลือกฐานข้อมูล<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0f7004fc-83c3-44fa-99ea-f9052cc087e4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">use ชื่อฐานข้อมูล</div></figure><ul id="d53f8362-fb0f-4baf-9c68-1981fe3de443" class="toggle"><li><details open=""><summary>กรณีที่ยังไม่มีฐานข้อมูลนั้น : จะทำการสร้างฐานข้อมูลขึ้นมา</summary><p id="f58dbfee-a5f4-4586-acd8-aac096bb43a1" class="">จะทำงานคู่กับ db.createCollection() เพื่อเป็นการสร้างฐานข้อมูล และจะถูกเห็นได้จาก show dbs</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="11137317-1db9-434c-84c9-9bbef2fa00ef"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.createCollection(”ชื่อ collection”)</div></figure><figure id="0652840a-d2d3-4b66-b852-22463557bd34" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2014.png"><img style="width:288px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2014.png"/></a></figure></details></li></ul><p id="24f25ce8-f4cd-40e4-9ed9-0ce93202eb0b" class=""><strong>การสร้างฐานข้อมูลใน MongoDB Compass</strong></p><figure id="72b853ee-53a6-4b6a-8e5f-aa51777a501e" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2015.png"><img style="width:321px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2015.png"/></a></figure><figure id="3d284010-a1ab-4f6a-a32c-bd70ac642600" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2016.png"><img style="width:336px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2016.png"/></a></figure><p id="18f96a19-9450-4d65-ba27-773a56102c49" class="">
+</p><ul id="0ea50b61-9d36-4ade-97ed-6829aee03846" class="toggle"><li><details open=""><summary>กรณีที่มีฐานข้อมูลอยู่แล้ว : จะเลือกฐานข้อมูลนั้นมาใช้</summary><figure id="d23067e0-e15c-4587-b8e9-8558dbfac187" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2017.png"><img style="width:271px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2017.png"/></a></figure></details></li></ul></li></ul><ul id="26bc6ef9-7eac-4df0-85f6-e90ff7a77514" class="bulleted-list"><li style="list-style-type:disc">การลบฐานข้อมูล<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9513a317-a56e-471e-8127-552919a670fd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.droupDatabase()</div></figure><ul id="d28f94ea-2812-44f6-a590-0b2b1c265c44" class="toggle"><li><details open=""><summary>โดยที่ต้องเข้าไปทำงานในฐานข้อมูลก่อนถึงจะลบได้</summary><figure id="7ae770bd-3fe9-4fa4-a5f1-f55135d3a3ff" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2018.png"><img style="width:326px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2018.png"/></a></figure></details></li></ul><figure id="98a5ee95-e6f4-4e35-8713-c1490c3faf66" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2019.png"><img style="width:324px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2019.png"/></a></figure></li></ul><hr id="0b9f084e-e06c-40fb-a75b-f6c7f3f28e0f"/><h2 id="cc378668-8b9f-43d7-a486-2f5c50a9aa50" class="">การจัดการ Collection</h2><ul id="f06e4735-1455-472d-9ba4-3f4a00d22f47" class="bulleted-list"><li style="list-style-type:disc">การสร้าง Collection<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4be7fa6c-1da7-47ef-9ffe-52f903bca293"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">use ชื่อฐานข้อมูล<br/>db.createCollection(”ชื่อ Collection”)<br/></div></figure><figure id="541dc613-19de-407a-8f29-7caf894673ca" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2020.png"><img style="width:342px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2020.png"/></a></figure></li></ul><ul id="0bf54736-2c9b-409a-8703-b2185e991676" class="bulleted-list"><li style="list-style-type:disc">การเปลี่ยนชื่อ Collection<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ee0bbf42-2b83-4b72-8b70-0c454a7b488f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.renameCollection(”ชื่อ Collection ใหม่”)</div></figure><figure id="ec141a4b-aa02-48d8-a545-096a6b52d5c6" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2021.png"><img style="width:447px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2021.png"/></a></figure></li></ul><ul id="edb578eb-6002-4c40-b893-fe9fe56d67bd" class="bulleted-list"><li style="list-style-type:disc">การลบ Collection<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="396110ed-6305-40bd-9100-5b3cd1af182a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.drop()</div></figure><ul id="5d52f4d6-527d-4686-b712-07a89a8ecbf0" class="toggle"><li><details open=""><summary>โดยที่ต้องเข้าไปทำงานในฐานข้อมูลก่อนถึงจะลบได้</summary><figure id="131ba79d-6dc9-40d6-b453-0805741b3003" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2022.png"><img style="width:239px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2022.png"/></a></figure></details></li></ul></li></ul><hr id="fd6251c6-9877-4c51-95ab-6c1b075b744b"/><h2 id="c4d5b2f5-6f4a-4b9f-96fc-e2e8451996bb" class="">ชนิดข้อมูลใน MongoDB</h2><figure id="88950611-54a4-4f00-b10b-4feb2813b597" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2023.png"><img style="width:1770px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2023.png"/></a></figure><figure id="52cf1a94-6ddf-436a-96ae-74aab108f9ae" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2024.png"><img style="width:758px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2024.png"/></a></figure><hr id="ac6a5de7-2302-4082-8d2b-cac46af3bb64"/><h2 id="3ebcd672-6ae9-4702-966e-709bb0013557" class="">การเพิ่ม Document (insert)</h2><figure id="553d3912-8fbb-49d8-aaac-490f530d427b" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2025.png"><img style="width:288px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2025.png"/></a></figure><ul id="9a89e38e-c806-4362-9a57-442050efb45c" class="bulleted-list"><li style="list-style-type:disc"><strong>การเพิ่ม Document เดียว</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3217db46-e472-4c9c-ba17-40dcbdb304bd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.insertOne(&lt;Document&gt;)</div></figure><figure id="afe27fec-bd3d-43f3-a87e-7a5a8ee8f89c" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2026.png"><img style="width:1361px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2026.png"/></a></figure><figure id="b7f7b025-db1d-4117-9d95-68c4d9f17304" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2027.png"><img style="width:1011px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2027.png"/></a></figure><ul id="7e63f52d-b19e-4fa9-8e68-a4b6af699784" class="toggle"><li><details open=""><summary>เพิ่ม/ลด field ใน document ได้</summary></details></li></ul><figure id="f8df0445-8fb5-4748-acb0-bfaa65d4361c" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2028.png"><img style="width:712px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2028.png"/></a></figure><p id="4ae80e56-1598-44f8-8e82-37dc024b7741" class="">
+</p><p id="e29fed36-4923-4145-a762-6e694d7db25e" class=""><strong>การเพิ่มใน MongoDB Compass</strong></p><p id="c7385bac-9b70-44ce-9248-9bc7f9fa6770" class="">ADD DATA&gt;Import Document</p><figure id="7100d637-8b65-44af-ac01-83ec96ab153d" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2029.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2029.png"/></a></figure><ul id="cc3a43c7-5e06-436a-bdbd-b35768acaada" class="toggle"><li><details open=""><summary>โดยที่แต่ละ field ต้องกำหนดชนิดข้อมูลด้วย</summary></details></li></ul><p id="223f9d5a-8143-4fbd-9977-9fdaf163f271" class="">
+</p></li></ul><ul id="3167e850-4bf7-416b-87b6-b653d7bd1e68" class="bulleted-list"><li style="list-style-type:disc"><strong>การเพิ่มหลาย Document</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="04b7b878-8e90-42f7-8f69-7f62df9b6b74"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.insertMany([&lt;Document&gt;])</div></figure><figure id="3de8a91f-25b9-4450-a3f1-8110d76601e2" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2030.png"><img style="width:999px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2030.png"/></a></figure><p id="3c9eebfa-494a-4b61-b5dc-8cd2787906ce" class="">
+</p></li></ul><ul id="d9475469-5e66-4a14-969e-999b3ebedb7f" class="bulleted-list"><li style="list-style-type:disc"><strong>การเพิ่ม Document ที่มี field เป็น array</strong><figure id="5729c2a0-4536-4d73-bd53-71a294859950" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2031.png"><img style="width:1048px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2031.png"/></a></figure><figure id="90ede9c9-f95a-425d-bce5-41369ddc5a66" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2032.png"><img style="width:1444px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2032.png"/></a></figure><figure id="e764e92e-4fc9-44aa-8d01-5f2b5d52d586" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2033.png"><img style="width:878px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2033.png"/></a></figure><p id="7c196b10-a3c4-4b96-8b67-dc0fee57f343" class=""><strong>การเพิ่มใน MongoDB Compass</strong></p><figure id="d5720a29-96cd-44b2-8333-9e211c8e29b3" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2034.png"><img style="width:824px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2034.png"/></a></figure><p id="c18e10ac-902a-4faf-88cb-697fe38aa5bd" class="">
+</p></li></ul><ul id="ff124f38-909f-4423-bd36-f0f456695efe" class="bulleted-list"><li style="list-style-type:disc"><strong>การเพิ่ม Document ที่มี field เป็น Object</strong><p id="8c44b7a9-904a-414e-89a7-979d8414082d" class="">เข้าถึงข้อมูลได้ง่ายกว่า array (ไม่ต้องจำเลข index)</p><figure id="25dd3487-5fe0-4c4b-aa39-c2b651c7e2a7" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2035.png"><img style="width:1235px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2035.png"/></a></figure><figure id="a9c58e52-e5e9-4bd1-81dc-c12cd64ac61b" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2036.png"><img style="width:1466px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2036.png"/></a></figure><figure id="2db0acd8-fe8e-4c83-8a81-8eab1ec42ff9" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2037.png"><img style="width:530px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2037.png"/></a></figure><p id="d8824333-5627-4689-b0e3-28f76bde805c" class=""><strong>การเพิ่มใน MongoDB Compass</strong></p><figure id="10a66986-e8c1-46c2-99f7-334cf1eb96b8" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2038.png"><img style="width:816px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2038.png"/></a></figure></li></ul><hr id="7a112452-4fe0-42c1-9c8e-7e6bae0e59e4"/><h2 id="3b80b245-6298-4f7c-9e37-c321a7e38dfe" class="">การส่งออกและนำเข้า Collection</h2><ul id="1fe51639-61bc-4e5d-86fe-62781e063a17" class="bulleted-list"><li style="list-style-type:disc"><strong>การส่งออก Collection ใน MongoDB Compass</strong></li></ul><figure id="7c26191a-71c1-43ed-8a54-028946a05e0b" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2039.png"><img style="width:401px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2039.png"/></a></figure><figure id="994df429-60a4-4279-bc68-1bed3c20a071" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2040.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2040.png"/></a></figure><figure id="a7983548-b273-4f35-b160-d180e0dd2a2a" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2041.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2041.png"/></a></figure><figure id="0b1e3049-d92f-4b01-90a8-f3a93fa0d86b" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2042.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2042.png"/></a></figure><ul id="8eb812eb-59a9-4d47-8a95-63761ab98b76" class="bulleted-list"><li style="list-style-type:disc"><strong>การนำเข้า Collection ใน MongoDB Compass</strong><p id="26c3187d-74a4-4795-8d5f-571bc5e519ca" class="">ADD DATA&gt;Import file  </p><figure id="1510e904-340b-4780-b8c3-e9aaf0db4b4a" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2043.png"><img style="width:382px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2043.png"/></a></figure></li></ul><hr id="f4e26120-d4e9-4e19-80f2-5ef42a334d2e"/><h2 id="4d6d3b21-2d92-4a18-b238-d0af15d17942" class="">การสอบถามข้อมูล</h2><ul id="8c01face-b057-4daa-8f7a-8028b3d24ce6" class="bulleted-list"><li style="list-style-type:disc"><strong>fineOne()</strong><p id="7b8634f1-d7bb-4522-97b0-b84ad8bf8906" class="">การสอบถามข้อมูล Document จาก Collection ตามเงื่อนไขที่กำหนดผลจากการวอบถามจะได้ผลลัพธ์เพียง Document เดียว หากเจอ Document หลายรายการจะเลือกเอารายการแรกมาใช้งาน ถ้าไม่เจอจะได้ค่า Null</p></li></ul><ul id="cb087be0-a3b2-4eeb-bb89-4801870fbca5" class="bulleted-list"><li style="list-style-type:disc"><strong>fine()</strong><p id="7b66a602-8ad3-4a40-b274-6bb238c5742f" class="">สอบถามข้อมูล Document จาก Collection ถ้าไม่กำหนดเงื่อนไขจะเลือก Document ทั้งหมดมาใช้งาน แต่สามารถกรอง (Filter) หรือเลือกข้อมูลภายใน Document ได้โดยระบุเงื่อนไข หรือ Parameter เข้าไป ถ้าเงื่อนไขไม่ตรงจะได้ Document เป็นค่า Null</p></li></ul><p id="db7e32c8-110f-4c73-b4a0-49761a65ed59" class="">
+</p><figure id="9346ce1d-aa3d-42fc-b189-7c863b16fead" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2044.png"><img style="width:1834px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2044.png"/></a></figure><figure id="45e2e4ea-665c-48e6-96ac-56591d7a8f1e" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2045.png"><img style="width:629px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2045.png"/></a></figure><figure id="759793b8-1103-41ab-bb8d-3eae7bf4d102" class="image" style="text-align:left"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2046.png"><img style="width:334px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2046.png"/></a></figure><figure id="be6a8b2a-3631-490c-84ce-0349d5eca1f1" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2047.png"><img style="width:654px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2047.png"/></a></figure><p id="d17e1937-fa21-43ef-a47d-ffd47f3acaf6" class="">
+</p><p id="7cc2c0f3-1197-4631-88bd-17b2a13b1ee2" class=""><strong>การสอบถามข้อมูลแบบเงื่อนไขเดียว</strong></p><ul id="be0af889-10b8-4ab4-8e6f-c64a5ed78d1b" class="bulleted-list"><li style="list-style-type:disc">ใช้ <strong>{}</strong> เพื่อระบุเงื่อนไขข้างใน</li></ul><ul id="2305a1cf-cf57-453f-b689-3e57f09b1aa4" class="bulleted-list"><li style="list-style-type:disc">ใช้<strong> : </strong>แทนเครื่องหมายเท่ากับ</li></ul><figure id="5bac398e-2193-484b-a35d-959a237f35fe" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2048.png"><img style="width:336px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2048.png"/></a></figure><figure id="03045684-d41c-4459-8b17-ba2a62daeb0b" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2049.png"><img style="width:336px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2049.png"/></a></figure><p id="d9bc1b4c-fb32-42b9-b7df-fddf73e18b4a" class="">
+</p><p id="56536377-d572-4ec3-bea4-769a58b6475a" class=""><strong>การสอบถามข้อมูลแบบ 2 เงื่อนไข</strong></p><ul id="a80dd823-555b-4f3b-9676-9dc4f48087ab" class="bulleted-list"><li style="list-style-type:disc">ใช้ , แทน และ</li></ul><figure id="81b9c687-62f3-4ab4-a8da-d402bd338eb5" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2050.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2050.png"/></a></figure><figure id="3727ff5a-c731-4d68-a27e-f26d7046307f" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2051.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2051.png"/></a></figure><p id="2261a165-d727-4d8e-8189-2d4d53132f7c" class="">
+</p><p id="925f5c34-f271-4299-b93e-b3a1fbd66335" class="">สามารถใช้ FILTERใน MongoDB Compass ได้ &gt; กด FIND</p><figure id="21718301-2581-4ef3-8943-2de3b0e84b86" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2052.png"><img style="width:1854px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2052.png"/></a></figure><p id="88adbe2f-afcd-4a84-89b6-442cd5a54cc8" class="">
+</p><p id="ce32c889-576e-4e02-bb77-6ad3cfd13af9" class=""><strong>การสอบถามข้อมูลแบบ Object</strong></p><p id="81978cef-c9b9-4f2b-8aba-849fdbb16a5b" class="">สอบถามใน field ย่อยที่เป็นชนิดข้อมูลแบบ Object</p><p id="f4ef5c70-15f9-4788-b945-e264653590ec" class=""><strong>เข้าถึงด้วย</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="249346b2-f450-4bb3-b8a5-40c0584ec357"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-red"><strong>“</strong></mark>ชื่อ_field_หลัก<mark class="highlight-red"><strong>.</strong></mark>ชื่อ_field_ย่อย<mark class="highlight-red"><strong>”</strong></mark></div></figure><figure id="b08ebc46-12f3-453e-82c5-c191a78f00f5" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2053.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2053.png"/></a></figure><figure id="2b23288d-7de9-4f75-b56a-a082687bcb6f" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2054.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2054.png"/></a></figure><figure id="eab98707-e025-42c5-b4f9-dc70ee1cf0a1" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2055.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2055.png"/></a></figure><p id="4b20ff03-b351-4502-b9ca-23c70cf7c76a" class="">
+</p><p id="49ee2c74-22e3-420d-8d66-1e2237d4372f" class=""><strong>การสอบถามข้อมูลแบบ Array</strong></p><ul id="f5913ff7-bb8d-4291-97e6-94483f857fdb" class="bulleted-list"><li style="list-style-type:disc">สอบถามข้อมูลที่ต้องการภายใน []</li></ul><ul id="a4626078-b4c0-417e-b418-fcbbd1d8ecbf" class="bulleted-list"><li style="list-style-type:disc">สนใจลำดับภายใน [] (ลำดับไม่ตรง: ไม่นำมาแสดงผล)</li></ul><p id="c8c7bc9d-bd98-4b5a-9ad4-e5807eab0083" class=""><strong>เข้าถึงด้วย</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a72cf0a7-4324-4651-92ac-0b0f3a1ed478"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-red"><strong>“</strong></mark>ชื่อ_field_array<mark class="highlight-red"><strong>”:[”</strong></mark><mark class="highlight-default">ข้อมูลที่จะสอบถาม</mark><mark class="highlight-red"><strong>”]</strong></mark></div></figure><figure id="4e5791ca-513b-4371-8fe7-b03725e28151" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2056.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2056.png"/></a></figure><figure id="c73f108e-72da-498b-8f3d-10896d7d2982" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2057.png"><img style="width:384px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2057.png"/></a></figure><hr id="94a72ba1-0eb4-488c-8d17-1b435f5892b7"/><h2 id="23f32170-52e5-4902-b2be-d616fff14f78" class="">ตัวดำเนินการเปรีบเทียบ</h2><figure id="7d6f3a8f-1b9c-47c0-b46a-9da070dfed6f" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2058.png"><img style="width:1660px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2058.png"/></a></figure><figure id="50fe06f5-a131-4e9c-b42b-98fdf4bee29f" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2059.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2059.png"/></a></figure><figure id="fec252cc-4f5b-4ff7-8158-d8cc6b9f7937" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2060.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2060.png"/></a></figure><figure id="4ca143c9-67cf-48f2-91d1-4dcd927c7373" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2061.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2061.png"/></a></figure><hr id="081624f9-2a37-485f-b9ce-895081429bc4"/><h2 id="35561226-eb4d-416f-b8ef-c679f036b2cd" class="">สอบถามข้อมูลด้วย In และ Not In</h2><figure id="d2666d1b-db73-489a-a569-3779aff64a7d" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2062.png"><img style="width:948px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2062.png"/></a></figure><figure id="a5c131eb-8275-4d63-89fb-7dd415ed2889" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2063.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2063.png"/></a></figure><figure id="3a4aa79d-ad31-43af-bdeb-7d7804a0a6aa" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2064.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2064.png"/></a></figure><figure id="ee7cc34b-2abb-4da0-a6bd-f30ddc8dc5a4" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2065.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2065.png"/></a></figure><figure id="dba7d3b6-89b8-4685-9fd7-9eee72b18c5a" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2066.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2066.png"/></a></figure><hr id="17e61d0a-2759-4355-85ae-945f5afd7083"/><h2 id="2cbc119b-921c-48c1-b6a0-c7e9896a7da2" class="">ตัวดำเนินการทางตรรกศาสตร์</h2><p id="3ad24d44-78fe-4107-8224-98e74622e3a0" class="">เขียนเงื่อนไขใน [] และคั้นเงื่อนไขด้วย , (comma)</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2984219d-7c82-4a9b-a181-33046f8d6095"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>$and</strong>:[{เงื่อนไขที่_1},{เงื่อนไขที่_2}]</div></figure><figure id="cc238be2-6d8e-4f31-baec-9a92e38eb8c9" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2067.png"><img style="width:1512px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2067.png"/></a></figure><figure id="9adacde4-4214-4b6b-9ae7-06307a5c45c5" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2068.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2068.png"/></a></figure><figure id="df6da902-08d4-4ee9-b690-b611a2739fc7" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2069.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2069.png"/></a></figure><figure id="538b4f6f-fca6-4909-ab9c-ef41a510203b" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2070.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2070.png"/></a></figure><figure id="614e380b-62d3-4d47-8dba-0b42526628d8" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2071.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2071.png"/></a></figure><hr id="8dcb6958-ac31-468b-bd9b-08c4f38ba0d8"/><h2 id="cf4783fb-e45a-49c3-9f0c-3cceb7f95f3d" class="">การอัพเดต&amp;ลบ Document </h2><p id="f02e8bf0-92d5-4876-a3ec-c2d9ed5f16b5" class="">มี 2 รูปแบบ</p><ul id="581e48fb-758a-43fd-8101-6382f87ce1c1" class="bulleted-list"><li style="list-style-type:disc">อัพเดตรายการเดียว<ul id="2d89f555-f94f-4fe0-b4ea-8341881fc742" class="bulleted-list"><li style="list-style-type:circle">การอัพเดต<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4ced16b4-730c-4343-822d-b1966b67d1b6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.updateOne({flieldที่ต้องการแก้ไข},{ข้อมูลที่ต้องการแก้ไข(แก้ไขหลายรายการใช้ , คั้น)},{ตัวเลือกเพิ่มเติม})</div></figure></li></ul><figure id="18bcc847-bbf9-4959-a2d9-4b6dc4570382" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2072.png"><img style="width:528px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2072.png"/></a></figure><ul id="03a56061-2196-4481-98d9-59611484ca00" class="bulleted-list"><li style="list-style-type:circle">การลบ<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4144cb13-7908-4e98-b9b1-74741c0589a3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.deleteOne({flieldที่ต้องการลบ})</div></figure><figure id="82a006ae-0f7d-4fba-a0e5-cfd1ad8bd298" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2073.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2073.png"/></a></figure></li></ul></li></ul><ul id="4da4d05c-deee-47a1-b792-94479c538069" class="bulleted-list"><li style="list-style-type:disc">อัพเดตหลายรายการ<ul id="2287b571-0387-4c0b-a3ce-b51958e2e840" class="bulleted-list"><li style="list-style-type:circle">การอัพเดต<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="06ad4bce-ca5f-4f27-bf15-7f4a91723ed1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.updateMany({flieldที่ต้องการแก้ไข},{ข้อมูลที่ต้องการแก้ไข(แก้ไขหลายรายการใช้ , คั้น)},{ตัวเลือกเพิ่มเติม})</div></figure></li></ul><figure id="b225f1fe-847f-4500-88e3-f5dd3dcb08a5" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2074.png"><img style="width:528px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2074.png"/></a></figure><ul id="9312ae76-e857-40aa-8716-0d1250ef126d" class="bulleted-list"><li style="list-style-type:circle">การลบ<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="311bd6b6-d85a-4c20-83c1-df2ad1b014ad"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.deleteMany({flieldที่ต้องการลบ})</div></figure><figure id="ac1eb0ea-a706-4a1a-a43c-52b1f7836008" class="image" style="text-align:center"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2075.png"><img style="width:528px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2075.png"/></a></figure></li></ul></li></ul><hr id="67097c05-981d-4a98-abba-68521740c5c7"/><h2 id="b1d04927-8309-4208-a6cd-148eee0196ef" class="">Aggregation &amp; Pipeline</h2><p id="8f5ff47f-4aa3-4c1e-8e10-da7fedf41edd" class=""><strong>Pipeline </strong>: การนำเข้าข้อมูลขากฐานข้อมูลมารวมเข้าด้วยกันและวิเคราะห์หาผลลัพธ์ที่ต้องการ โดยจะนำเอา Document ต่างๆจาก Collection ไปเข้าสู่กระบวนการกลั่นกรอง (Stage) เพื่อวิเคราะห์หาผลลัพธ์ (Output)</p><figure id="e8521046-cc68-40d4-ae1c-fa77d8193663" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2076.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2076.png"/></a></figure><p id="06c66425-b1b7-496f-a314-183d79c4f668" class="">Pipeline จะใช้ method/คำสั่ง : <strong>aggregation() </strong>สำหรับรวบรวม Document ภายใน Collection ซึ่งด้านในจะประกอบไปด้วย Array ของ Stage โดย Document ทั้งหมดก็จะถูกดำเนินการกลั่นกรองข้อมูลด้านในกลุ่มของ Stage ดังกล่าวนั้นเอง</p><figure id="f0d2aed6-6469-4ea6-85f9-710d9f3bb1c8" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2077.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2077.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8f68b859-b24c-41e2-a115-0bc063cb997c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">db.ชื่อCollection.aggregate([stage])</div></figure><figure id="3806872b-2e4f-407d-9e7f-72cf72a912ba" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2078.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2078.png"/></a></figure><figure id="c70eb0c1-dda3-414d-9fbc-9924ab39b37c" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2079.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2079.png"/></a></figure><p id="3826865b-c10c-47b2-bd24-761574cf402e" class="">
+</p><h3 id="37cfb26c-4ab7-42d7-8bed-d007af1205c2" class="">การสอบถามข้อมูลด้วย $project (Projection)</h3><p id="1a62cda6-cda2-4edb-883c-c9de8bdb17d0" class="">เป็นรูปแบบการสอบถามข้อมูล และให้แสดงผลเฉพาะ field ที่ต้องการและส่งออกไปโดยการแสดง field จะกำหนดเป็นหมายเลย 1 ส่วนการซ่อน/ปิด field จะใช้หมายเลข 0</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ec895d77-3088-4cf0-b0f1-a72c44c66ac5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$project</strong>:{ชื่อfield : หมายเลข,ชื่อfield : หมายเลข}}</div></figure><ul id="518007dd-6b9e-4cb7-9d36-91ec67f1606b" class="bulleted-list"><li style="list-style-type:disc">ถ้าไม่ระบุ field : _id จะเปิดทุกครั้ง (มีค่าเป็น 1) เนื่องมาจากเป็นค่าที่ไม่ซ้ำกันในแต่ละ document)</li></ul><figure id="44d33016-43f9-4406-aaaf-70aef655b4cc" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2080.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2080.png"/></a></figure><figure id="e287eb31-f3da-467f-a70c-980aaebc44c4" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2081.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2081.png"/></a></figure><figure id="44088c36-cf5c-427d-8099-54c1791f3b4d" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2082.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2082.png"/></a></figure><h3 id="bc67ba61-0c76-4a8d-9611-c548f62f2dd6" class="">การสอบถามข้อมูลด้วย $match</h3><p id="a9bf769d-aced-4225-8f20-93b22b9ee0a7" class="">เป็นรูปแบบการสอบถามข้อมูลโดยเลือกเอาเฉพาะ Document ที่ผ่านเงื่อนไขที่ระบุแล้วส่งออกไป</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="93919a88-0533-4d5b-85bc-4f9ca2ba538f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$match</strong>:{ชื่อfield : เงื่อนไข}}</div></figure><figure id="a3fec3e4-a48e-4bfa-a5ac-4a34fbc84a11" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2083.png"><img style="width:432px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2083.png"/></a></figure><figure id="4d7c477b-b293-41ef-b311-bb11fc470a66" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2084.png"><img style="width:624px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2084.png"/></a></figure><figure id="3a1f9627-adb9-4a47-8b6a-9a9f19dd6838" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2085.png"><img style="width:624px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2085.png"/></a></figure><p id="5d7e52db-d774-42c5-b199-a0e1a8d3be51" class="">
+</p><h3 id="bf8140fc-b4cc-464e-aac5-60f71363e628" class="">นับจำนวนด้วย $count</h3><p id="cdeffd83-c7a9-4cd3-8c68-c012967dcab0" class="">เป็นการนับจำนวน Document ใน Collection และส่งออกเป็นจำนวน Document ที่นับได้</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4b0ce545-9d6e-4e44-ad67-07983dbcbb09"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$count</strong>:ชื่อfieldที่แสดงการนับจำนวน&lt;string&gt;}</div></figure><figure id="3f1cf940-3879-4ab5-999c-b3cf0665e6da" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2086.png"><img style="width:968px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2086.png"/></a></figure><p id="003131bd-d028-447b-b8d9-8cb1df6a1928" class="">
+</p><h3 id="136bedb9-28d5-4a47-a7a5-5240ac9366fb" class="">เรียงลำดับด้วย $count</h3><p id="95a6bbe9-2e72-45f7-99ba-e818aafc01f1" class="">การดึงข้อมูลใน Collection จะมีลำดับในการจัดเก็บข้อมูล ถ้าเราต้องการอยากเรียงลำดับข้อมูลใหม่จะใช้ $sort โดยกำหนดค่าเป็นหมายเลข ดังนี้</p><ul id="042b5edc-e2c1-4778-8f56-dea35aab97aa" class="bulleted-list"><li style="list-style-type:disc"><strong>1 </strong> : เรียงจากน้อยไปมาก/พยัญชนะ (ก-ฮ) - สระ</li></ul><ul id="40f48501-36bc-477f-ad25-52736e053ddb" class="bulleted-list"><li style="list-style-type:disc"><strong>-1</strong> : เรียงจากมากไปน้อย/สระ - พยัญชนะ (ก-ฮ)</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b41bab1f-6cb4-48e7-b74c-015816ca1132"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$sort</strong>:{ชื่อfield:หมายเลข,ชื่อfield:หมายเลข}}</div></figure><figure id="86da5f49-92a0-448e-a568-01091dfdbeee" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2087.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2087.png"/></a></figure><figure id="0979e02e-d111-4e57-ad82-ce5186162252" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2088.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2088.png"/></a></figure><figure id="e58d9e1c-9fa3-4c9a-be28-154cdff378bf" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2089.png"><img style="width:480px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2089.png"/></a></figure><p id="d602298e-c5db-498a-90ab-b81a08f28629" class="">
+</p><h3 id="6a190236-cd75-44f7-adbd-369ea8050032" class="">จำกัดข้อมูลด้วย $limit</h3><p id="0310dfdc-fd93-44a5-a435-ad57c745d558" class="">การจำกัดการแสดงจำนวน Document </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7116919f-e9df-4ddf-9cb3-0588dae05d48"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$limit</strong>:จำนวนDocumentที่ต้องการจะแสดง&lt;integer&gt;}</div></figure><figure id="4ab00308-a821-4f48-b903-95509502902d" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2090.png"><img style="width:835px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2090.png"/></a></figure><figure id="60265da2-78eb-40f8-a2e3-303bd3bf282e" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2091.png"><img style="width:1315px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2091.png"/></a></figure><p id="baad221a-f2ab-4243-9dd1-4a95f10573f1" class="">
+</p><h3 id="b274f5be-6b5b-4f86-a7cb-3b6e206efbd4" class="">ข้าม Document ด้วย $skip</h3><p id="622ec803-6f1a-4d0e-a1c2-609672e6c067" class="">ข้าม Document ที่ไม่ต้องการจะเเสดง </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7416bc5c-27ee-4e60-b8de-cf5d1df71613"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$skip</strong>:จำนวนDocumentที่จะข้ามการแสดงผล&lt;integer&gt;}</div></figure><figure id="a04037bf-47d9-4ed0-a1d3-b61c7f75529e" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2092.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2092.png"/></a></figure><figure id="fc525ad3-dc8a-499f-b031-1eb0b7570b5f" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2093.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2093.png"/></a></figure><p id="a248be42-2bf6-4539-ab84-1e0fa8dd6bef" class="">
+</p><h3 id="cfe9f142-b115-488c-8278-67ead9880c96" class="">การจัดกลุ่มข้อมูลด้วย $group</h3><p id="2d79550f-5a53-45e4-883b-0d9a20f7a0be" class="">การจัดกลุ่มข้อมูลของ Document ไว้เป็นกลุ่มเดียวกันโดยมี _id เก็บรายการข้อมูลแต่ละกลุ่มที่ไม่ซ้ำกัน และยังสามารถเพิ่มฟิลด์ในการคำนวณหาผลลัพธ์ภายในกลุ่มข้อมูลที่สร้างขึ้นได้ โดยใช้งานกลุ่มร่วมกับฟังก์ชั่นทางสถิติ</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1c9f3e7d-8147-40d0-b097-f80e3d668c02"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$group</strong>:{ชื่อfieldสำหรับจัดกลุ่ม:ตัวดำเนินการทางสถิติ}}</div></figure><p id="30457c10-9db7-4166-b3e7-c5640220342a" class=""><strong>ex.</strong> {<strong>$group</strong>:{_id:”$address”}}, {<strong>$group</strong>:{_id:null}}</p><figure id="b7b7a29a-0928-4041-9fa7-ea423228643a" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2094.png"><img style="width:1727px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2094.png"/></a></figure><figure id="c7602b13-d56f-4042-8200-ce904ba60965" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2095.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2095.png"/></a></figure><figure id="62998b3e-e7de-4b4c-b6b1-5e4420c9f63d" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2096.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2096.png"/></a></figure><figure id="7bd0af1a-13bf-477f-b4eb-bca16fa149b2" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2097.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2097.png"/></a></figure><figure id="c07c12ae-1aac-4fe0-86d2-c84e3b9063cd" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2098.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2098.png"/></a></figure><figure id="32832eda-de7e-4182-ba26-1d8b0118b757" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2099.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%2099.png"/></a></figure><figure id="857a3831-5155-4d23-b9ba-2ed85ee9daba" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20100.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20100.png"/></a></figure><figure id="ec2af68d-93ae-43d7-87e7-f569b9725398" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20101.png"><img style="width:576px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20101.png"/></a></figure><p id="a7f9032d-26f2-4273-b883-c00259270811" class="">
+</p><h3 id="70bae650-7af0-45ca-95b2-c02a49737a63" class="">เพิ่มข้อมูลกลุ่มด้วย $push และ $addToSet</h3><p id="eb99edf8-8ac2-4247-8135-44640e8881a9" class="">การเพิ่มลายละเอียดข้อมูล</p><ul id="2312ef3c-4133-4718-b479-f7858e461a8b" class="bulleted-list"><li style="list-style-type:disc">$push : แสดงผลเป็น object</li></ul><ul id="8a7eb5d0-59f9-4aad-926b-23e3d7b885b0" class="bulleted-list"><li style="list-style-type:disc">$addToSet : แสดงผลเป็น array</li></ul><figure id="387b25de-ef24-47a4-8dd7-cf118d4bf853" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20102.png"><img style="width:1466px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20102.png"/></a></figure><figure id="7f0ba457-9314-42b6-a7c3-1f8a61973150" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20103.png"><img style="width:1574px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20103.png"/></a></figure><p id="1a629296-fa0d-401f-880a-629a6abab7c5" class="">
+</p><h3 id="144661f9-b789-448e-90fa-5d845d0cbe16" class="">เชื่อม Collection ด้วย $lookup</h3><p id="07364b27-fbbd-4ae5-b36f-769f3c172218" class="">เป็นการสอบถามข้อมูล Document ที่เก็บข้อมูลใน Collection ที่แตกต่างกันโดยกำหนดให้ Collection หลักเชื่อมกับ Collection ด้านนอก ซึ่ง Collection ดังกล่าวต้องอยู่ในฐานข้อมูลเดียวกัน ผลลัพธ์ที่ได้คือ กลุ่ม Document ที่เชื่อมโยงช้อมูลระหว่าง Collection นั้นเอง</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="da34fdb0-bd5d-430a-86d3-764cd642436c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">{<strong>$lookup:</strong>{<br/>     <br/><strong>from:</strong>”ชื่อCollectionด้านนอกที่เชื่อมโยง”,<br/>     <br/><strong>localField:</strong>”FieldจากCollectionหลัก”,<br/>    <br/><strong> foreignField:</strong>”FieldCollectionที่จะเชื่อมโยง”,<br/>     <br/><strong>as:</strong>”ชื่อFieldที่เก็บผลลัพธ์”<br/>     }<br/>}<br/></div></figure><figure id="89b26f68-234c-458c-99a3-2aba87d501d2" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20104.png"><img style="width:1803px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20104.png"/></a></figure><figure id="641341d3-056c-402e-a961-99edf4444b16" class="image"><a href="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20105.png"><img style="width:1305px" src="MongoDB%205a42f8cfde0c44509e7a951e3f689d2e/Untitled%20105.png"/></a></figure><hr id="bcca18d4-c984-4084-8f29-74e36f8d72f3"/><p id="3457d681-610d-4a7c-b729-7888b41e2690" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

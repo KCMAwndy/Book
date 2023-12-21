@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ASP.NET Core MVC (.NET7)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0ed4345e-d0fd-487c-9c45-23e69c2bc1f9" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/globe_gray.svg"/></div><h1 class="page-title">ASP.NET Core MVC (.NET7)</h1><p class="page-description"></p></header><div class="page-body"><p id="e6737ae8-9b25-4ed0-98f7-16ded60b2329" class="">
+</p><h2 id="34a3d972-e744-4f27-8533-49991dd67251" class=""><strong>MVC</strong></h2><ul id="5b04d444-cbaf-4421-9520-1989e5e5300d" class="bulleted-list"><li style="list-style-type:disc"><strong>Model(M) : </strong>ส่วนที่เก็บข้อมูลของ Application (Back-End)</li></ul><ul id="fffd36b5-2603-4aa3-9590-7d589c70d398" class="bulleted-list"><li style="list-style-type:disc"><strong>View(V) : </strong>ส่วนที่ทำงานฝั่ง Front-End หรือหน้าตาแอพพริเคชั่น เป็นส่วนที่ไว้ใช้แสดงผลข้อมูลด้วย HTML ร่วมกับ Tag Helper</li></ul><ul id="fe5f305c-a919-4bf3-b4bd-697122e0a339" class="bulleted-list"><li style="list-style-type:disc"><strong>Controller(C) : </strong>ส่วนประมวลผลคำสั่งต่างๆ ใน Application โดยควบคุมการทำงานระหว่าง Model และ View (Back-End)</li></ul><p id="2fa5f653-99d9-4271-bcd3-9af844dd0c44" class="">
+</p><h2 id="502f518f-f720-48d0-bac5-efc1082e3f26" class="">Getting Start</h2><h3 id="a5d34069-f338-42b9-8dd0-f44ba41a1a6c" class="">Create new project</h3><ul id="896926f6-8e06-4f5b-9764-34ef07302db1" class="bulleted-list"><li style="list-style-type:disc">เลือก templates : ASP.NET Core Web App(Model-View-Controller)<figure id="19a36f24-d048-47d5-95d2-35ff3649423c" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled.png"><img style="width:1292px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled.png"/></a></figure></li></ul><ul id="fac1c17e-cdb7-4d66-849a-e3acecb4f19b" class="bulleted-list"><li style="list-style-type:disc">ตั้งชื่อ Project, Location<figure id="36e24867-6f2d-4610-9a8e-84c69ccfa59c" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%201.png"><img style="width:602px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%201.png"/></a></figure></li></ul><ul id="8f2ec304-a720-4afb-9bb3-02164c959e87" class="bulleted-list"><li style="list-style-type:disc">ต่อมา เลือก Framework : .NET 7.0 (Standard Team Support)<figure id="003987a3-90c5-44f1-9ae2-ea407582b84c" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%202.png"><img style="width:587px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%202.png"/></a></figure></li></ul><ul id="83c451a0-a3fc-41eb-9209-045b8e76e0e2" class="bulleted-list"><li style="list-style-type:disc">create</li></ul><h2 id="63fab1fa-9326-46c2-9585-ad6db41e7ce2" class="">Introduce</h2><ul id="3db83291-ce0d-4b3a-8d25-cb3755ec5ebb" class="bulleted-list"><li style="list-style-type:disc">สามารถเลือกการ run projectได้<figure id="55b6ef19-839d-4769-8b74-5c98d99d8615" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%203.png"><img style="width:755px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%203.png"/></a></figure></li></ul><ul id="f974c570-8d57-4d97-b068-c845acba942b" class="bulleted-list"><li style="list-style-type:disc">ออกจากการ run ด้วยการ ปิด prompt/ปิด web browser</li></ul><ul id="01a22901-7ffa-4a9b-b70a-27d796744c58" class="bulleted-list"><li style="list-style-type:disc">มี hot reload: สามารถกดเพื่อเป็นการ update คำสั่งอัตโนมัติ</li></ul><ul id="91ddb259-4531-430a-90e9-7cdb6e9766e9" class="bulleted-list"><li style="list-style-type:disc">การตั้งค่าการ run ตัว project จะอยู่ใน Properties&gt;launchSetting.json<figure id="ac7a28b3-d8b1-43db-a2de-d7aea4fec816" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%204.png"><img style="width:1077px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%204.png"/></a></figure><ul id="9c85e930-53e2-44f7-8c36-beb8d204f1ad" class="bulleted-list"><li style="list-style-type:circle">โดยที่ .NET 7.0 ต่างจาก .NET 6.0 ตรงที่ .NET 7.0 มี http, https แต่ .NET 6.0 จะเป็นชื่อ project แทน (ไม่มี profile: http/https)</li></ul></li></ul><hr id="93f10ad6-42cd-46a0-ab30-0304afbe14da"/><h2 id="6483381e-8946-4e13-b81b-2d2ded986035" class="">โครงสร้าง Project</h2><h3 id="6113e68d-6f4e-4a13-8a6c-3475d8a7765a" class="">Folder</h3><ul id="9ea59e0b-c96e-4712-98a9-73c067ca5da6" class="bulleted-list"><li style="list-style-type:disc"><strong>Controllers : </strong>เป็น folder ที่เก็บกลุ่ม Controller สำหรับกำหนดการทำงานหรือการประมวลผลข้อมูลใน application</li></ul><ul id="3b06fbdf-885f-4567-b2e3-0d89f60c1564" class="bulleted-list"><li style="list-style-type:disc"><strong>Models : </strong>เป็น folder ที่เก็บกลุ่ม file : Model เพื่อใช้งานฐานข้อมูล</li></ul><ul id="74515092-752a-4a66-afc6-b4647ecbe410" class="bulleted-list"><li style="list-style-type:disc"><strong>Views :</strong> เป็น folder ที่เก็บ file สำหรับแสดงผลหน้าเว็บ (.cshtml)</li></ul><ul id="bd2879b1-0afe-4e77-bff0-0ac5869f2eae" class="bulleted-list"><li style="list-style-type:disc"><strong>wwwroot : </strong>เป็น folder ที่ใช้จัดการ Static File (css, js), เก็บ file รูปภาพ, library</li></ul><ul id="c5abf2f3-de10-4db2-9afc-582799278f71" class="bulleted-list"><li style="list-style-type:disc"><strong>Properties : </strong>เป็น folder ที่เก็บการตั้งค่ารูปแบบการ run : application ผ่าน file ที่ชื่อวา launchSetting.json</li></ul><h3 id="c8893c1e-8568-4bed-afbc-5dc0646111ab" class="">Files</h3><ul id="825d4b7d-5626-4ace-b8a3-908d6ae198a3" class="bulleted-list"><li style="list-style-type:disc"><strong>appsettings.json : </strong>เป็น Configuration File หลักของระบบ เช่นการเพิ่ม Environment Variable ที่ใช้ใน project</li></ul><ul id="cf6f1190-8dfa-4364-9ca0-61e716853282" class="bulleted-list"><li style="list-style-type:disc"><strong>Program.cs :</strong><p id="6e5b4180-98c6-4766-9c04-1f7878dc6ac6" class="">การทำงานเริ่มต้นของ project: ASP.NET Core MVC จะอยู่ใน file: Program.cs ซึ่งมีกลุ่มคำสั่งสำหรับจัดการ Request และ Response (Middleware) รวมถึงการตั้งค่า Service หรือบริการต่างๆ ที่ใช้งานใน project เช่น Routing, Database Service, Static File, Authentication เป็นต้น</p><ul id="fc62f3ae-ac0b-4da5-bca3-679ff3554356" class="bulleted-list"><li style="list-style-type:circle">File : Program.cs จะมีการตั้งค่าบริการเริ่มต้นสำหรับจัดการเส้นทาง(Route) และ Controller <p id="bef3a00f-df44-46ca-8112-f28108a9dfb9" class="">ผ่านคำสั่ง :</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e9c94d20-9a1e-4df1-a71e-df27c77d8368"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/snippet_gray.svg"/></div><div style="width:100%">app.UseRouting();<p id="3900a93f-7c92-4338-8391-70cf3e908ae3" class="">app.MapControllerRoute(<div class="indented"><p id="faab2a6d-a63d-4a6d-a84d-a3f7967f3d5b" class="">name: “default”,</p><p id="c32b793a-cf4c-4e1f-a69a-834c89498924" class="">pattern: “{controller=Home}/{action=Index}/{id?}”</p></div></p><p id="63307867-ca04-4add-abc0-88bba5581cab" class="">);</p></div></figure><ul id="1dacfb80-1b9b-4cc6-903d-a2278518ab4b" class="bulleted-list"><li style="list-style-type:square">name: “default” ; default คือชื่อ Route: เมื่อเปิด project จะไปค้นหาเส้นทางที่ชื่อ default โดยเส้นทางจะไปคุยกับ controller</li></ul><ul id="79959d96-4e94-4ece-aa2f-828565fe67cc" class="bulleted-list"><li style="list-style-type:square">controller=Home ; controller จะเป็นที่ทำงานเป็นอันดับแรกในตอนเริ่มต้นรัน Application<ul id="e4b854ec-832a-4f8c-9c16-03190953419e" class="bulleted-list"><li style="list-style-type:disc">Home: เขียนแบบย่อ</li></ul><ul id="e60c0c41-5c79-4b63-816c-3f0b5e2effb8" class="bulleted-list"><li style="list-style-type:disc">HomeController: เขียนแบบเต็ม</li></ul></li></ul><ul id="bda4c165-8944-47f6-b37f-7fdc1b48aa46" class="bulleted-list"><li style="list-style-type:square">action=Index ; action คือกระบวนการทำงาน function<ul id="8af75e95-622a-449d-9909-f17748334d9a" class="bulleted-list"><li style="list-style-type:disc">Index(): ชื่อ method ที่ทำงานอยู่ใน Home(HomeController)</li></ul><ul id="6542837a-9888-454f-af24-b78a3800b62e" class="bulleted-list"><li style="list-style-type:disc">ดังนั้น ชื่อ controller กับ ชื่อ action ต้องสัมพันธ์กัน</li></ul></li></ul><ul id="ebc452f0-91a5-4d05-933f-87abc5758379" class="bulleted-list"><li style="list-style-type:square">id? ; parameter ที่ส่งเข้ามาทำงานใน method: Index, สามารถส่งค่าเข้าไปทำงานหรือไม่ส่งก็ได้ (? Optional Parameter)</li></ul></li></ul><p id="9b9049f4-7cc7-4752-8f7c-06ee0f1c1fe4" class="">ตัวอย่างการใช้งาน:<div class="indented"><p id="8eb19b8d-d4a2-4142-969b-7106c3a20853" class=""><strong>Program.cs</strong> : กระบวนการทำงานเริ่มต้นของตัว Project จะอยู่ใน file นี้<div class="indented"><figure id="9ddf80ee-244b-41f4-894c-65e3a1aa575a" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%205.png"><img style="width:477px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%205.png"/></a></figure><ul id="e58c2f7a-4100-4976-b9b3-7bc04ba2b11d" class="bulleted-list"><li style="list-style-type:disc">Program จะสร้าง builder และ set Service: AddContollersWithViews():<ul id="78562489-c7ff-43b8-9941-4813e7122e4e" class="bulleted-list"><li style="list-style-type:circle">นั้นคือ จะมี Contoller และ Views ทำงานอยู่ใน project</li></ul></li></ul><ul id="c52a8f7e-2cdf-4c16-8595-0a3c8393b10e" class="bulleted-list"><li style="list-style-type:disc">ตั้งค่า MiddleWare ผ่าน App</li></ul><figure id="9f7b3174-3e5a-4d9a-a267-9bec4e01030f" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%206.png"><img style="width:480px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%206.png"/></a></figure><p id="9e1da7fd-ca85-44d9-b862-c1afe86a6e5c" class="">เช่น </p><p id="fa65b7ac-d9ef-499d-9fb2-3b7ef3e052e6" class="">การกำหนดการใช้ middleware ที่มีชื่อว่า HttpsRedirection() : กำหนดให้ตัว project run เป็นรูปแบบของ https</p><ul id="1b2ca379-8011-405a-b27e-af8636813071" class="bulleted-list"><li style="list-style-type:disc">การกำหนดการใช้ middleware ที่มีชื่อว่า HttpsRedirection() : กำหนดให้ตัว project run เป็นรูปแบบของ https</li></ul><ul id="a58268b1-80aa-47c7-8d9b-abd75bc716d3" class="bulleted-list"><li style="list-style-type:disc">มีการใช้ตัว static file ผ่าน app.UseStaticFiles()</li></ul><ul id="931efd9f-0ffa-4dc1-937e-653e5ccea824" class="bulleted-list"><li style="list-style-type:disc">มีการกำหนดเส้นทาง ผ่าน app.UseRouting()</li></ul><ul id="19c4c2a7-991f-4904-890e-6ff40b12264b" class="bulleted-list"><li style="list-style-type:disc">มีการกำหนดสิทธิที่จะจัดการข้อมูลที่อยู่ในตัว project ผ่าน app.UseRouting()</li></ul><ul id="43f23670-b7a1-4a07-b5ca-720afa2e5f64" class="bulleted-list"><li style="list-style-type:disc">app.MapContollerRoute : เป็นการจับคู่ระหว่างชื่อ controller กับชื่อ route</li></ul></div></p><p id="cb296567-fa00-47b6-9dda-cb4be59009eb" class="">
+</p><p id="15eafc5e-9663-4610-96d6-a979503e0229" class=""><strong>HomeContoller.cs : </strong><div class="indented"><figure id="f6314efe-e0ca-4934-97c9-822b1a911113" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%207.png"><img style="width:480px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%207.png"/></a></figure><ul id="ea8f7b51-63e1-41e7-ad50-f8c6ecde5f8e" class="bulleted-list"><li style="list-style-type:disc">มี Action method ที่ทำงานอยู่ใน HomeController<ul id="ff11f7e5-c462-40d9-84c6-23a95483c3d0" class="bulleted-list"><li style="list-style-type:circle">Index() ; return View()</li></ul><ul id="a4a2a271-9314-4967-afcf-1b6b04fd9274" class="bulleted-list"><li style="list-style-type:circle">Privacy() ; return View()</li></ul><p id="9f0c2a35-44da-4cd5-ad33-5f0c8cc931a3" class="">View ในที่นี้คือ View ที่บรรจุอยู่ใน HomeController โดยจะมีชื่อ View ตาม Action method (.cshtml)<div class="indented"><figure id="548b516f-fd4f-4a33-8f3f-3d3d185574a7" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%208.png"><img style="width:248px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%208.png"/></a></figure></div></p></li></ul></div></p></div></p></li></ul><hr id="481778ba-c4a4-4cc6-9ad6-c4e2f7703f31"/><h2 id="82aec59a-4997-4a23-95e5-83a222835e2c" class="">Routing &amp; Controller</h2><ul id="ab1088a1-9ec1-4616-bdf4-d8492a673d74" class="bulleted-list"><li style="list-style-type:disc"><strong>Routing :</strong> ส่วนที่ใช้ระบุเส้นทางในการรับส่งข้อมูล</li></ul><ul id="b2ad157f-37e5-4420-8ac0-6fe35f6daef2" class="bulleted-list"><li style="list-style-type:disc"><strong>Controller :</strong> ศูนย์กลางสำหรับส่งข้อมูล และการประมวลผลโยเชื่อมโยงการทำงานระหว่าง Model และ View</li></ul><p id="3a31df04-1809-4caf-b5f6-d77cdebc2cbc" class=""><strong>โครงสร้าง URL</strong><div class="indented"><figure id="ad52f155-e809-427e-9961-7901523d5f2a" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%209.png"><img style="width:468px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%209.png"/></a></figure></div></p><ul id="e97a7fae-8b14-49cf-8bdd-8e9957acf321" class="bulleted-list"><li style="list-style-type:disc"><strong>Path :</strong> จับคู่ระหว่าง Controller และ Action Method ใน Controller เอาไปสร้างเป็น View<p id="b4bde46f-f03c-4643-9d6b-29c6cdc9583a" class=""><strong>ตัวอย่าง Path :</strong><div class="indented"><figure id="e7b85895-16c6-4d4e-b05a-6a73094856a7" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2010.png"><img style="width:1712px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2010.png"/></a></figure><ul id="ac2fccee-dc93-4eef-8fd5-a932a0d71b3f" class="bulleted-list"><li style="list-style-type:disc"><strong>ID : </strong>Parameter ID ส่งมาให้ Action Method</li></ul></div></p></li></ul><hr id="cac3418b-9155-4c04-8900-62f6cf511583"/><h2 id="c2321919-5ded-48dd-82aa-9786efc445b8" class="">การสร้าง Controller</h2><ul id="f30a9082-ec7a-4685-b438-753260310343" class="bulleted-list"><li style="list-style-type:disc">คลิกขวา&gt;Add&gt;Controller&gt;MVC Empty&gt;Add&gt;ตั้งชื่อ(xxxController.cs)&gt;Add<figure id="fcc5e71e-bb88-45bc-9934-0a40b61221bb" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2011.png"><img style="width:435px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2011.png"/></a></figure><ul id="1d69a23d-f4d8-44d4-be71-e3d9f14544bf" class="bulleted-list"><li style="list-style-type:circle"><strong>IActionResult</strong> Method : ส่งเป็นหน้า Web ออกไป<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="05b38c58-d8cb-433e-bed3-765fe700249d"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/snippet_gray.svg"/></div><div style="width:100%">public IActionResult Index()<br/>{<br/>     return Content(”Index”)<br/>}<br/></div></figure><ul id="7da0ee0d-162f-4392-924b-3c72cd5557a0" class="bulleted-list"><li style="list-style-type:square">return Content(””) : จะเป็นการ return การแสดงผลในรูปแบบ String (ชุดข้อความ)</li></ul></li></ul><ul id="25a48ebb-3c02-4a53-831c-c439db8ed4a7" class="bulleted-list"><li style="list-style-type:circle">เพิ่ม <strong>Parameter ID</strong> :<figure id="4a44c5b5-333f-40ad-8dab-4aa132886b7d" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2012.png"><img style="width:432px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2012.png"/></a></figure><figure id="c7108006-7a78-4f35-bc33-57c86a4d40f9" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2013.png"><img style="width:316px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2013.png"/></a></figure></li></ul><ul id="49b06838-b7be-4105-bddf-9c686bc1e2d1" class="bulleted-list"><li style="list-style-type:circle">สามารถเปลี่ยน Default Rout ได้ โดยเมื่อ run Web จะเปิด view ใน Action Method ของ Controller นั้นขึ้นมาทันที : ปรับที่ <strong>pattern</strong><figure id="788e4d6c-9d5f-4c9d-b43b-95b576676b71" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2014.png"><img style="width:480px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2014.png"/></a></figure><figure id="77f5e39b-7739-40ef-99f4-849bab3b3e73" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2015.png"><img style="width:251px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2015.png"/></a></figure></li></ul></li></ul><hr id="c0c6fee2-7264-444e-a1ca-f55a94e311de"/><h2 id="a83bf995-dc04-4416-b287-c64440f3a1fa" class="">View</h2><ul id="4a92fb56-6fe7-4ec1-a814-a594cc230ad4" class="bulleted-list"><li style="list-style-type:disc"><strong>View :</strong> หน้าตา Application เป็นส่วนที่ไว้ใช้แสดงผลหรือผลลัพธ์จากการประมวลผลในหน้าเว็บเพจ โดยทำงานร่วมกับ HTML และ Tag Helper</li></ul><ul id="a27edc23-ffe7-4870-bbd1-a49f4c00008f" class="bulleted-list"><li style="list-style-type:disc">โดยจะต้องสร้าง file View(.cshtml) ตาม ชื่อ Action method และอยู่ใน folder ที่ตั้งชื่อตามชื่อ controller นั้นๆ<figure id="c52002db-90c6-4ef6-81e1-042b2e0c8c82" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2016.png"><img style="width:480px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2016.png"/></a></figure><figure id="134e449c-9a43-4da1-abd5-26e2ab357340" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2017.png"><img style="width:480px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2017.png"/></a></figure></li></ul><hr id="4129fe69-9b15-4245-889a-c1698fe4e8d2"/><h2 id="8d2111a9-51ee-4b72-be8c-e5cbd7af6250" class="">การสร้าง View-Empty</h2><ul id="ebb99664-f30f-494d-8306-3873f9d432df" class="bulleted-list"><li style="list-style-type:disc">คลิกขวาที่ Action method ใน controller ที่ต้องการ&gt;Add View&gt;<strong>Razor View-Empty</strong>&gt;Add&gt;ตั้งชื่อ xxx.cshtml(auto: เอามาจาก ชื่อ Action method)&gt;Add<p id="7ff59536-20a2-4c6c-a685-336e0854876b" class=""><strong>ตัวอย่างการใช้งาน :</strong><div class="indented"><p id="1fe93a4d-79e5-4006-a9fe-fae9cccdc559" class=""><strong>StudentController.cs ;</strong></p><figure id="bcbeffee-a23f-45d0-85aa-206fa67c1a20" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2018.png"><img style="width:384px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2018.png"/></a></figure><p id="08627719-94c0-48eb-9a36-0a319607f7e8" class=""><strong>Index.cshtml ;</strong></p><figure id="db438161-5d4d-49c6-b3b0-3f546bf33cd2" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2019.png"><img style="width:531px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2019.png"/></a></figure><p id="da997fcb-7a5a-4c50-a4c2-5832901f65ab" class=""><strong>การแสดงผล</strong></p><figure id="ff11d008-520b-4db2-9b3d-bec7bd4a114b" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2020.png"><img style="width:336px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2020.png"/></a></figure><p id="a4588074-6d6a-4156-94f9-92cbd387e65f" class="">สิ่งที่ไม่ใช่ h1 ; คือ view-layout(BasicASPTutorial - 2566 Privacy)</p></div></p></li></ul><hr id="01033bed-5e6c-4b21-b93e-fdc62afb7726"/><h2 id="9e6062e1-c1da-4115-9668-2ee553855b8f" class="">Layout &amp; Tag Helper</h2><ul id="feabe49f-1d59-4e15-9753-c47cc10048e6" class="bulleted-list"><li style="list-style-type:disc"><strong>Layout Views : </strong>การกำหนดโครงสร้างหลักในหน้าเว็บที่ทุกๆหน้าใช้งานร่วมกัน เพื่อลดความซ้ำซ้อนของ code เช่น เมนู(Navbar), Footer เป็นต้น </li></ul><ul id="ede44df3-befd-4a71-b663-fb31ea2cfcc5" class="bulleted-list"><li style="list-style-type:disc">โดยการแทรก File เนื้อหสหลักเข้าไปทำงานในหน้า Webpage ใน project ASP.NET Core MVC จะตั้งค่าการทำงาน file ที่ชื่อว่า <strong>“_Layouts.cshtml”</strong> จะอยู่ใน View&gt;Shared&gt;_Layouts.cshtml<p id="3c796a79-d3ef-42e3-8a95-edf18b9ebd4b" class=""><strong>โครงสร้างของ _Layouts.cshtml</strong></p><figure id="ec2c0f23-bba5-4ab8-bf9c-149f9ebf2ef3" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2021.png"><img style="width:920px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2021.png"/></a></figure></li></ul><p id="ad5c1c62-76e9-4cf6-80c2-dd2755853155" class="">
+</p><ul id="670003ba-448c-4f2b-a6bd-595e2a637f16" class="bulleted-list"><li style="list-style-type:disc"><strong>Tag Helper </strong>: การเชื่อมโยง Element ของ HTML5 ให้สามารถทำงานร่วมกับ .NET ได้ (ขึ้นต้นด้วย asp-xxx; ชื่อ tag helper ที่เราจะเรียกใช้งาน)<p id="32ccb1bb-502d-481b-9552-51f07e25294e" class="">ตัวอย่างเช่น : link ต้องการเรียกใช้ controller และ action method<div class="indented"><figure id="84c852a1-4ffb-4865-b6ab-d4aa2f80c70c" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2022.png"><img style="width:384px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2022.png"/></a></figure></div></p></li></ul><hr id="3893ee91-0ca7-4a37-8772-afae4fc48b0b"/><h2 id="f67ebeb1-1451-4b77-a67c-a8b174511774" class="">การสร้าง View-Layout</h2><p id="f39f0bb2-be53-4d14-b054-cd2cbb6d436a" class="">โครงสร้างที่ View ทุกๆ หน้าจะใช้ร่วมกัน</p><ul id="83d129a7-8be5-4598-9e5c-5646fcb8b398" class="bulleted-list"><li style="list-style-type:disc">คลิกขวาที่ Action method ใน controller ที่ต้องการ&gt;Add View&gt;<strong>Razor View&gt;</strong>Add&gt;ตั้งชื่อ xxx.cshtml(auto: เอามาจาก ชื่อ Action method)&gt;Add<figure id="2427a0d1-0a4a-4c0e-a6e9-771eeede038c" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2023.png"><img style="width:384px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2023.png"/></a></figure><figure id="a50dd7e6-4eb1-483d-b488-ad396e21635f" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2024.png"><img style="width:384px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2024.png"/></a></figure><ul id="1ee5c844-31d4-4bdd-a227-24f3e39653f5" class="bulleted-list"><li style="list-style-type:circle">ViewData[”Tittle”] = “Index”; คือการกำหนดชื่อ ViewData ใหม่ ใน _Layouts.cshtml</li></ul><figure id="1bf7dde0-1c76-4a1a-a9b1-c55fd467bf9f" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2025.png"><img style="width:576px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2025.png"/></a></figure></li></ul><hr id="34e896d2-4f94-4260-bf05-d82f3a21f85a"/><h2 id="a6511f49-a721-481b-9c9e-4f2053f81bdc" class="">Model</h2><p id="7c59ee30-19be-4169-bf9a-6e00665576c7" class="">ส่วนที่เก็บข้อมูลของ Application โดยจะทำหน้าที่จัดการฐานข้อมูลแทนการใช้คำสั่ง SQL โดยตรง ผ่านการกำหนด Class และ Object ซึ่งจะเรียกส่วนนี้ว่า ORM (Object Relational Mapping)</p><figure id="300426b7-5312-4a52-9862-a29f9139fd5d" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2026.png"><img style="width:1682px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2026.png"/></a></figure><hr id="12935d41-190d-4ccf-909a-46e52e9cfb00"/><h2 id="3e6139db-b747-4ca7-885d-0a1531f0123c" class="">การสร้าง Model</h2><p id="94709c6a-e5fa-4534-ba4a-babf561c1ef3" class="">โดยที่ 1 Model แทน 1 Table ในฐานข้อมูล</p><ul id="f277e595-a3be-41a4-957f-9e849d0c2ca4" class="bulleted-list"><li style="list-style-type:disc">ออกแบบตารางข้อมูลก่อน เก็บเป็น type อะไร, ชื่อตัวแปรอะไร<figure id="cec02124-b0f6-47af-9b44-5ff5bbbed250" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2027.png"><img style="width:712px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2027.png"/></a></figure><figure id="2bb0c201-a7f8-4474-88f1-bf4ac8b3ebf5" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2028.png"><img style="width:538px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2028.png"/></a></figure></li></ul><ul id="78ddb9ba-5265-42ff-b6bc-92df057e0a35" class="bulleted-list"><li style="list-style-type:disc">สร้าง class ใน folder Model (Add) &gt; ตั้งชื่อ class อะไรก็ได้<figure id="97063e79-eb9a-4518-91d1-8780e860ec8b" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2029.png"><img style="width:628px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2029.png"/></a></figure><figure id="97bc2421-5f24-4ae3-8429-a0bd4dfdbf7d" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2030.png"><img style="width:618px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2030.png"/></a></figure></li></ul><hr id="9edb81d1-41ff-44fa-ab41-10cbf6474087"/><h2 id="6a8c7f57-189a-4ca1-9f0f-35a46463a72d" class="">สร้าง Object จาก Model</h2><p id="55497a15-cb24-4ec4-92ad-aa0b2b798ed6" class="">การทำ Model ไปใช้งานใน controller โดยการใช้ Object</p><ul id="67dca33a-669c-4ffe-a06c-3886a53b3304" class="bulleted-list"><li style="list-style-type:disc">รูปแบบการสร้าง Object<ol type="1" id="b2a89747-8069-416d-a9f0-d1ec21ec7f65" class="numbered-list" start="1"><li><strong>คำสั่ง new</strong> : เป็นวิธีการสร้าง Object แบบมาตรฐาน</li></ol><ol type="1" id="d793bc8f-efc8-4985-bfb9-3c33d218b710" class="numbered-list" start="2"><li><strong>Type Inference</strong> : ตัวแปรภาษา C# จะกำหนดชนิดข้อมูลให้กับตัวแปรอัตโนมัติตามข้อมูลที่จัดเก็บ</li></ol><ol type="1" id="63546514-d2ab-4f67-974b-856d3664ab8e" class="numbered-list" start="3"><li><strong>ใช้ฟังก์ชั่น new()</strong> : การกำหนดชนิดข้อมูลให้กับตัวแปรก่อน ข้อมูลที่อยู่ในตัวแปรนั้นๆก็จะมีชนิดข้อมูลเดียวกันอัตโนมัติ<figure id="3734afe4-ab89-4603-bf14-0a7ac3bc290d" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2031.png"><img style="width:384px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2031.png"/></a></figure><ul id="4737e8bc-7ce4-443a-a3e5-ca42c18f5c61" class="bulleted-list"><li style="list-style-type:disc">ใน Controller - StudentController.cs<figure id="a94a3e86-1777-40d0-bfae-17cc25d4e079" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2032.png"><img style="width:346px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2032.png"/></a></figure></li></ul></li></ol></li></ul><hr id="88f92de8-ba26-4425-b5a8-4d07f1ca366d"/><h2 id="d4c47b4e-5c9d-4fc9-84f8-e02ddb8f0c28" class="">การแสดงข้อมูล</h2><p id="2cc2d076-7db7-48f5-92ff-0546d7d12695" class="">การนำข้อมูลจาก controller ไปแสดงผลที่ view โดยข้อมูลนำมาจาก Model</p><ul id="1aa0d357-42d7-4058-88c2-4cf3c273f3c3" class="bulleted-list"><li style="list-style-type:disc">รายการเดียว (Object เดียว)<p id="a9d33507-ee4d-4839-91e9-49fdce4fd8ec" class=""><strong>ใน controller </strong></p><ul id="838bd6a2-b9a9-423a-a3c3-9be8d7694022" class="bulleted-list"><li style="list-style-type:circle">กำหนดข้อมูลด้วยการใช้ตัวแปร object กำหนดค่า<ul id="109e7a56-785d-4b93-8296-ceefe56f18e6" class="bulleted-list"><li style="list-style-type:square">ex. s1.Id = 1;</li></ul></li></ul><ul id="f9ac9f23-f972-4fa5-a831-116b0c21a505" class="bulleted-list"><li style="list-style-type:circle">ส่งข้อมูลจาก controller ไปแสดงผลที่ view ด้วยการ return object นั้นไปให้ view<ul id="d364c5f1-dd9f-4cc1-81d4-b1b834c3479f" class="bulleted-list"><li style="list-style-type:square">ex. return View(s1)</li></ul><p id="490a032e-f9b9-472e-a628-e7aad4b79970" class="">ใน controller - StudentController.cs</p><figure id="fd778a1a-8565-40c2-9290-b2f7b91da803" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2033.png"><img style="width:422px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2033.png"/></a></figure></li></ul><p id="995c9495-a65f-4718-aa76-83145275612a" class=""><strong>ใน View</strong></p><ul id="0bbc7315-ebd1-4d33-9b78-78c152fb93f0" class="bulleted-list"><li style="list-style-type:circle">ต้องมีการ import Model ที่จะใช้งานเข้ามาจาก Model นั้นๆที่มีส่งมาจาก controller<ul id="65922db1-46ff-4493-a6d8-212003b7a27a" class="bulleted-list"><li style="list-style-type:square">ex. @model <strong>BasicASPTutorial</strong>.Models.<strong>Student</strong>;</li></ul></li></ul><ul id="5e54479b-2e51-41d6-9e83-3764602735bc" class="bulleted-list"><li style="list-style-type:circle">การใช้งานตัวแปรใน Model ต้องระบุ @Model.<strong>ตัวแปร</strong><ul id="4253c7d5-7b03-429f-853b-51ceac855b1f" class="bulleted-list"><li style="list-style-type:square">ex. @Model.Id</li></ul><p id="a824b0c9-00ea-424a-a062-24835ce5b071" class="">ใน view - Index.cshtml</p><figure id="0fccc047-f3a3-4c9b-8b75-9a67f27a0894" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2034.png"><img style="width:464px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2034.png"/></a></figure></li></ul></li></ul><ul id="40c8a261-71f9-4a7e-9fc8-3e13c3f64a38" class="bulleted-list"><li style="list-style-type:disc">หลายรายการ (หลาย Object)<p id="4cc37e3e-eeb8-4415-aaa9-075397f1d48d" class=""><strong>ใน Controller</strong></p><ul id="7c88520b-d3f3-40c3-9949-d6a52414959f" class="bulleted-list"><li style="list-style-type:circle">ต้องมีการรวบรวม Object โดยการใช้ List โดยระบุ Object นั้นๆที่สามารถเก็บได้เท่านั้น<ul id="5aa191c7-9b78-4aa0-a95c-958ac8d9d19c" class="bulleted-list"><li style="list-style-type:square">ex. List&lt;<strong>Student</strong>&gt; <strong>allStudent </strong>= new List&lt;<strong>Student</strong>&gt;();<p id="c75b0cdc-8869-47c9-9bd7-e50b734c5b55" class="">&gt;นั้นคือ เก็บเฉพาะ object student เท่านั้น โดยเก็บอยู่ใน list ของตัวแปร allStudent</p></li></ul></li></ul><ul id="625923df-c2f2-43b0-bad4-758cdefcc72a" class="bulleted-list"><li style="list-style-type:circle">เก็บ object เข้า list โดยการใช้ method : Add<ul id="7b7f4e2d-7864-4f4b-ae2c-9bda00ae790e" class="bulleted-list"><li style="list-style-type:square">ex. allStudent<strong>.Add</strong>(s1)</li></ul></li></ul><ul id="47d364d9-036b-4f8b-8d02-df35c2308f35" class="bulleted-list"><li style="list-style-type:circle">ทำการส่ง List ของ Object ไปยัง View<p id="91f332ca-08c6-4747-a296-1bd62b0e16c3" class="">ใน controller - StudentController.cs</p><figure id="e3e511d6-31e6-4a47-b170-95b89e4531e4" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2035.png"><img style="width:427px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2035.png"/></a></figure></li></ul><p id="30dfbced-ac07-4b75-b05b-55b989fc3be7" class=""><strong>ใน View</strong></p><ul id="1d986108-42b8-4bb7-94cf-a7541ce6214c" class="bulleted-list"><li style="list-style-type:circle">เนื่องจากมีหลาย Object การแค่ import Model เข้ามานั้นหมายถึงแค่ 1 Object ดังนั้นจึงเปลี่ยนมา import ด้วย IEnumerable&lt;&gt; แทน เพื่อเป็นการแจกแจง Object<ul id="9f39c28a-8f22-42a2-afe9-1d6f66b7dd39" class="bulleted-list"><li style="list-style-type:square">ex. @model <strong>IEnumerable&lt;</strong>BasicASPTutorial.Models.Student<strong>&gt;</strong>;</li></ul></li></ul><ul id="bda0c003-e3bd-4143-92a6-4d8598719751" class="bulleted-list"><li style="list-style-type:circle">ทำให้เมื่อวนการแสดงผลจึงต้องมีการแจกแจง object ด้วย จึงใช้ <strong>@foreach(</strong>var xxx <strong>in</strong> ObjectList<strong>) </strong>มาวนการแสดงผลแทนของเดิม</li></ul><ul id="6272a471-4563-4763-9237-abc8be2e19cd" class="bulleted-list"><li style="list-style-type:circle">ทำให้เมื่อวน foreach จึงต้องใช้ตัวแปร var xxx แทน Model นั้นคือ ตัวแปร xxx แทน object แต่ละตัวใน ObjectList นั้นๆ<ul id="4a417392-a242-4a2c-b322-1a0a8bad9c78" class="bulleted-list"><li style="list-style-type:square">ex. xxx.Id แทน Model.Id</li></ul><p id="a80503f0-a90c-4d01-978a-5a89aaca14aa" class="">ใน View - Index.cshtml</p><figure id="9c272acb-46d6-4f5e-9560-838fd93c789b" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2036.png"><img style="width:467px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2036.png"/></a></figure></li></ul></li></ul><ul id="23e42d40-9764-455a-8fce-af664ac818f2" class="bulleted-list"><li style="list-style-type:disc">เพิ่มเติม<ul id="804e4ec4-1852-4c3e-98b2-63335d4143ca" class="bulleted-list"><li style="list-style-type:circle">สามารถเพิ่มเงื่อนไขใน View เพื่อเลือกข้อมูลได้ - แสดงผลข้อมูลแบบมีเงื่อนไข<ul id="f0cb4fec-dd84-42c1-bebe-297d7e0881a1" class="bulleted-list"><li style="list-style-type:square">โดยใช้ @if{} else{}<figure id="eefea972-9bc4-4dce-aa37-0e7eb9e9c0ad" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2037.png"><img style="width:415px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2037.png"/></a></figure></li></ul></li></ul></li></ul><hr id="c5ffa2f6-dbb2-40f2-a602-48dc3c24ea1b"/><h2 id="125af345-f64f-4fe1-a6d8-3e5934b101e3" class="">SQL Server</h2><p id="a0089cd1-ce73-4d17-806c-c351f5dfad38" class=""><mark class="highlight-teal">ใช้ SQL Server 2022 - Microsoft</mark></p><p id="e234d25c-c52f-4b76-8fa2-f65f32e3f70b" class="">เป็นระบบจัดการฐานข้อมูลเชิงสัมพันธ์ (RDBMS: Relational Database Management System) หรือ การเก็บข้อมูลในรูปแบบตารางและใช้ภาษา SQL เข้ามาจัดการข้อมูลในฐานข้อมูล</p><ul id="6cde5da1-7870-4abf-850e-cbbcdfc95ca6" class="bulleted-list"><li style="list-style-type:disc">ทำให้เครื่องคอมพิวเตอร์ให้เป็นเครื่อง server โดยมี fileๆ นี้เป็นตัวเก็บ database</li></ul><ul id="6f494739-a538-4e3c-8dcf-00193287bc8e" class="bulleted-list"><li style="list-style-type:disc">ใช้<mark class="highlight-yellow"><strong> Instance name</strong></mark> และ Connection String ในการเชื่อมต่อกับตัวจัดการฐานข้อมูล <figure id="d57277a5-d4f1-411a-9608-ac5adc1df625" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2038.png"><img style="width:477px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2038.png"/></a></figure></li></ul><h2 id="66d1332b-92bb-471f-bf2e-498739630ca4" class="">SQL Server Management Studio (SSMS)</h2><p id="1c759e74-897d-4be5-9b61-3a7aef2c6280" class="">โปรแกรมสำหรับจัดการฐานข้อมูล สำหรับกำหนดการเข้าถึง, จัดการฐานข้อมูล และการตั้งค่าฐานข้อมูล เป็นต้น</p><p id="730637cf-cdbe-4cfe-99ac-296b30e76a86" class=""><strong>การเชื่อมต่อฐานข้อมูลด้วย SSMS</strong></p><p id="2ba68fc8-a0e7-4286-9fb6-0d5176868661" class="">เชื่อมต่อ SSMS กับ SQL Server โดยระบุ ชื่อเครื่อง/<mark class="highlight-yellow"><strong>ชื่อฐานข้อมูล</strong></mark></p><ul id="5478762a-658f-4fe3-bb49-1a4d482923f2" class="bulleted-list"><li style="list-style-type:disc">ex. KONGRUKSIAM\<mark class="highlight-yellow"><strong>SQLEXPRESS</strong></mark><figure id="cba0dbf4-d602-402b-ac4c-ce8853b9e05f" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2039.png"><img style="width:636px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2039.png"/></a></figure></li></ul><hr id="c9b18c3b-fcee-4de6-87df-65f83551a1c4"/><h2 id="95ae966d-e133-4810-b3a1-e1323c36075f" class="">Data Annotation</h2><p id="fa5483d4-779e-442e-be2f-c777ff81d25c" class="">เป็นการกำหนดกฎเกณเฑ์หรือรูปแบบการทำงานในระดับโมเดล</p><ul id="5a098404-5503-420d-9e04-7d2b3791c5f3" class="bulleted-list"><li style="list-style-type:disc">ex. </li></ul><ul id="af1925f2-74f2-433b-807d-79e4d97e72ac" class="bulleted-list"><li style="list-style-type:disc">โดยต้องมีกรกำหนด <strong>using System.ComponentModel.DataAnnotation;</strong> ที่ header<figure id="b99d2027-c714-4823-927d-5bef7f7d5b54" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2040.png"><img style="width:725px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2040.png"/></a></figure><p id="7819034e-4b3f-4497-b1da-38d258b17d45" class="">ตัวอย่างการใช้งาน : </p><figure id="b7c67e98-ad61-4659-ad53-8a688e1d0d43" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2041.png"><img style="width:476px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2041.png"/></a></figure><p id="27764bd1-9027-4664-8e85-e16235fa73a3" class="">การกำหนดตัวแปร property Id เป็น [Key] หรือ primary key นั้นคือ ข้อมูลห้ามซ้ำกันและห้ามเป็น null นั้นเอง และ property String ระบุเป็น [Required] นั้นคือจำเป็นต้องมีข้อมูลในส่วนนี้ ห้ามเป็นค่าว่าง</p></li></ul><hr id="86df3a11-0b09-4cae-a487-4c8fc839b983"/><h2 id="6e5fc421-56f5-4fe3-946b-efeec895ae0d" class="">Connection String</h2><p id="870a4393-7fe4-4359-bf76-fc7b02a08854" class="">ชุดข้อความสำหรับระบุตำแหน่งฐานข้อมูลที่จะใช้งานร่วมกับ Project : ASP.NET Core MVC โดยระบุใน file : appsetting.json</p><ul id="2d886be4-f811-4b86-83f5-51270e5042f8" class="bulleted-list"><li style="list-style-type:disc"><strong>DefaultConnection </strong>: ชื่อ Connection (อะไรก็ได้)</li></ul><ul id="39752f5a-8c07-4437-bb46-f9cf757595cc" class="bulleted-list"><li style="list-style-type:disc"><strong>ชื่อ Server</strong> :<mark class="highlight-yellow"><strong> Instance name</strong></mark></li></ul><ul id="5fc62cb9-a8f8-47b5-ac6a-5821ad7c9783" class="bulleted-list"><li style="list-style-type:disc"><strong>ชื่อ Database</strong> : ชื่อฐานข้อมูล (อะไรก็ได้)<figure id="f24e2dc3-fcf4-4e76-86dc-e6b4a0770f49" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2042.png"><img style="width:653px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2042.png"/></a></figure></li></ul><p id="3a95a5b9-8ec5-4ba8-8d75-530859bfc871" class="">เป็นการเชื่อมฐานข้อมูล &gt; แต่ยังทำงานไม่ได้ต้องมีตัวแทนฐานข้อมูล : Application DB context เนื่องจากฐานข้อมูลมีหลายประเภท/เจ้า ex. mySQL, mongoDB</p><hr id="d63716f5-b17e-4b37-8b98-1b79c735925b"/><h2 id="30d5c383-f617-4e85-b863-20fff38ba4b0" class="">Entity Framework Core (EF Core)</h2><ul id="691662b8-d9d7-40a6-ab6f-cea82546383b" class="bulleted-list"><li style="list-style-type:disc">library สำหรับจัดการฐานข้อมูล โดยทำงานร่วมกับ Model</li></ul><ul id="aa2259c6-1a86-4a50-8af5-4300680a755e" class="bulleted-list"><li style="list-style-type:disc">EF Core ทำหน้าที่จัดการฐานข้อมูลแทนการใช้คำสั่ง SQL โดยตรง</li></ul><ul id="c936e6e6-f1e2-4168-b05d-6f3e05dbc9fb" class="bulleted-list"><li style="list-style-type:disc">กระบวนการทำงาน : จะทำการ Mapping หรือจับคู่ Model กับตาราง (Table) ที่อยู่ในฐานข้อมูลและให้ Model นั้นๆ เป็นตัวแทนของตาราง (ORM : Object Relational Mapping)<figure id="6723144c-7791-4444-bb7d-d13a321c695a" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2043.png"><img style="width:743px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2043.png"/></a></figure></li></ul><p id="c98dee82-c05d-405c-8a7c-2f041a9a478d" class=""><strong>ติดตั้ง :</strong><div class="indented"><p id="0be02eb7-4f25-42fa-85ae-3a782855061d" class="">Project &gt; Manage NuGet Packages… &gt; ค้นหา &gt; install</p></div></p><p id="2833a9f4-1278-4aa4-a79e-32ca32579a12" class="">สามารถ check package ที่ download มา : ชื่อ Project &gt; Dependencies &gt; Packages</p><hr id="ca24ad29-92c7-4eeb-ae17-d78065107ebf"/><h2 id="911bf0bb-b088-46d5-8d0d-d99b5237198f" class="">Application DbContext</h2><p id="cdf0e5fd-4ca0-4ce1-beca-dde2e87ba241" class="">การสร้าง class ที่รับบทบาทเป็นตัวแทนของฐานข้อมูลที่ใช้งานใน Project รวมถึง Model ที่จะนำไปสร้างเป็นตารางเก็บในฐานข้อมูลดังกล่าวต้องมาระบุใน Application DbContext นี้</p><p id="6636d570-3334-4bec-94a5-d735bc143724" class="">วิธีทำ : </p><ol type="1" id="8dbcc1b6-de26-4881-914f-67b50431dbc3" class="numbered-list" start="1"><li>สร้าง folder จัดเก็บ <ol type="a" id="0a5fd4a8-c706-406c-9e50-819f93f0dbd9" class="numbered-list" start="1"><li>ชื่อ Project &gt; Add &gt; New folder : ตั้งชื่อว่า Data</li></ol><ol type="a" id="33b2621b-f74f-485a-a9ad-1e871ffa2573" class="numbered-list" start="2"><li>Data &gt; Add &gt; Class : ตั้งชื่อว่า ApplicationDBContext</li></ol></li></ol><ol type="1" id="18dc1629-44de-44a6-ad4a-9e8afbd78158" class="numbered-list" start="2"><li>ให้ class : ApplicationDBContext สืบทอดคุณสมบัติมาจาก class : DbCintext<ol type="a" id="2d1f86cc-dc81-4ad6-92af-85ad63fe5f6a" class="numbered-list" start="1"><li>import class : DbCintext : มาจาก Microsoft.EntityFrameworkCore<ol type="i" id="22aeccfc-cc85-49c4-9b37-1fe96c72d24e" class="numbered-list" start="1"><li>พิมพ์คำสั่ง : using Microsoft.EntityFrameworkCore;</li></ol></li></ol></li></ol><ol type="1" id="6e61105f-e608-4bcc-9221-e55f61bd7728" class="numbered-list" start="3"><li>สร้าง constructure : ระบุ Option (ระบุว่าเชื่อมต่อ ฐานข้อมูลแบบใด)<ol type="a" id="edcd3076-c8ac-4813-a613-b97429272cbe" class="numbered-list" start="1"><li>โดยระบุใน &lt;&gt; <ol type="i" id="4ed7dc49-2b99-4284-b7ce-987e46b9e8fa" class="numbered-list" start="1"><li>DbContextOptions&lt;<strong>ApplicationDBContext</strong>&gt; options<p id="98bff586-0482-41a7-8f71-ed218cbfd327" class="">-options แทนฐานข้อมูล</p></li></ol><ol type="i" id="999f92a4-2d3f-4df9-8a59-eb9c2e862939" class="numbered-list" start="2"><li>โยน options ไปทำงานใน class แม่ โดยการเรียกใช้ comstructure class แม่ : โดยใช้คำสั่ง base()<ul id="43f6c8bf-85dc-4eb4-a829-98507f1bf5ef" class="bulleted-list"><li style="list-style-type:disc">base(options)</li></ul></li></ol><figure id="184e7589-afa1-44d0-a5c5-417e9d082859" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2044.png"><img style="width:1308px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2044.png"/></a></figure></li></ol></li></ol><ol type="1" id="3849ca00-0aa1-4831-b7ff-2aff4f32c484" class="numbered-list" start="4"><li>นำ Model ไปสร้างฐาข้อมูล โดยใช้คำสั้ง DbSet&lt;Model&gt; ชื่อแทนฐานข้อมูล {get; set;}<ol type="a" id="43433636-b906-412e-9793-2e131062d378" class="numbered-list" start="1"><li>DbSet&lt;Student&gt; Students {get; set;}<ul id="8321426f-15a3-457e-b33d-ee5fa4618485" class="bulleted-list"><li style="list-style-type:disc">Model : Student นำไปสร้างตารางฐานข้อมูล โดยจะใช้ชื่อ Students แทนตารางที่ Student ไปสร้างมา</li></ul><figure id="e53e82d9-84d3-4523-a961-75d21c7e67ab" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2045.png"><img style="width:1125px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2045.png"/></a></figure></li></ol></li></ol><hr id="368c58a5-5d86-4443-b7b5-0d4824de7bff"/><h2 id="0b7a7c5f-fd80-4b6b-ad71-0ec2b40c2cc1" class="">ตั้งค่า DbContext</h2><p id="b4fedfe2-1998-4d39-8921-27e988d91568" class="">ตั้งค่า service (ที่เกี่ยวกับฐานข้อมูล) ที่จะใช้งาน</p><ul id="eaf565d7-87c8-4445-a75f-7cb813eed790" class="bulleted-list"><li style="list-style-type:disc">ไปที่ Program.cs<ul id="5e37ca86-5b28-4f2d-84b0-1f4130382d8b" class="bulleted-list"><li style="list-style-type:circle">เพิ่ม service : เชื่อมต่อฐานข้อมูลผ่าน Application DbContext<ul id="36e83791-611d-45a6-bf23-f27f5d520000" class="bulleted-list"><li style="list-style-type:square">builder.Services.AddDBContext&lt;<strong>class ที่เชื่อมต่อ</strong>&gt;(<mark class="highlight-blue"><strong>ตัวที่จะตั้งค่า service</strong></mark> ⇒<mark class="highlight-blue"><strong> ตัวที่จะตั้งค่า service</strong></mark>.<mark class="highlight-teal"><strong>ใช้ฐานข้อมูลประเภทใด</strong></mark>(builder.Configuration.GetConnectionString(”<mark class="highlight-yellow"><strong>ชื่อ Connection String</strong></mark>”)))<ul id="50d0dbc4-09fd-4019-813e-e682db8c7eee" class="bulleted-list"><li style="list-style-type:disc">builder.Services.AddDBContext&lt;<strong>ApplicationDbContext</strong>&gt;(<mark class="highlight-blue"><strong>options</strong></mark> ⇒ <mark class="highlight-blue"><strong>options</strong></mark>.<mark class="highlight-teal"><strong>UseSqlServer</strong></mark>(builder.Configuration.GetConnectionString(”DefaultConnection”)))<ul id="f16c4e43-8943-4097-9fed-e613f39f3f8e" class="bulleted-list"><li style="list-style-type:circle"><strong>import : </strong>using BasicASPTutorial.Data</li></ul></li></ul></li></ul><figure id="ba359278-281b-41fb-9512-0e292ea27e96" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2046.png"><img style="width:790px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2046.png"/></a></figure></li></ul></li></ul><hr id="2397670f-a958-4862-aaaf-98a573ec9084"/><h2 id="74b4581b-9c7b-443f-9985-f6853679bc42" class="">การสร้างฐานข้อมูล (Database)</h2><p id="8461a4c1-2371-493f-a718-b2175f04c793" class="">ดำเนินการผ่าน package manager console : การป้อนคำสั่ง</p><p id="371dbee8-175c-4f69-91e7-a6ba5e5af008" class="">อยู่ใน Tools &gt; NuGet Package Manager &gt; Package Manager Console</p><ul id="f2a7f6e5-896b-432c-a207-b55ee1180685" class="bulleted-list"><li style="list-style-type:disc"><strong>จะมี terminal ขึ้น : </strong>PM&gt;<figure id="a7a9ea34-1260-41a7-a166-e3e7c0392fe8" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2047.png"><img style="width:419px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2047.png"/></a></figure></li></ul><p id="09d97505-5405-43ed-b3e5-f7e0299aa7af" class=""><strong>ขั้นตอนการสร้างข้อมูล</strong></p><ol type="1" id="188bcf17-0b55-4109-bfa8-097e1f785d9d" class="numbered-list" start="1"><li><strong>add-migration &lt;migration-name&gt;</strong><ol type="a" id="9ff992c1-5650-47ba-a1f2-51fc21749086" class="numbered-list" start="1"><li>สร้างไฟล์ migration ที่เก็บโครงสร้างตารางจาก Model ⇒ แปลง Model เป็นตาราง<figure id="8782fd55-ac1a-4c89-b9f3-7ba9184eff75" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2048.png"><img style="width:867px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2048.png"/></a></figure></li></ol><ol type="a" id="acc47796-e10f-435e-8170-64d8e21d7d04" class="numbered-list" start="2"><li>folder : <strong>Migration </strong>จะสร้างขึ้น โดยจะมี file : xxx_addStudentDB.cs ถูกสร้างขึ้น &gt; file นี้บรรจุโครงสร้างของตารางที่ถูกแปลงจาก Model เป็นตารางในฐานข้อมูลผ่าน DbSet โดยจะสร้างตารางใน ApplicationDBContext.cs </li></ol><ol type="a" id="1a0a62cc-bd76-4d32-aacc-4e2fe315c478" class="numbered-list" start="3"><li>ใน file : ApplicationDBContext.cs <figure id="b4b2e38e-482e-4436-a630-35ac783302c9" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2049.png"><img style="width:735px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2049.png"/></a></figure></li></ol><ol type="a" id="9002be54-6761-4fab-ad5f-962f7154ba42" class="numbered-list" start="4"><li><strong>update-database</strong></li></ol><ol type="a" id="7bbc868b-56ed-44cb-8ab8-6bc12f0489db" class="numbered-list" start="5"><li>นำไฟล์ migration ไปใช้งาน<p id="20024261-4a76-4d5e-a1d1-ce2ba1089137" class="">ใน SqlServer สร้างฐานข้อมูลมาแล้ว &gt; ยังไม่มีข้อมูล</p><figure id="b0f36eba-42e4-47c5-83c3-e84f4dcfe286" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2050.png"><img style="width:771px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2050.png"/></a></figure><ul id="4bae0cc0-843e-46a4-8c00-c039df754ba2" class="bulleted-list"><li style="list-style-type:disc">ดูข้อมูล dbo.student &gt; คลิกขวา &gt;Select Top 1000 Rows</li></ul></li></ol><hr id="427746a5-3009-4cd2-a902-a3fcbc79ef5f"/><h2 id="dd6f1173-0c92-431e-9479-ef70ea79e5f6" class="">ตัวอย่าง : แบบฟอร์มบันทึกข้อมูล</h2><ul id="e6c43c8b-cfa0-4e13-850f-caac931f91b9" class="bulleted-list"><li style="list-style-type:disc"><strong>tag form</strong><ul id="b513f650-aaaf-4b59-bfb0-be71e5ce9423" class="bulleted-list"><li style="list-style-type:circle"><strong>asp-controller : </strong>ปลายทางที่ข้อมูลจะส่งมา</li></ul><ul id="76b575a2-cc71-4710-81c5-3baa3b7d2561" class="bulleted-list"><li style="list-style-type:circle"><strong>asp-action : </strong>method ที่จะรับค่าที่ส่งมามาทำงาน</li></ul></li></ul><figure id="7e084c0c-7780-461a-bcd8-ce8469ad7623" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2051.png"><img style="width:288px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2051.png"/></a></figure><figure id="f6e88cfa-cff8-40fc-b2d0-09f4b7788ede" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2052.png"><img style="width:761px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2052.png"/></a></figure><ul id="1ebe76b4-56f4-4e09-ade1-93a291500a84" class="bulleted-list"><li style="list-style-type:disc"><strong>get :</strong> เหมาะกับการดึงข้อมูล </li></ul><ul id="e1dcbe9e-9c36-4b11-936e-a82e7cfbfef1" class="bulleted-list"><li style="list-style-type:disc"><strong>post :</strong> เหมาะกับการส่งข้อมูล/บันทึกข้อมูล</li></ul><p id="a4fda54a-844d-4949-92c1-4c19772e1502" class=""><strong>ตัวอย่างการใช้งาน :</strong></p><figure id="c20f87e3-e029-4038-87bf-b64b47ff1a70" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2053.png"><img style="width:554px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2053.png"/></a></figure><figure id="78e800c7-b8f9-4a4a-8804-8cec6222b45a" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2054.png"><img style="width:1096px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2054.png"/></a></figure><ul id="5eb875d5-9898-4af6-b403-a5bb301b9e58" class="bulleted-list"><li style="list-style-type:disc">import Model เข้ามาใช้งาน</li></ul><ul id="7ed43fdc-df36-44c2-8bb3-ecf1bc73e0ba" class="bulleted-list"><li style="list-style-type:disc">ผูกค่า form กับ model ด้วย tag helper :<strong> asp-for=””</strong><ul id="8002be65-d723-43e5-8946-00526e217351" class="bulleted-list"><li style="list-style-type:circle">&lt;Label asp-for=”Name”&gt;&lt;/Label&gt; : นำชื่อ property Name มาแสดงผล</li></ul><ul id="96b4c835-47b3-4fe0-8d96-a5b9020acd6b" class="bulleted-list"><li style="list-style-type:circle">&lt;input type=”text” asp-for=”Name”&gt;&lt;/Label&gt; : ผูกค่า</li></ul><ul id="e425201e-2a8c-4418-97e4-3ba60d5f809f" class="bulleted-list"><li style="list-style-type:circle">ค่า defult ของ method เป็น GET Method เนื่องจากไม่ได้รับค่ามา แค่ส่งไปแสดงผลที่ view</li></ul><figure id="174ec53a-1b1d-4cb2-ad74-9f517999d353" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2055.png"><img style="width:234px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2055.png"/></a></figure></li></ul></li></ol><hr id="63eb235a-695b-4e35-9d56-50497ee3b55d"/><h2 id="715273d9-ec1c-4cd7-9c48-ebc2c433ff44" class="">DisplayName &amp; Range</h2><p id="344fbe85-ed35-4a57-9c44-9bb9d967d37f" class=""><strong>DisplatName :</strong> เป็นการใช้ data anotation แทนที่ &lt;Label<strong> asp-for=”Name”</strong>&gt; ทำให้สามารถตั้งชื่อ property อื่นได้ โดยตั้งใน Model</p><p id="e505e770-a245-42a3-b20b-c3158c8e879d" class=""><strong>Range : </strong>เป็นการใช้ data anotation เพื่อกำหนดช่วงของตัวเลข ถึงเก็บลงในฐานข้อมูลได้ <div class="indented"><figure id="aa075a68-f929-4ead-9534-7d72e455d13a" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2056.png"><img style="width:284px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2056.png"/></a></figure></div></p><hr id="fed58b6f-dbf4-413a-8f91-75efb5e64b54"/><h2 id="91ca9fd2-7e99-43cd-986a-4065dcd42547" class="">Dependency Injection</h2><p id="5f66598a-be16-4914-82c4-ffe63bd17d21" class="">การกำหนดให้ controller สามารถเรียกใช้งานฐานข้อมูลได้ ผ่านตัวแทนของฐานข้อมูลที่ระบุใน DbContext</p><ul id="0c5974fd-0a1c-4f14-8ab7-07f243df8962" class="bulleted-list"><li style="list-style-type:disc">โดยการสร้าง object จาก ApplicationDbContext ในพื้นที่ของ controller ที่เราสนใจ<figure id="d5338063-fb58-44ba-b131-97b97f100d17" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2057.png"><img style="width:745px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2057.png"/></a></figure><figure id="8ab642ac-b8ef-425d-9c76-23c8c855a878" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2058.png"><img style="width:495px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2058.png"/></a></figure></li></ul><hr id="23cdc1af-1122-4fbb-a74b-ec01e1bf3fc7"/><h2 id="475421d4-1639-4d59-9341-b6a2b467413d" class="">การบันทึกข้อมูล (Insert)</h2><figure id="601fa37a-8878-461d-9cfa-e5de017c5449" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2059.png"><img style="width:432px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2059.png"/></a></figure><p id="10a8fb1d-e171-4a00-8792-ca1ea9fb4c83" class=""><strong>ตัวอย่างการใช้งาน :</strong><div class="indented"><p id="303f2aa4-c38a-4f2b-9399-a9acaffeda65" class="">ใน file : StudentController.cs<div class="indented"><figure id="5df06deb-b2d4-4831-b7f5-b1419ec951c9" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2060.png"><img style="width:376px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2060.png"/></a></figure><ul id="c2102885-89b2-4a33-a394-3e2c3f90e587" class="bulleted-list"><li style="list-style-type:disc">Post Method : รับ parameter เป็น Model : Student มาทำงาน เนื่องจาก form มีการผูกค่ากับ Model : Student (Name, Score)</li></ul><ul id="321d47dc-0a4d-4ca8-a900-8517a67126d0" class="bulleted-list"><li style="list-style-type:disc">เรียกใช้ฐานข้อมูลจาก <mark class="highlight-teal"><strong>DbSet ที่เข้าถึงฐานข้อมูล Students </strong></mark>ผ่านตัวแปร _db<ul id="10947ce9-c08e-4d14-b63d-07e263781c84" class="bulleted-list"><li style="list-style-type:circle">_db.<mark class="highlight-teal"><strong>Students</strong></mark>.<strong>Add</strong>(obj) : เพิ่มข้อมูลที่ส่งมาลงตาราง</li></ul><ul id="f1c8191d-8515-4c9d-93c4-814d2b919a46" class="bulleted-list"><li style="list-style-type:circle">_db.SaveChanges() : บันทึกข้อมูล</li></ul></li></ul><ul id="f3c98e9d-233c-414c-8640-31446bd1257b" class="bulleted-list"><li style="list-style-type:disc">return RedirectToAction(”Index”) : กลับไปเรียกใช้ Method : Index ใน  file : StudentController.cs เดียวกัน<figure id="2b03419a-6725-4664-b8ad-771df074cdbf" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2061.png"><img style="width:696px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2061.png"/></a></figure></li></ul></div></p></div></p><hr id="c60d5649-5a88-493f-ad11-c08cfd5a401d"/><h2 id="b5d80a2a-99f7-4ed7-a5e4-d3e45c2fa1a4" class="">การดึงข้อมูล (Select)</h2><ul id="a6970c21-2347-4b0d-ab4d-ebcb778b48e2" class="bulleted-list"><li style="list-style-type:disc">IEnumerable &lt;ชื่อ Model&gt; ชื่อที่จะเรียกใช้ = ตัวที่เข้าถึงฐานข้อมูล.ตัวแทนฐานข้อมูล<ul id="4f21442a-bb01-4862-9376-20af9404ed51" class="bulleted-list"><li style="list-style-type:circle">IEnumerable &lt;Student&gt; allStudent = _db.Students</li></ul><ul id="5cd8dabd-6e0f-4d4b-91d4-1f2c91101429" class="bulleted-list"><li style="list-style-type:circle">เนื่องจากในตารางมีหลาย object &gt; ใช้ IEnumerable </li></ul><figure id="341ad46c-8e50-461e-9f78-3309556cdd02" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2062.png"><img style="width:937px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2062.png"/></a></figure><figure id="031cded2-9560-45c9-aba0-f32a9ca63583" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2063.png"><img style="width:983px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2063.png"/></a></figure></li></ul><hr id="fde1bda3-deeb-46c2-ae61-81efe8eb2be6"/><h2 id="46eaae82-0eed-4d21-8d06-9c322f516d29" class="">การตรวจสอบความถูกต้อง (Validation)</h2><p id="94c7a44c-c480-422d-91ca-3b41410ca204" class="">ระบุเพื่อให้ตรวจสอบ data anotation ที่ระบุ</p><p id="694090ae-0b3f-4463-9444-2920e31d1202" class="">ex. การตรวจสอบค่าว่าง (Required), อยู่ในช่วงไหม (Range)</p><ul id="e40674b2-cc0b-476a-a127-8b46aa04c7c0" class="bulleted-list"><li style="list-style-type:disc">โดยใช้ if(<strong>ModelState.IsValid</strong>){}<figure id="b0d501ff-1333-46bf-9734-73f0111da237" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2064.png"><img style="width:287px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2064.png"/></a></figure><ul id="6d4de800-ec9a-4aa0-a84b-7c5e15ae2c4a" class="bulleted-list"><li style="list-style-type:circle">ถ้าข้อมูลถูก &gt; Redirect</li></ul><ul id="01d9790e-a14c-4184-bdec-7587e32dd5ec" class="bulleted-list"><li style="list-style-type:circle">ถ้าข้อมูลผิด &gt; คงอยู่หน้านี้ต่อ, คงสภาพข้อมูลต่อไป</li></ul></li></ul><p id="f72a9796-d6f6-4ac6-aca6-1a1201b30cbf" class=""><strong>ตัวอย่างการใช้งาน :</strong></p><ul id="3bd1784f-c59b-465f-91a6-7a33e6918667" class="bulleted-list"><li style="list-style-type:disc">เมื่อป้อนข้อมูลไม่ถูกต้อง &gt; แจ้งข้อความตอบกลับ <ul id="80af177e-2466-480d-a32a-0ada8f73a5bc" class="bulleted-list"><li style="list-style-type:circle">ใช้ tag-helper : <strong>asp-validation-for=”ชื่อ poperty”</strong></li></ul><figure id="afff447d-0f77-48a0-a91f-ab34da481eb1" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2065.png"><img style="width:517px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2065.png"/></a></figure><figure id="eb740268-4562-4064-91bd-e1f2a49314bb" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2066.png"><img style="width:528px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2066.png"/></a></figure></li></ul><hr id="31c45071-0591-453d-9dcb-77b6e55ed979"/><h2 id="02bc6900-a75b-4a6c-9c7d-c03ee8d4478b" class="">การปรับแต่งข้อความ (Custom Validation)</h2><p id="17d4d1af-b620-4f36-8685-94b556a0ffcb" class="">แปลงภาษาอังกฤษเป็นภาษาไทย/แสดงข้อความตอบกลับเอง</p><ul id="c46f1776-1c05-46ea-873d-269ae1958625" class="bulleted-list"><li style="list-style-type:disc">ระบุ Attribue : <strong>ErrorMassage : “” </strong>ใน data anotation</li></ul><p id="15db764b-0c4e-4a10-906b-bde358a8efb9" class=""><strong>ตัวอย่างการใช้งาน :</strong></p><figure id="def92bde-9b60-4ef3-a19f-1c0954d2a063" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2067.png"><img style="width:488px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2067.png"/></a></figure><figure id="2f346a89-17a8-40cc-a3a7-18ebdd91ad4e" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2068.png"><img style="width:528px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2068.png"/></a></figure><hr id="22603818-85de-4aa1-81d1-e44872a0f006"/><h2 id="663a4a13-8122-434d-b4ce-0b06335151d5" class="">การแสดงข้อมูลแบบตาราง</h2><p id="73d7142d-0b62-4792-9fa7-cadd8e06e69c" class=""><strong>ตัวอย่างการใช้งาน : </strong></p><figure id="47aaf082-66bc-4b63-b4d5-869acf5621dc" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2069.png"><img style="width:336px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2069.png"/></a></figure><figure id="8d6d45dd-bd03-4b28-930d-b4a494377cbb" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2070.png"><img style="width:336px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2070.png"/></a></figure><figure id="f1fa12a3-d544-4eac-a2de-c2b479e5c660" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2071.png"><img style="width:867px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2071.png"/></a></figure><hr id="393c4703-697b-435b-b4ce-e34e39b763fb"/><h2 id="cf3179db-1669-47ec-bc88-7a9535049dfe" class="">การแก้ไขข้อมูล (Edit)</h2><p id="1d7cf44f-126b-4954-925e-08ef3bd0eef6" class=""><strong>ตัวอย่างการใช้งาน :</strong></p><p id="693d6383-6781-4b54-887c-9a6c47b89bba" class="">ใน Index.cshtml</p><figure id="27f9f15e-9022-4688-b687-d76693ca3234" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2072.png"><img style="width:432px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2072.png"/></a></figure><ul id="0f22b9ed-9607-4c0e-9e6c-66c5748a22ed" class="bulleted-list"><li style="list-style-type:disc">ส่ง Id นักเรียน ที่จะไปแก้ไข โดยระบุ tag-helper : <strong>asp-route-id=””</strong></li></ul><p id="625e8576-a4c1-4c64-b273-d3aea7697da2" class="">ใน StudentController.cs<div class="indented"><figure id="c594b990-bf09-4e95-8855-d9230d27ca7f" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2073.png"><img style="width:336px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2073.png"/></a></figure></div></p><ul id="391ad828-5957-4168-b5a8-b403fc9b7640" class="bulleted-list"><li style="list-style-type:disc">สร้าง Edit.cshtml (View)<figure id="f0e2d150-c040-4a52-8433-997d28c908c0" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2074.png"><img style="width:536px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2074.png"/></a></figure><figure id="68c9681d-6954-44c8-8ba5-fe0c8a6eac9f" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2075.png"><img style="width:630px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2075.png"/></a></figure></li></ul><hr id="36e9fe0f-e67b-4115-ae1c-c6fd5c818865"/><h2 id="cece19ad-8fd0-4c25-bd0b-a646e263ec73" class="">การอัพเดตข้อมูล (Update)</h2><ul id="b95e511a-3c80-471b-9289-c986cdfe8da4" class="bulleted-list"><li style="list-style-type:disc">ตัวที่เข้าถึงฐานข้อมูล.ตัวแทนฐานข้อมูล.<strong>Update</strong>(Obj ที่จะอัพเดต)<ul id="ab10ae48-95f1-43b0-83a8-a1f87598bd04" class="bulleted-list"><li style="list-style-type:circle">_db.Students.<strong>Update</strong>(Obj)</li></ul><figure id="73914b99-1e8f-4680-bc48-93febe6a869f" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2076.png"><img style="width:477px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2076.png"/></a></figure></li></ul><hr id="274f0b59-5166-4674-ac64-6141bdcadd15"/><h2 id="90a31c4c-7f02-4520-aaa9-a3e71e6b2b25" class=""><strong>การลบข้อมูล (Delete)</strong></h2><ul id="b8510fe5-0355-466f-9bf8-98c6d3a7076b" class="bulleted-list"><li style="list-style-type:disc">ตัวที่เข้าถึงฐานข้อมูล.ตัวแทนฐานข้อมูล.<strong>Remove</strong>(Obj ที่จะลบ)<ul id="9cc8fbe9-05fe-47e7-8300-bda6855f5edf" class="bulleted-list"><li style="list-style-type:circle">_db.Students.<strong>Remove</strong>(Obj)</li></ul></li></ul><p id="3986d878-c027-477e-9945-c3156c9d2f06" class=""><strong>ตัวอย่างการใช้งาน :</strong></p><p id="b0d596ef-9f28-4204-8e41-450be07ca742" class="">ใน Index.cshtml<div class="indented"><figure id="ce46cccc-2897-45ae-bdce-a1b6c8566bd3" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2077.png"><img style="width:336px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2077.png"/></a></figure></div></p><ul id="51f527e9-02bf-4a96-978b-3b2da4af6342" class="bulleted-list"><li style="list-style-type:disc">หลังจากลบต้องมีการ update ตารางด้วย<figure id="df20ebdb-f4f0-48c6-a52a-537545168e12" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2078.png"><img style="width:384px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2078.png"/></a></figure></li></ul><hr id="d1bd2cc5-9928-46fa-b4a3-6bddd0861684"/><h2 id="068a48c1-a54d-4a03-a388-788d89850da1" class="">การยืนยันการลบ (Confirm)</h2><p id="32b281c6-f130-4738-914a-9f7d6fc4ed7a" class="">ถามกับผู้ใช้ว่า ต้องการลบออกจาฐานข้อมูงจริงใช่ไหม</p><ul id="26b16e40-64c4-42db-8014-c9b4ba75e5fc" class="bulleted-list"><li style="list-style-type:disc">ใช้ event : <strong>onclick=”return confirm(’ข้อความ’)”</strong><figure id="018d135d-ec13-4e4a-9a1c-2508b62273eb" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2079.png"><img style="width:897px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2079.png"/></a></figure><ul id="571d28ca-bafe-4122-8af8-5b50af5491fa" class="bulleted-list"><li style="list-style-type:circle">กด OK = ลบ, Cancel = ไม่ลบ</li></ul><figure id="30d55312-8630-4f00-aa7b-aeafb5801f1c" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2080.png"><img style="width:871px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2080.png"/></a></figure></li></ul><hr id="4c4d6086-f6f1-4497-a8c3-7de76fedd8a2"/><h2 id="39c03db6-23b8-4661-9c15-04d210e12024" class="">การปรับการแสดงผล</h2><p id="82c59af7-e9a9-47df-8ffc-245c4998923a" class="">ถ้าไม่มีข้อมูลอยู่ในฐานข้อมูล &gt; ไม่ต้องแสดงผลตาราง</p><ul id="bd02b269-851d-4824-a0db-db116d435d47" class="bulleted-list"><li style="list-style-type:disc">นับจำนวน Object ที่ทำงานอยู่ในตัว Model (นับจำนวนแถวของฐานข้อมูล) ด้วยคำสั่ง :<strong> Model.Count() </strong>ใส่ใน if-else เพื่อเช็ค<figure id="d668f656-e1dd-4d8c-b75b-bd282e559e9a" class="image" style="text-align:center"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2081.png"><img style="width:336px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2081.png"/></a></figure><figure id="01a9fec1-0ceb-4e08-8035-a999c0a8aa55" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2082.png"><img style="width:672px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2082.png"/></a></figure><figure id="11614f5a-e33b-4387-8dd9-50b91b344062" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2083.png"><img style="width:987px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2083.png"/></a></figure></li></ul><figure id="b1afc4ea-1903-43e1-a4c0-376d3d7b8e73" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2084.png"><img style="width:1795px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2084.png"/></a></figure><ul id="e04d08c7-4d6b-43e0-a7b1-ef59f08cfc36" class="bulleted-list"><li style="list-style-type:disc">กดบันทึกข้อมูลถึงมีตารางแสดงผลออกมา</li></ul><figure id="4f13e440-6448-422c-9116-dbbdc82dcc49" class="image"><a href="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2085.png"><img style="width:876px" src="ASP%20NET%20Core%20MVC%20(%20NET7)%200ed4345ed0fd487c9c4523e69c2bc1f9/Untitled%2085.png"/></a></figure><div id="f516d68c-66e1-43b8-b3c5-6eee5f9abcb9" class="column-list"><div id="4c3440c3-b285-42e6-9827-9803121fbf4d" style="width:50%" class="column"><hr id="4427c625-38bf-4305-bc78-0b42b5dfa969"/></div><div id="ff9e1a77-052c-402c-8d00-86ca8c00bab2" style="width:50%" class="column"><p id="48d637be-f800-4997-b3b2-93b5c1fb4c15" class="">
+</p></div></div><p id="9f768de8-6e9e-4ddc-afcc-0009a6408b6b" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
